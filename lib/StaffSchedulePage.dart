@@ -35,7 +35,7 @@ class StaffCalendarPage extends StatelessWidget {
           ],
         ),
         body: ListView(
-          children: [
+          children: const [
             StaffCalendar(),
             StaffCalendarSalary(),
             StaffCalendarInfo(),
