@@ -49,22 +49,22 @@ class StaffCalendarPage extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: Image.asset('calendar.png'),
+                  icon: Image.asset('assets/calendar.png'),
                   iconSize: 20,
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Image.asset('change.png'),
+                  icon: Image.asset('assets/change.png'),
                   iconSize: 20,
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Image.asset('work.png'),
+                  icon: Image.asset('assets/work.png'),
                   iconSize: 20,
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Image.asset('mypage.png'),
+                  icon: Image.asset('assets/mypage.png'),
                   iconSize: 20,
                 ),
               ],
