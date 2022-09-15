@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'StaffSchedulePage.dart';
 
+
 class AlbaPresident extends StatelessWidget {
   const AlbaPresident({Key? key}) : super(key: key);
 
@@ -30,7 +31,7 @@ class Grade extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const StaffSchedulePage()
+                  MaterialPageRoute(builder: (context) => const StaffCalendarPage()
                   ),
                 );
               },
@@ -45,6 +46,7 @@ class Grade extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: Color(0xffE94869), width: 3)
+
                 ),
               ),
             ),
