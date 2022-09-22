@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'CommutePage.dart';
 
 // 알바용 한달근무표 - 메인 틀
 class StaffCalendarPage extends StatelessWidget {
@@ -49,7 +50,9 @@ class StaffCalendarPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   icon: Image.asset('assets/calendar.png'),
                   iconSize: 20,
                 ),
@@ -59,7 +62,12 @@ class StaffCalendarPage extends StatelessWidget {
                   iconSize: 20,
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const CommutePage()),
+                    );
+                  },
                   icon: Image.asset('assets/work.png'),
                   iconSize: 20,
                 ),

@@ -4,5 +4,4 @@ import 'AlbaPresident.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(const AlbaPresident()));
-
 }
