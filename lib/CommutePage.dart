@@ -90,15 +90,19 @@ class Commutebody extends StatelessWidget {
             Text("근무지 근방 100m 내에서\n출근 버튼을 누르면\n정상적으로 출근처리를 합니다.",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600), textAlign: TextAlign.center
             ),
-            TextButton(
-              onPressed: (){},
-              child: Text('버튼'),
-              style: TextButton.styleFrom(
-                minimumSize: Size.zero,
-                padding: EdgeInsets.zero,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            Container(
+              margin: EdgeInsets.only(
+                top: 30,
               ),
-            )
+                child: ElevatedButton.icon(
+                onPressed: () { // Respond to button press
+                 },
+                icon: Icon(Icons.check, size: 20),
+                label: Text("출근"),
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(130, 130), primary: Color(MAINCOLOR)),
+                ),
+            ),
           ],
         ));
   }
