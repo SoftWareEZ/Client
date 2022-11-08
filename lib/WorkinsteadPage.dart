@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'CommutePage.dart';
 import 'StaffSchedulePage.dart';
 
-// 알바용  - 메인 틀
+// 알바용  - 대타
 class WorkinsteadPage extends StatelessWidget {
   const WorkinsteadPage({Key? key}) : super(key: key);
 
@@ -14,7 +14,7 @@ class WorkinsteadPage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('한달근무표',
+          title: Text('알빠',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,

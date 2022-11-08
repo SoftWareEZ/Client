@@ -3,7 +3,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'CommutePage.dart';
 import 'WorkinsteadPage.dart';
 
-// 알바용 한달근무표 - 메인 틀
+// 알바용 - 한달근무표
 class StaffCalendarPage extends StatelessWidget {
   const StaffCalendarPage({Key? key}) : super(key: key);
 
@@ -15,7 +15,7 @@ class StaffCalendarPage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('한달근무표',
+          title: Text('알빠',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,

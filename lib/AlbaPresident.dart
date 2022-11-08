@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'StaffSchedulePage.dart';
 
-
+//알바 사장 선택
 class AlbaPresident extends StatelessWidget {
   const AlbaPresident({Key? key}) : super(key: key);
 
