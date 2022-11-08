@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'CommutePage.dart';
 import 'WorkinsteadPage.dart';
+import 'Menubar.dart';
 
 // 알바용 - 한달근무표
 class StaffCalendarPage extends StatelessWidget {
@@ -14,6 +15,7 @@ class StaffCalendarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        drawer: MenuBar(),
         appBar: AppBar(
           title: Text('알빠',
               style: TextStyle(
@@ -22,11 +24,6 @@ class StaffCalendarPage extends StatelessWidget {
                   letterSpacing: 1.5)),
           centerTitle: true,
           backgroundColor: Colors.white,
-          leading: IconButton(
-              icon: Icon(Icons.menu),
-              color: Color(MAINCOLOR),
-              iconSize: 30,
-              onPressed: () {}),
           actions: [
             IconButton(
               icon: Icon(Icons.notifications),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'StaffSchedulePage.dart';
 import 'WorkinsteadPage.dart';
+import 'Menubar.dart';
+
 
 // 알바용 - 출퇴근
 class CommutePage extends StatelessWidget {
@@ -13,6 +15,7 @@ class CommutePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        drawer: MenuBar(),
         appBar: AppBar(
           title: Text('알빠',
               style: TextStyle(
@@ -21,11 +24,6 @@ class CommutePage extends StatelessWidget {
                   letterSpacing: 1.5)),
           centerTitle: true,
           backgroundColor: Colors.white,
-          leading: IconButton(
-              icon: Icon(Icons.menu),
-              color: Color(MAINCOLOR),
-              iconSize: 30,
-              onPressed: () {}),
           actions: [
             IconButton(
               icon: Icon(Icons.notifications),
