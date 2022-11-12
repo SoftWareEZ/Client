@@ -1,29 +1,37 @@
 import 'package:flutter/material.dart';
-import 'StaffSchedulePage.dart';
+import 'Login.dart';
 
 
 //알바 사장 선택
 class AlbaPresident extends StatelessWidget {
   const AlbaPresident({Key? key}) : super(key: key);
 
+  final int MAINCOLOR = 0xffE94869;
+  final int SUBCOLOR = 0xffF4F4F4;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "choose",
       home: Grade(),
     );
   }
 }
 
-class Grade extends StatelessWidget {
+class Grade extends AlbaPresident {
   const Grade({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("choose"),
+        title: Text('알빠',
+          style: TextStyle(
+              color: Color(MAINCOLOR),
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.5)),
+      centerTitle: true,
+      backgroundColor: Colors.white,
       ),
       body: Center(
         child: Column(
@@ -32,7 +40,7 @@ class Grade extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const StaffCalendarPage()
+                  MaterialPageRoute(builder: (context) => const Login()
                   ),
                 );
               },
@@ -46,20 +54,29 @@ class Grade extends StatelessWidget {
                       fit: BoxFit.contain,
                     ),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Color(0xffE94869), width: 3)
+                    border: Border.all(color: Color(MAINCOLOR), width: 3)
 
                 ),
               ),
             ),
-            Container(
-                width: 300,
-                height: 200,
-                margin: EdgeInsets.only(top: 40),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Color(0xffE94869), width: 3)
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()
                 ),
-                child: Image.asset('assets/b.png', fit: BoxFit.contain,)
+              );
+            },
+            child: Container(
+                    width: 300,
+                    height: 200,
+                    margin: EdgeInsets.only(top: 40),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Color(MAINCOLOR), width: 3)
+                    ),
+                    child: Image.asset('assets/b.png', fit: BoxFit.contain,)
+                ),
             ),
           ],
         ),
