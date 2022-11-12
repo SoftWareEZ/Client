@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'StaffSchedulePage.dart';
 
-
 //회원가입
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -33,9 +32,97 @@ class Grade extends SignUp {
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
-      body: Center(
-        child: Column(
-
+      body: Container(
+        padding: const EdgeInsets.all(40.0),
+        child: Form(
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.account_circle),
+                  labelText: "이름을 입력해주세요",
+                  border: OutlineInputBorder(),
+                  hintText: 'Name',
+                ),
+              ),
+              SizedBox(
+                height: 13,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.account_circle),
+                  labelText: "이메일아이디를 입력해주세요",
+                  border: OutlineInputBorder(),
+                  hintText: 'E-mail',
+                ),
+              ),
+              SizedBox(
+                height: 13,
+              ),
+              TextFormField(
+                obscureText: true, // 비밀번호를 적을때 안보이도록
+                decoration: InputDecoration(
+                    icon: Icon(Icons.vpn_key),
+                    labelText: "비밀번호를 입력해주세요",
+                    border: OutlineInputBorder(),
+                    hintText: 'password'),
+              ),
+              SizedBox(
+                height: 13,
+              ),
+              TextFormField(
+                obscureText: true, // 비밀번호를 적을때 안보이도록
+                decoration: InputDecoration(
+                    icon: Icon(Icons.vpn_key),
+                    labelText: "비밀번호를 한번 더 입력해주세요",
+                    border: OutlineInputBorder(),
+                    hintText: 'password'),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5.0,bottom: 5.0),
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(	//모서리를 둥글게
+                        borderRadius: BorderRadius.circular(5)),
+                    primary: Color(MAINCOLOR),
+                    alignment: Alignment.center,
+                  ),
+                  onPressed: () {},
+                  child: Text('확인'),
+                ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.account_circle),
+                  labelText: "전화번호를 입력해주세요",
+                  border: OutlineInputBorder(),
+                  hintText: 'Phone number',
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(	//모서리를 둥글게
+                        borderRadius: BorderRadius.circular(5)),
+                    primary: Color(MAINCOLOR),
+                      minimumSize: Size(70, 50),	//width, height
+                      alignment: Alignment.center,
+                      textStyle: const TextStyle(fontSize: 15)
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => StaffCalendarPage()));
+                  },
+                  child: Text('회원가입'),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

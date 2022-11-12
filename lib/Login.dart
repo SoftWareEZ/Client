@@ -35,16 +35,15 @@ class Grade extends Login {
         backgroundColor: Colors.white,
       ),
       body: Center(
-        child: Column(
+          child:Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
+            children: <Widget>[
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(	//모서리를 둥글게
                         borderRadius: BorderRadius.circular(10)),
                     primary: Color(MAINCOLOR),
-                    minimumSize: Size(200, 80),	//width, height
+                    minimumSize: Size(200, 65),	//width, height
                     //child 정렬 - 아래의 Text('$test')
                     alignment: Alignment.center,
                     textStyle: const TextStyle(fontSize: 25)
@@ -58,12 +57,15 @@ class Grade extends Login {
                 },
                 child: Text("로그인"),
               ),
+              SizedBox(
+                height: 15,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(	//모서리를 둥글게
                         borderRadius: BorderRadius.circular(10)),
-                    primary: Colors.amberAccent,
-                    minimumSize: Size(200, 80),	//width, height
+                    primary: Colors.yellow,
+                    minimumSize: Size(200, 65),	//width, height
                     //child 정렬 - 아래의 Text('$test')
                     alignment: Alignment.center,
                     textStyle: const TextStyle(fontSize: 25)
@@ -77,12 +79,15 @@ class Grade extends Login {
                 },
                 child: Text("카카오로그인"),
               ),
+              SizedBox(
+                height: 15,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(	//모서리를 둥글게
                         borderRadius: BorderRadius.circular(10)),
-                    primary: Color(MAINCOLOR),
-                    minimumSize: Size(200, 80),	//width, height
+                    primary: Colors.tealAccent,
+                    minimumSize: Size(200, 65),	//width, height
                     //child 정렬 - 아래의 Text('$test')
                     alignment: Alignment.center,
                     textStyle: const TextStyle(fontSize: 25)
@@ -97,50 +102,6 @@ class Grade extends Login {
                 child: Text("회원가입"),
               ),
             ],
-          // children: [
-          //   InkWell(
-          //     onTap: () {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(builder: (context) => const SignUp()
-          //         ),
-          //       );
-          //     },
-          //     child: Container(
-          //       width: 300,
-          //       height: 200,
-          //       margin: EdgeInsets.only(top: 80),
-          //       decoration: BoxDecoration(
-          //           image: DecorationImage(
-          //             image: AssetImage('assets/a.png'),
-          //             fit: BoxFit.contain,
-          //           ),
-          //           borderRadius: BorderRadius.circular(12),
-          //           border: Border.all(color: Color(MAINCOLOR), width: 3)
-          //
-          //       ),
-          //     ),
-          //   ),
-          // InkWell(
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => const StaffCalendarPage()
-          //       ),
-          //     );
-          //   },
-          //   child: Container(
-          //           width: 300,
-          //           height: 200,
-          //           margin: EdgeInsets.only(top: 40),
-          //           decoration: BoxDecoration(
-          //               borderRadius: BorderRadius.circular(12),
-          //               border: Border.all(color: Color(MAINCOLOR), width: 3)
-          //           ),
-          //           child: Image.asset('assets/b.png', fit: BoxFit.contain,)
-          //       ),
-          //   ),
-          // ],
         ),
       ),
     );
