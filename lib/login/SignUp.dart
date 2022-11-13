@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/worker/StaffCalendarPage.dart';
+import '/worker/CalendarPage_worker.dart';
 
 //회원가입
 class SignUp extends StatelessWidget {
@@ -116,7 +116,7 @@ class Grade extends SignUp {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => StaffCalendarPage()));
+                            builder: (context) => CalendarPage_worker()));
                   },
                   child: Text('회원가입'),
                 ),

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '/Menubar.dart';
+import '/AlertPage.dart';
 import '/Bottombar.dart';
 
 // 알바용 - 한달근무표
-class StaffCalendarPage extends StatelessWidget {
-  const StaffCalendarPage({Key? key}) : super(key: key);
+class CalendarPage_worker extends StatelessWidget {
+  const CalendarPage_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -36,26 +37,26 @@ class StaffCalendarPage extends StatelessWidget {
         body: ListView(
           children: const [
             //여기서 if로 변수해서 클릭시 변수 바뀌면 그거만 로딩하는건 안되는강
-            StaffCalendar(),
-            StaffCalendarSalary(),
-            StaffCalendarInfo(),
+            Calendar(),
+            CalendarSalary(),
+            CalendarInfo(),
           ],
         ),
-        bottomNavigationBar: Bottombar(),
+        bottomNavigationBar: BottomBar_worker(),
       ),
     );
   }
 }
 
 // 알바용 한달근무표 - 달력
-class StaffCalendar extends StatefulWidget {
-  const StaffCalendar({Key? key}) : super(key: key);
+class Calendar extends StatefulWidget {
+  const Calendar({Key? key}) : super(key: key);
 
   @override
-  State<StaffCalendar> createState() => _StaffCalendarState();
+  State<Calendar> createState() => _CalendarState();
 }
 
-class _StaffCalendarState extends State<StaffCalendar> {
+class _CalendarState extends State<Calendar> {
   CalendarFormat format = CalendarFormat.month;
 
   DateTime selectedDay = DateTime.now();
@@ -115,8 +116,8 @@ class _StaffCalendarState extends State<StaffCalendar> {
 }
 
 // 알바용 한달근무표 - 월급
-class StaffCalendarSalary extends StatelessWidget {
-  const StaffCalendarSalary({Key? key}) : super(key: key);
+class CalendarSalary extends StatelessWidget {
+  const CalendarSalary({Key? key}) : super(key: key);
 
   final int SUBCOLOR = 0xffF4F4F4;
 
@@ -144,8 +145,8 @@ class StaffCalendarSalary extends StatelessWidget {
 }
 
 // 알바용 한달근무표 - 세부일정
-class StaffCalendarInfo extends StatelessWidget {
-  const StaffCalendarInfo({Key? key}) : super(key: key);
+class CalendarInfo extends StatelessWidget {
+  const CalendarInfo({Key? key}) : super(key: key);
 
   final int SUBCOLOR = 0xffF4F4F4;
 

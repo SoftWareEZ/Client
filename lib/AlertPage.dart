@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '/Bottombar.dart';
+
 // 알림창
-class AlertPage extends StatelessWidget {
-  const AlertPage({Key? key}) : super(key: key);
+class AlertPage_manager extends StatelessWidget {
+  const AlertPage_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffeeeded;
   final int SUBCOLOR = 0xffE94869;
@@ -172,36 +174,7 @@ class AlertPage extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: Container(
-          height: 70,
-          child: BottomAppBar(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset('calendar.png'),
-                  iconSize: 80,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset('change.png'),
-                  iconSize: 80,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset('work.png'),
-                  iconSize: 80,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset('mypage.png'),
-                  iconSize: 80,
-                ),
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: BottomBar_manager(),
       ),
     );
   }

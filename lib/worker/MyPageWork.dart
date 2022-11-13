@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '/Menubar.dart';
 import '/Bottombar.dart';
 
-// 알바용  - 대타
-class WorkinsteadPage extends StatelessWidget {
-  const WorkinsteadPage({Key? key}) : super(key: key);
+// 알바용 마이페이지 - 근무기록
+class MyPageWork extends StatelessWidget {
+  const MyPageWork({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -13,10 +14,10 @@ class WorkinsteadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
+     home: Scaffold(
         drawer: MenuBar(),
         appBar: AppBar(
-          title: Text('알빠',
+          title: Text('근무기록',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,
@@ -33,10 +34,24 @@ class WorkinsteadPage extends StatelessWidget {
           ],
         ),
         body: ListView(
-
+          children: [MyPageWorkLog()
+          ],
         ),
-        bottomNavigationBar: BottomBar_manager(),
+        bottomNavigationBar: BottomBar_worker(),
       ),
     );
+  }
+}
+
+// 알바용 마이페이지 - 근무기록 캘린더
+class MyPageWorkLog extends StatelessWidget {
+  const MyPageWorkLog({Key? key}) : super(key: key);
+
+  final int MAINCOLOR = 0xffE94869;
+  final int SUBCOLOR = 0xffF4F4F4;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

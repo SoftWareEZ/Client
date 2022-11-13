@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'StaffCalendarPage.dart';
-import 'WorkinsteadPage.dart';
-import '/Menubar.dart';
 
+import '/Menubar.dart';
+import '/AlertPage.dart';
+import '/Bottombar.dart';
 
 // 알바용 - 출퇴근
 class CommutePage extends StatelessWidget {
@@ -34,57 +34,9 @@ class CommutePage extends StatelessWidget {
           ],
         ),
         body: ListView(
-          children: const [
-            Commutebody()
-          ],
+          children: const [Commutebody()],
         ),
-        bottomNavigationBar: Container(
-          height: 70,
-          child: BottomAppBar(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const StaffCalendarPage()),
-                    );
-                  },
-                  icon: Image.asset('assets/calendar.png'),
-                  iconSize: 20,
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const WorkinsteadPage()),
-                    );
-                  },
-                  icon: Image.asset('assets/change.png'),
-                  iconSize: 20,
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const CommutePage()),
-                    );
-                  },
-                  icon: Image.asset('assets/work.png'),
-                  iconSize: 20,
-                ),
-                IconButton(
-                  onPressed: () {
-
-                  },
-                  icon: Image.asset('assets/mypage.png'),
-                  iconSize: 20,
-                ),
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: BottomBar_worker(),
       ),
     );
   }
@@ -104,15 +56,15 @@ class Commutebody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("근무지 근방 100m 내에서\n출근 버튼을 누르면\n정상적으로 출근처리를 합니다.",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600), textAlign: TextAlign.center
-            ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center),
             Container(
               margin: EdgeInsets.only(
                 top: 30,
               ),
               child: ElevatedButton(
-
-                style: ElevatedButton.styleFrom(backgroundColor: Color(MAINCOLOR),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(MAINCOLOR),
                   fixedSize: const Size(130, 130),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -120,20 +72,19 @@ class Commutebody extends StatelessWidget {
 
                   // alignment: BorderRadius.all(Radius.circular(10)),
                 ),
-                onPressed: () {
-                },
-                child:Column(
+                onPressed: () {},
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Icon(Icons.check,size:40),
-                  Text(
+                    Icon(Icons.check, size: 40),
+                    Text(
                       "출근",
                       style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.w600,
+                        fontSize: 35,
+                        fontWeight: FontWeight.w600,
                       ),
-                   ),
-                ],
+                    ),
+                  ],
                 ),
               ),
             ),

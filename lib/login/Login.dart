@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '/worker/StaffCalendarPage.dart';
+import '/worker/CalendarPage_worker.dart';
+import '/manager/CalendarPage_manager.dart';
 import 'SignUp.dart';
 
 
@@ -51,7 +52,7 @@ class Grade extends Login {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const StaffCalendarPage()
+                    MaterialPageRoute(builder: (context) => const CalendarPage_manager()
                     ),
                   );
                 },
@@ -73,7 +74,7 @@ class Grade extends Login {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const StaffCalendarPage()
+                    MaterialPageRoute(builder: (context) => const CalendarPage_manager()
                     ),
                   );
                 },
