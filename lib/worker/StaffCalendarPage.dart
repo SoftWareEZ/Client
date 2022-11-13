@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'CommutePage.dart';
-import 'WorkinsteadPage.dart';
+
 import '/Menubar.dart';
+import '/Bottombar.dart';
 
 // 알바용 - 한달근무표
 class StaffCalendarPage extends StatelessWidget {
@@ -41,51 +41,7 @@ class StaffCalendarPage extends StatelessWidget {
             StaffCalendarInfo(),
           ],
         ),
-        bottomNavigationBar: Container(
-          height: 70,
-          child: BottomAppBar(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const StaffCalendarPage()),
-                    );
-                  },
-                  icon: Image.asset('assets/calendar.png'),
-                  iconSize: 20,
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const WorkinsteadPage()),
-                    );
-                  },
-                  icon: Image.asset('assets/change.png'),
-                  iconSize: 20,
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const CommutePage()),
-                    );
-                  },
-                  icon: Image.asset('assets/work.png'),
-                  iconSize: 20,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Image.asset('assets/mypage.png'),
-                  iconSize: 20,
-                ),
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: Bottombar(),
       ),
     );
   }
@@ -128,9 +84,9 @@ class _StaffCalendarState extends State<StaffCalendar> {
           // 날짜 선택하는 포멧 설정
           onDaySelected: (selectDay, focusDay) => {
             setState(() => {
-              selectedDay = selectDay,
-              focusedDay = focusDay,
-            }),
+                  selectedDay = selectDay,
+                  focusedDay = focusDay,
+                }),
             print(focusedDay),
           },
 
@@ -140,7 +96,6 @@ class _StaffCalendarState extends State<StaffCalendar> {
 
           // 캘린더 디자인
           calendarStyle: CalendarStyle(
-
               todayDecoration: BoxDecoration(
                   color: Colors.transparent,
                   shape: BoxShape.circle,
@@ -155,11 +110,9 @@ class _StaffCalendarState extends State<StaffCalendar> {
               selectedTextStyle: TextStyle(
                 color: Colors.white,
               )),
-        )
-    );
+        ));
   }
 }
-
 
 // 알바용 한달근무표 - 월급
 class StaffCalendarSalary extends StatelessWidget {
@@ -245,4 +198,3 @@ class StaffCalendarInfo extends StatelessWidget {
     );
   }
 }
-
