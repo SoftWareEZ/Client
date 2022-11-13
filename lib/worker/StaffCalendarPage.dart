@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'CommutePage.dart';
 import 'WorkinsteadPage.dart';
-import 'Menubar.dart';
+import '/Menubar.dart';
 
 // 알바용 - 한달근무표
 class StaffCalendarPage extends StatelessWidget {

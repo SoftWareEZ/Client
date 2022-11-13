@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:software_engineering/StaffSchedulePage.dart';
+import 'package:software_engineering/worker/StaffCalendarPage.dart';
 
 import 'package:software_engineering/main.dart';
 

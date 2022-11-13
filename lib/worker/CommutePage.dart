@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'StaffSchedulePage.dart';
+import 'StaffCalendarPage.dart';
 import 'WorkinsteadPage.dart';
-import 'Menubar.dart';
+import '/Menubar.dart';
 
 
 // 알바용 - 출퇴근

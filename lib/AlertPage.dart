@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 알림창
 class AlertPage extends StatelessWidget {
   const AlertPage({Key? key}) : super(key: key);
 

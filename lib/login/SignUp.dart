@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'StaffSchedulePage.dart';
+import '/worker/StaffCalendarPage.dart';
 
 //회원가입
 class SignUp extends StatelessWidget {

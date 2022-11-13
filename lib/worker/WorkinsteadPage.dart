@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'CommutePage.dart';
-import 'StaffSchedulePage.dart';
-import 'Menubar.dart';
+import 'StaffCalendarPage.dart';
+import '/Menubar.dart';
 
 // 알바용  - 대타
 class WorkinsteadPage extends StatelessWidget {
