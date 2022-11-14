@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:software_engineering/manager/AddAlert.dart';
 
 import '/Bottombar.dart';
 
@@ -159,7 +160,13 @@ class AlertPage_manager extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   RawMaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AddAlert()
+                        ),
+                      );
+                    },
                     elevation: 2.0,
                     fillColor: Color(SUBCOLOR),
                     child: Icon(
@@ -172,8 +179,6 @@ class AlertPage_manager extends StatelessWidget {
                   ),
                 ],
               )
-
-
             ],
           ),
         ),

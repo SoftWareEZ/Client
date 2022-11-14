@@ -16,7 +16,7 @@ class AddWorkSpace extends StatelessWidget{
         home: Scaffold(
           drawer: MenuBar(),
             appBar: AppBar(
-              title: Text('알빠',
+              title: Text('사업장 추가',
                   style: TextStyle(
                       color: Color(MAINCOLOR),
                       fontWeight: FontWeight.w700,
@@ -47,7 +47,6 @@ class AddWorkSpace extends StatelessWidget{
                 ),
                 Check(),
               ],
-
             ),
               bottomNavigationBar: BottomBar_manager(),
      ),

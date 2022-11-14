@@ -57,7 +57,7 @@ class AlbaMenuBar extends StatelessWidget {
                     children: <Widget>[
                       Text('  워크 플레이스'),
                       Icon(
-                        Icons.add,
+                        Icons.arrow_drop_down,
                         color: Color(0xffE94869),
                       ),
                     ],
