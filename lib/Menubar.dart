@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:software_engineering/manager/AddWorkSpace.dart';
 
 class MenuBar extends StatelessWidget {
   const MenuBar({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class MenuBar extends StatelessWidget {
             ),
           ),
           Container(
-            height: 110,
+            height: 130,
             margin: EdgeInsets.fromLTRB(30, 20, 30, 6),
             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
             decoration: BoxDecoration(
@@ -56,9 +57,15 @@ class MenuBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text('  나의 사업장'),
-                      Icon(
-                        Icons.add,
+                      IconButton(
+                        icon: Icon(Icons.add),
                         color: Color(0xffE94869),
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const AddWorkSpace()),
+                          );
+                        },
                       ),
                     ],
                   ),

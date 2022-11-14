@@ -42,6 +42,10 @@ class AddWorkSpace extends StatelessWidget{
               children: const [
                 SpaceName(),
                 SpaceAddress(),
+                SizedBox(
+                  height: 140,
+                ),
+                Check(),
               ],
 
             ),
@@ -123,6 +127,35 @@ class SpaceAddress extends StatelessWidget {
               ),
             ]
         )
+    );
+
+  }
+}
+
+class Check extends StatelessWidget {
+  const Check({Key? key}) : super(key: key);
+
+  final int MAINCOLOR = 0xffE94869;
+
+  @override
+  Widget build(BuildContext context){
+    return Container(
+          margin: const EdgeInsets.only(top: 5.0,bottom: 5.0),
+          alignment: Alignment.centerRight,
+          child: (
+              RawMaterialButton(
+                onPressed: () {},
+                elevation: 2.0,
+                fillColor: Color(MAINCOLOR),
+                child: Icon(
+                  Icons.check,
+                  color: Colors.white,
+                  size: 25.0,
+                ),
+                padding: EdgeInsets.all(15.0),
+                shape: CircleBorder(),
+              )
+          ),
     );
   }
 }

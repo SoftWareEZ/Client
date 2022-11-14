@@ -152,6 +152,9 @@ class AlertPage_manager extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                height: 100,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
