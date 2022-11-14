@@ -39,6 +39,7 @@ class Grade extends Login {
           child:Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Image.asset('assets/Loginlogo.png', height: 200,),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(	//모서리를 둥글게
@@ -65,29 +66,7 @@ class Grade extends Login {
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(	//모서리를 둥글게
                         borderRadius: BorderRadius.circular(10)),
-                    primary: Colors.yellow,
-                    minimumSize: Size(200, 65),	//width, height
-                    //child 정렬 - 아래의 Text('$test')
-                    alignment: Alignment.center,
-                    textStyle: const TextStyle(fontSize: 25)
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CalendarPage_manager()
-                    ),
-                  );
-                },
-                child: Text("카카오로그인"),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(	//모서리를 둥글게
-                        borderRadius: BorderRadius.circular(10)),
-                    primary: Colors.tealAccent,
+                    primary: Color(MAINCOLOR),
                     minimumSize: Size(200, 65),	//width, height
                     //child 정렬 - 아래의 Text('$test')
                     alignment: Alignment.center,
@@ -101,6 +80,28 @@ class Grade extends Login {
                   );
                 },
                 child: Text("회원가입"),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(	//모서리를 둥글게
+                        borderRadius: BorderRadius.circular(10)),
+                    primary: Colors.amberAccent,
+                    minimumSize: Size(200, 65),	//width, height
+                    //child 정렬 - 아래의 Text('$test')
+                    alignment: Alignment.center,
+                    textStyle: const TextStyle(fontSize: 25)
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CalendarPage_manager()
+                    ),
+                  );
+                },
+                child: Text("카카오로그인"),
               ),
             ],
         ),

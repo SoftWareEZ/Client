@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '/worker/CalendarPage_worker.dart';
-
+FocusNode myFocusNode = new FocusNode();
 //회원가입
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -39,10 +40,15 @@ class Grade extends SignUp {
             children: <Widget>[
               TextFormField(
                 decoration: InputDecoration(
-                  icon: Icon(Icons.account_circle),
+                  icon: Icon(Icons.account_circle,color: Color(MAINCOLOR),),
                   labelText: "이름을 입력해주세요",
+                  labelStyle: TextStyle(
+                      color: Colors.black54
+                  ),
                   border: OutlineInputBorder(),
-                  hintText: 'Name',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),),
+                  hintText: 'EX) 김철수',
                 ),
               ),
               SizedBox(
@@ -50,10 +56,15 @@ class Grade extends SignUp {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                  icon: Icon(Icons.account_circle),
+                  icon: Icon(Icons.email,color: Color(MAINCOLOR),),
                   labelText: "이메일아이디를 입력해주세요",
+                  labelStyle: TextStyle(
+                      color: Colors.black54
+                  ),
                   border: OutlineInputBorder(),
-                  hintText: 'E-mail',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),),
+                  hintText: 'EX) abcd@naver.com',
                 ),
               ),
               SizedBox(
@@ -62,9 +73,14 @@ class Grade extends SignUp {
               TextFormField(
                 obscureText: true, // 비밀번호를 적을때 안보이도록
                 decoration: InputDecoration(
-                    icon: Icon(Icons.vpn_key),
+                    icon: Icon(Icons.vpn_key,color: Color(MAINCOLOR),),
                     labelText: "비밀번호를 입력해주세요",
+                    labelStyle: TextStyle(
+                        color: Colors.black54
+                    ),
                     border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),),
                     hintText: 'password'),
               ),
               SizedBox(
@@ -73,9 +89,14 @@ class Grade extends SignUp {
               TextFormField(
                 obscureText: true, // 비밀번호를 적을때 안보이도록
                 decoration: InputDecoration(
-                    icon: Icon(Icons.vpn_key),
+                    icon: Icon(Icons.vpn_key,color: Color(MAINCOLOR),),
                     labelText: "비밀번호를 한번 더 입력해주세요",
+                    labelStyle: TextStyle(
+                        color: Colors.black54
+                    ),
                     border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),),
                     hintText: 'password'),
               ),
               Container(
@@ -93,12 +114,19 @@ class Grade extends SignUp {
                 ),
               ),
               TextFormField(
+                inputFormatters: [FilteringTextInputFormatter(RegExp('[0-9]'), allow:false), ],
                 decoration: InputDecoration(
-                  icon: Icon(Icons.account_circle),
+                  icon: Icon(Icons.call,color: Color(MAINCOLOR),),
                   labelText: "전화번호를 입력해주세요",
+                    labelStyle: TextStyle(
+                        color: Colors.black54
+                    ),
                   border: OutlineInputBorder(),
-                  hintText: 'Phone number',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),),
+                  hintText: 'EX) 01012345678',
                 ),
+
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10.0),
