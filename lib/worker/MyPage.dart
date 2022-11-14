@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/Menubar.dart';
+import '/AlbaMenubar.dart';
 import '/AlertPage.dart';
 import '/Bottombar.dart';
 import '/worker/MyPageResign.dart';
@@ -18,7 +18,7 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar(),
+        drawer: AlbaMenuBar(),
         appBar: AppBar(
           title: Text('마이페이지',
               style: TextStyle(

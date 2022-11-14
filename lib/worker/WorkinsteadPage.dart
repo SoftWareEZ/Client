@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/Menubar.dart';
+import '/AlbaMenubar.dart';
 import '/Bottombar.dart';
 
 // 알바용  - 대타
@@ -14,7 +14,7 @@ class WorkinsteadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar(),
+        drawer: AlbaMenuBar(),
         appBar: AppBar(
           title: Text('알빠',
               style: TextStyle(

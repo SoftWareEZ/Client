@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/Menubar.dart';
+import '/AlbaMenubar.dart';
 import '/AlertPage.dart';
 import '/Bottombar.dart';
 
@@ -15,7 +15,7 @@ class CommutePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar(),
+        drawer: AlbaMenuBar(),
         appBar: AppBar(
           title: Text('알빠',
               style: TextStyle(
@@ -64,7 +64,7 @@ class Commutebody extends StatelessWidget {
               ),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  //backgroundColor: Color(MAINCOLOR),
+                  backgroundColor: Color(MAINCOLOR),
                   fixedSize: const Size(130, 130),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),

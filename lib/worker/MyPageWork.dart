@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '/Menubar.dart';
+import '/AlbaMenubar.dart';
 import '/Bottombar.dart';
 
 // 알바용 마이페이지 - 근무기록
@@ -15,7 +15,7 @@ class MyPageWork extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
      home: Scaffold(
-        drawer: MenuBar(),
+        drawer: AlbaMenuBar(),
         appBar: AppBar(
           title: Text('근무기록',
               style: TextStyle(

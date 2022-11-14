@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '/Menubar.dart';
+import '/AlbaMenubar.dart';
 import '/AlertPage.dart';
 import '/Bottombar.dart';
 
@@ -16,7 +16,7 @@ class CalendarPage_worker extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar(),
+        drawer: AlbaMenuBar(),
         appBar: AppBar(
           title: Text('알빠',
               style: TextStyle(
