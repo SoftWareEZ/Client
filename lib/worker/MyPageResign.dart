@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/AlbaMenubar.dart';
-import '/AlertPage.dart';
+import '/AlbaAlertPage.dart';
 import '/Bottombar.dart';
 
 // 알바용 마이페이지 - 퇴사하기

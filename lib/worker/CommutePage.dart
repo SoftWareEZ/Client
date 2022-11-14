@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/AlbaMenubar.dart';
-import '/AlertPage.dart';
+import '/AlbaAlertPage.dart';
 import '/Bottombar.dart';
 
 // 알바용 - 출퇴근
@@ -64,7 +64,7 @@ class Commutebody extends StatelessWidget {
               ),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(MAINCOLOR),
+                  //backgroundColor: Color(MAINCOLOR),
                   fixedSize: const Size(130, 130),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),

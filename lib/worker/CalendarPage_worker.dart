@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '/AlbaMenubar.dart';
-import '/AlertPage.dart';
+import '/AlbaAlertPage.dart';
 import '/Bottombar.dart';
 
 // 알바용 - 한달근무표

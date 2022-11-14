@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/AlbaMenubar.dart';
-import '/AlertPage.dart';
+import '/AlbaAlertPage.dart';
 import '/Bottombar.dart';
 import '/worker/MyPageResign.dart';
 import '/worker/MyPageWork.dart';
