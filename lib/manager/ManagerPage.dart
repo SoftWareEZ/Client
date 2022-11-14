@@ -18,6 +18,7 @@ class ManagerPage extends StatelessWidget {
       home: Scaffold(
         drawer: MenuBar(),
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알바생 관리',
               style: TextStyle(
                   color: Color(MAINCOLOR),

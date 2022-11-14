@@ -20,6 +20,7 @@ class MyPage extends StatelessWidget {
       home: Scaffold(
         drawer: AlbaMenuBar(),
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('마이페이지',
               style: TextStyle(
                   color: Color(MAINCOLOR),

@@ -18,6 +18,7 @@ class CalendarPage_manager extends StatelessWidget {
       home: Scaffold(
         drawer: MenuBar(),
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알빠',
               style: TextStyle(
                   color: Color(MAINCOLOR),

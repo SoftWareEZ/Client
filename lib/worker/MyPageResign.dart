@@ -18,6 +18,7 @@ class MyPageResign extends StatelessWidget {
       home: Scaffold(
         drawer: AlbaMenuBar(),
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('퇴사하기',
               style: TextStyle(
                   color: Color(MAINCOLOR),

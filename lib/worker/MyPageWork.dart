@@ -18,6 +18,7 @@ class MyPageWork extends StatelessWidget {
      home: Scaffold(
         drawer: AlbaMenuBar(),
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('근무기록',
               style: TextStyle(
                   color: Color(MAINCOLOR),

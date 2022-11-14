@@ -17,6 +17,7 @@ class CommutePage extends StatelessWidget {
       home: Scaffold(
         drawer: AlbaMenuBar(),
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알빠',
               style: TextStyle(
                   color: Color(MAINCOLOR),

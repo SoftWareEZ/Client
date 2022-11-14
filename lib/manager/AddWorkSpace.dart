@@ -16,6 +16,7 @@ class AddWorkSpace extends StatelessWidget{
         home: Scaffold(
           drawer: MenuBar(),
             appBar: AppBar(
+              iconTheme: IconThemeData(color: Color(MAINCOLOR)),
               title: Text('사업장 추가',
                   style: TextStyle(
                       color: Color(MAINCOLOR),
