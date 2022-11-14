@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/AlbaMenubar.dart';
+import '/AlbaAlertPage.dart';
 import '/Bottombar.dart';
 
 // 알바용  - 대타
@@ -28,7 +29,13 @@ class WorkinsteadPage extends StatelessWidget {
               icon: Icon(Icons.notifications),
               color: Color(MAINCOLOR),
               iconSize: 30,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AlbaAlertPage()),
+                );
+              },
             )
           ],
         ),

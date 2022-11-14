@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '/AlbaMenubar.dart';
+import '/AlbaAlertPage.dart';
 import '/Bottombar.dart';
 
 // 알바용 마이페이지 - 근무기록
@@ -29,7 +30,13 @@ class MyPageWork extends StatelessWidget {
               icon: Icon(Icons.notifications),
               color: Color(MAINCOLOR),
               iconSize: 30,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AlbaAlertPage()),
+                );
+              },
             )
           ],
         ),

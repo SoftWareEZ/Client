@@ -147,7 +147,7 @@ class AlbaAlertPage extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomBar_manager(),
+        bottomNavigationBar: BottomBar_worker(),
       ),
     );
   }

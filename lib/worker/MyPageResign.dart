@@ -30,7 +30,13 @@ class MyPageResign extends StatelessWidget {
               icon: Icon(Icons.notifications),
               color: Color(MAINCOLOR),
               iconSize: 30,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AlbaAlertPage()),
+                );
+              },
             )
           ],
         ),
