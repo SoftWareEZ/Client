@@ -41,9 +41,65 @@ class WorkinsteadPage extends StatelessWidget {
           ],
         ),
         body: ListView(
-
+          children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              decoration: BoxDecoration(
+                color: Color(SUBCOLOR),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Column(
+                      children: [
+                        Text(
+                          "2022년 10월 15일",
+                          style: TextStyle(color: Colors.black38, fontSize: 20),
+                        ),
+                        Text("12:00 - 18:00",
+                            style:
+                                TextStyle(color: Colors.black38, fontSize: 20))
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "조유정",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                " -> ",
+                                style: TextStyle(fontSize: 25),
+                              ),
+                              Text(
+                                "김민지",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                        ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        bottomNavigationBar: BottomBar_manager(),
+        bottomNavigationBar: BottomBar_worker(),
       ),
     );
   }
