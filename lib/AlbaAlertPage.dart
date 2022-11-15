@@ -84,6 +84,7 @@ class AlbaAlertPage extends StatelessWidget {
                       ),
                     ]
                 ),
+
               ),
               Container(
                 height: 110,
@@ -143,7 +144,6 @@ class AlbaAlertPage extends StatelessWidget {
                   ],
                 ),
               ),
-
             ],
           ),
         ),
