@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:software_engineering/worker/ViewAlert.dart';
 
 import '/Bottombar.dart';
 
@@ -55,7 +56,8 @@ class AlbaAlertPage extends StatelessWidget {
           color: Color(MAINCOLOR),
           child: Column(
             children: [
-              Container(
+              InkWell(
+              child: Container(
                 height: 110,
                 width: 500,
                 margin: EdgeInsets.fromLTRB(30, 10, 30, 5),
@@ -82,11 +84,20 @@ class AlbaAlertPage extends StatelessWidget {
                                 fontWeight: FontWeight.w500),),
                         ],
                       ),
-                    ]
+                    ],
                 ),
-
               ),
-              Container(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ViewAlert_1()
+                    ),
+                  );
+                },
+              ),
+
+              InkWell(
+              child: Container(
                 height: 110,
                 width: 500,
                 margin: EdgeInsets.fromLTRB(30, 5, 30, 5),
@@ -115,7 +126,17 @@ class AlbaAlertPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ViewAlert_2()
+                    ),
+                  );
+                },
+              ),
+
+              InkWell(
+              child: Container(
                 height: 110,
                 width: 500,
                 margin: EdgeInsets.fromLTRB(30, 5, 30, 5),
@@ -143,6 +164,14 @@ class AlbaAlertPage extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ViewAlert_3()
+                    ),
+                  );
+                },
               ),
             ],
           ),
