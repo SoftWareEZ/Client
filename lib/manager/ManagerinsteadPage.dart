@@ -5,8 +5,8 @@ import '/AlbaAlertPage.dart';
 import '/Bottombar.dart';
 
 // 알바용  - 대타
-class WorkinsteadPage extends StatelessWidget {
-  const WorkinsteadPage({Key? key}) : super(key: key);
+class ManagerinsteadPage extends StatelessWidget {
+  const ManagerinsteadPage({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -43,7 +43,7 @@ class WorkinsteadPage extends StatelessWidget {
         body: ListView(
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                 color: Color(SUBCOLOR),
@@ -59,11 +59,11 @@ class WorkinsteadPage extends StatelessWidget {
                       children: [
                         Text(
                           "2022년 10월 15일",
-                          style: TextStyle(color: Colors.black38, fontSize: 20),
+                          style: TextStyle(color: Colors.black38, fontSize: 15),
                         ),
                         Text("12:00 - 18:00",
                             style:
-                                TextStyle(color: Colors.black38, fontSize: 20))
+                                TextStyle(color: Colors.black38, fontSize: 15))
                       ],
                     ),
                   ),
@@ -77,29 +77,66 @@ class WorkinsteadPage extends StatelessWidget {
                     child: Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "조유정",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                " -> ",
-                                style: TextStyle(fontSize: 25),
-                              ),
-                              Text(
-                                "김민지",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                        ),
+                        children: [
+                          Text(
+                            "조유정",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Text(
+                            " -> ",
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          Text(
+                            "김민지",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 10.0),
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Color(MAINCOLOR),
+                          borderRadius: BorderRadius.circular(13),
+                        ),
+                        child: TextButton(
+                            onPressed: () {
+                              // Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              "수락",
+                              style: TextStyle(color: Colors.white),
+                            )),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 40.0),
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Color(MAINCOLOR),
+                          borderRadius: BorderRadius.circular(13),
+                        ),
+                        child: TextButton(
+                            onPressed: () {
+                              // Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              "거절",
+                              style: TextStyle(color: Colors.white),
+                            )),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
           ],
         ),
-        bottomNavigationBar: BottomBar_worker(),
+        bottomNavigationBar: BottomBar_manager(),
       ),
     );
   }
