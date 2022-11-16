@@ -46,9 +46,9 @@ class AddInsteadPage_worker extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            AddInsteadDateForm(),
-            AddInsteadStartTimeForm(),
-            AddInsteadEndTimeForm()
+            AddInsteadDateForm_worker(),
+            AddInsteadStartTimeForm_worker(),
+            AddInsteadEndTimeForm_worker()
           ],
         ),
         bottomNavigationBar: BottomBar_worker(),
@@ -71,8 +71,8 @@ class AddInsteadPage_worker extends StatelessWidget {
   }
 }
 
-class AddInsteadDateForm extends StatelessWidget {
-  const AddInsteadDateForm({Key? key}) : super(key: key);
+class AddInsteadDateForm_worker extends StatelessWidget {
+  const AddInsteadDateForm_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -129,8 +129,8 @@ class AddInsteadDateForm extends StatelessWidget {
   }
 }
 
-class AddInsteadStartTimeForm extends StatelessWidget {
-  const AddInsteadStartTimeForm({Key? key}) : super(key: key);
+class AddInsteadStartTimeForm_worker extends StatelessWidget {
+  const AddInsteadStartTimeForm_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -179,8 +179,8 @@ class AddInsteadStartTimeForm extends StatelessWidget {
   }
 }
 
-class AddInsteadEndTimeForm extends StatelessWidget {
-  const AddInsteadEndTimeForm({Key? key}) : super(key: key);
+class AddInsteadEndTimeForm_worker extends StatelessWidget {
+  const AddInsteadEndTimeForm_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;

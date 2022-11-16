@@ -40,9 +40,10 @@ class MyPageWork_worker extends StatelessWidget {
             )
           ],
         ),
-        body: ListView(
-          children: [MyPageWorkLog_worker()
-          ],
+        body: ListView.builder(
+          itemBuilder: (BuildContext context, int index) =>
+              EntryItem(data[index]),
+          itemCount: data.length,
         ),
         bottomNavigationBar: BottomBar_worker(),
       ),
@@ -50,15 +51,103 @@ class MyPageWork_worker extends StatelessWidget {
   }
 }
 
-// 알바용 마이페이지 - 근무기록 캘린더
-class MyPageWorkLog_worker extends StatelessWidget {
-  const MyPageWorkLog_worker({Key? key}) : super(key: key);
+// One entry in the multilevel list displayed by this app.
+class Entry {
+  Entry(this.title, [this.children = const <Entry>[]]);
 
-  final int MAINCOLOR = 0xffE94869;
-  final int SUBCOLOR = 0xffF4F4F4;
+  final String title;
+  final List<Entry> children;
+}
+
+// The entire multilevel list displayed by this app.
+final List<Entry> data = <Entry>[
+  Entry(
+    '2022년',
+    <Entry>[
+      Entry(
+        '3월',
+        <Entry>[
+          Entry('9일 이마트24 11:00-16:30'),
+          Entry('10일 이마트24 11:00-16:30'),
+          Entry('25일 이마트24 11:00-16:30'),
+        ],
+      ),
+      Entry('4월',
+        <Entry>[
+          Entry('9일 이마트24 11:00-16:30'),
+          Entry('10일 이마트24 11:00-16:30'),
+          Entry('25일 이마트24 11:00-16:30'),
+        ],),
+      Entry('5월',
+        <Entry>[
+          Entry('9일 이마트24 11:00-16:30'),
+          Entry('10일 이마트24 11:00-16:30'),
+          Entry('25일 이마트24 11:00-16:30'),
+        ],),
+    ],
+  ),
+  Entry(
+    '2021년',
+    <Entry>[
+      Entry('1월',
+        <Entry>[
+          Entry('9일 이마트24 11:00-16:30'),
+          Entry('10일 이마트24 11:00-16:30'),
+          Entry('25일 이마트24 11:00-16:30'),
+        ],),
+      Entry('2월',
+        <Entry>[
+          Entry('9일 이마트24 11:00-16:30'),
+          Entry('10일 이마트24 11:00-16:30'),
+          Entry('25일 이마트24 11:00-16:30'),
+        ],),
+    ],
+  ),
+  Entry(
+    '2020년',
+    <Entry>[
+      Entry('10월',
+        <Entry>[
+          Entry('9일 이마트24 11:00-16:30'),
+          Entry('10일 이마트24 11:00-16:30'),
+          Entry('25일 이마트24 11:00-16:30'),
+        ],),
+      Entry('11월',
+        <Entry>[
+          Entry('9일 이마트24 11:00-16:30'),
+          Entry('10일 이마트24 11:00-16:30'),
+          Entry('25일 이마트24 11:00-16:30'),
+        ],),
+      Entry(
+        '12월',
+        <Entry>[
+          Entry('9일 이마트24 11:00-16:30'),
+          Entry('10일 이마트24 11:00-16:30'),
+          Entry('25일 이마트24 11:00-16:30'),
+        ],
+      ),
+    ],
+  ),
+];
+
+// Displays one Entry. If the entry has children then it's displayed
+// with an ExpansionTile.
+class EntryItem extends StatelessWidget {
+  const EntryItem(this.entry);
+
+  final Entry entry;
+
+  Widget _buildTiles(Entry root) {
+    if (root.children.isEmpty) return ListTile(title: Text(root.title));
+    return ExpansionTile(
+      key: PageStorageKey<Entry>(root),
+      title: Text(root.title),
+      children: root.children.map(_buildTiles).toList(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return _buildTiles(entry);
   }
 }
