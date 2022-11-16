@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:software_engineering/alert/AlertPage.dart';
-import 'package:software_engineering/manager/ManagementUpdatePage_manager.dart';
+import 'package:intl/intl.dart';
 
+import '/alert/AlertPage.dart';
+import '/manager/ManagementUpdatePage_manager.dart';
 import '/bar/Menubar.dart';
 import '/bar/Bottombar.dart';
 
@@ -128,7 +129,7 @@ class StaffInfo {
 }
 
 class OwnerManagerStaffInfo extends StatelessWidget {
-  const OwnerManagerStaffInfo(
+  OwnerManagerStaffInfo(
       {Key? key, required this.name, required this.hour, required this.minute})
       : super(key: key);
 
@@ -138,6 +139,8 @@ class OwnerManagerStaffInfo extends StatelessWidget {
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
+
+  var f = NumberFormat('00');
 
   @override
   Widget build(BuildContext context) {
@@ -176,9 +179,9 @@ class OwnerManagerStaffInfo extends StatelessWidget {
                   Text(
                     '$name',
                     style: TextStyle(
-                        color: Color(MAINCOLOR),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
@@ -187,11 +190,11 @@ class OwnerManagerStaffInfo extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      '$hour시간 $minute분',
+                      f.format(hour) + '시간 ' + f.format(minute) + '분',
                       style: TextStyle(
-                        color: Color(MAINCOLOR),
+                        color: Colors.black,
                         fontSize: 16,
-                        fontWeight: FontWeight.w700,
+                        //fontWeight: FontWeight.w700,
                       ),
                     ),
                   )

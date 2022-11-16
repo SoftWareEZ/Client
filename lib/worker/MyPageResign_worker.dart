@@ -125,7 +125,7 @@ class ResignButton_worker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 30,
+        height: 35,
         decoration: BoxDecoration(
           color: Color(MAINCOLOR),
           borderRadius: BorderRadius.circular(10),
@@ -163,7 +163,7 @@ class ResignButton_worker extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                height: 30,
+                                height: 35,
                                 decoration: BoxDecoration(
                                   color: Color(MAINCOLOR),
                                   borderRadius: BorderRadius.circular(10),
@@ -190,7 +190,7 @@ class ResignButton_worker extends StatelessWidget {
                                                         ) 
                                                       ),
                                                       Container(
-                                                        height: 30,
+                                                        height: 35,
                                                         decoration: BoxDecoration(
                                                           color: Color(MAINCOLOR),
                                                           borderRadius: BorderRadius.circular(10),
@@ -217,7 +217,7 @@ class ResignButton_worker extends StatelessWidget {
                                     )),
                               ),
                               Container(
-                                height: 30,
+                                height: 35,
                                 decoration: BoxDecoration(
                                   color: Color(MAINCOLOR),
                                   borderRadius: BorderRadius.circular(10),

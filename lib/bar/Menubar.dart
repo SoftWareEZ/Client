@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:software_engineering/login/WorkerManager.dart';
 import 'AddWorkSpace.dart';
 
 class MenuBar_manager extends StatelessWidget {
@@ -60,10 +61,11 @@ class MenuBar_manager extends StatelessWidget {
                       IconButton(
                         icon: Icon(Icons.add),
                         color: Color(0xffE94869),
-                        onPressed: (){
+                        onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const AddWorkSpace()),
+                            MaterialPageRoute(
+                                builder: (context) => const AddWorkSpace()),
                           );
                         },
                       ),
@@ -118,21 +120,30 @@ class MenuBar_manager extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 50,
-            margin: EdgeInsets.fromLTRB(30, 6, 30, 6),
-            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-            decoration: BoxDecoration(
-              color: Color(0xffF4F4F4),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('로그아웃', style: TextStyle(color: Colors.red)),
-              ],
-            ),
-          ),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const WorkerManager()),
+                );
+              },
+              child: Container(
+                height: 50,
+                margin: EdgeInsets.fromLTRB(30, 6, 30, 6),
+                padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                decoration: BoxDecoration(
+                  color: Color(0xffF4F4F4),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('로그아웃', style: TextStyle(color: Colors.red)),
+                  ],
+                ),
+              ),
+          )
         ],
       ),
     );
@@ -234,22 +245,30 @@ class MenuBar_worker extends StatelessWidget {
               ],
             ),
           ),
-
-          Container(
-            height: 50,
-            margin: EdgeInsets.fromLTRB(30, 6, 30, 6),
-            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-            decoration: BoxDecoration(
-              color: Color(0xffF4F4F4),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('로그아웃', style: TextStyle(color: Colors.red)),
-              ],
-            ),
-          ),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const WorkerManager()),
+                );
+              },
+              child: Container(
+                height: 50,
+                margin: EdgeInsets.fromLTRB(30, 6, 30, 6),
+                padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                decoration: BoxDecoration(
+                  color: Color(0xffF4F4F4),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('로그아웃', style: TextStyle(color: Colors.red)),
+                  ],
+                ),
+              ),
+          )
         ],
       ),
     );

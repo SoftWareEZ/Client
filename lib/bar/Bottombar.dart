@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '/manager/PersonnelManagement_manager.dart';
 
 import '/worker/CalendarPage_worker.dart';
-import '/manager/InsteadPage_manager.dart';
+import '/worker/InsteadPage_worker.dart';
 import '/worker/CommutePage_worker.dart';
 import '/worker/MyPage_worker.dart';
 
 import '/manager/CalendarPage_manager.dart';
+import '/manager/InsteadPage_manager.dart';
+import '/manager/PersonnelManagement_manager.dart';
 import '/manager/ManagementPage_manager.dart';
 
 class BottomBar_worker extends StatelessWidget {
@@ -36,11 +37,11 @@ class BottomBar_worker extends StatelessWidget {
             // 대타
             IconButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => const ()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const InsteadPage_worker()),
+                );
               },
               icon: Image.asset('assets/change.png'),
               iconSize: 20,
@@ -121,7 +122,7 @@ class BottomBar_manager extends StatelessWidget {
                 );
               },
               icon: Image.asset('assets/personnel.png'),
-              iconSize: 20,
+              iconSize: 40,
             ),
             // 관리
             IconButton(
