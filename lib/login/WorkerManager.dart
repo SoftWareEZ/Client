@@ -3,8 +3,8 @@ import 'Login.dart';
 
 
 //알바 사장 선택
-class AlbaPresident extends StatelessWidget {
-  const AlbaPresident({Key? key}) : super(key: key);
+class WorkerManager extends StatelessWidget {
+  const WorkerManager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -18,7 +18,7 @@ class AlbaPresident extends StatelessWidget {
   }
 }
 
-class Grade extends AlbaPresident {
+class Grade extends WorkerManager {
   const Grade({Key? key}) : super(key: key);
 
   @override

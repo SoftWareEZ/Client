@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '/AlbaMenubar.dart';
-import '/AlbaAlertPage.dart';
-import '/Bottombar.dart';
+import '/bar/Menubar.dart';
+import '../alert/AlertPage.dart';
+import '/bar/Bottombar.dart';
 
 // 알바용  - 대타
-class ManagerinsteadPage extends StatelessWidget {
-  const ManagerinsteadPage({Key? key}) : super(key: key);
+class InsteadPage_manager extends StatelessWidget {
+  const InsteadPage_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -15,7 +15,7 @@ class ManagerinsteadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: AlbaMenuBar(),
+        drawer: MenuBar_manager(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알빠',
@@ -34,7 +34,7 @@ class ManagerinsteadPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AlbaAlertPage()),
+                      builder: (context) => const AlertPage_manager()),
                 );
               },
             )

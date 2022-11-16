@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '/AlbaMenubar.dart';
-import '/AlbaAlertPage.dart';
-import '/Bottombar.dart';
-import '/worker/MyPageResign.dart';
-import '/worker/MyPageWork.dart';
+import '/bar/Menubar.dart';
+import '/alert/AlertPage.dart';
+import '/bar/Bottombar.dart';
+import '/worker/MyPageResign_worker.dart';
+import '/worker/MyPageWork_worker.dart';
 
 // 알바용 마이페이지
-class MyPage extends StatelessWidget {
-  const MyPage({Key? key}) : super(key: key);
+class MyPage_worker extends StatelessWidget {
+  const MyPage_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -18,7 +18,7 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: AlbaMenuBar(),
+        drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('마이페이지',
@@ -37,7 +37,7 @@ class MyPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AlbaAlertPage()),
+                      builder: (context) => const AlertPage_worker()),
                 );
               },
             )
@@ -45,9 +45,9 @@ class MyPage extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            MyPageMyInfo(),
-            MyPageGoToWork(),
-            MyPageGoToResign()
+            MyPageMyInfo_worker(),
+            MyPageGoToWork_worker(),
+            MyPageGoToResign_worker()
           ],
         ),
         bottomNavigationBar: BottomBar_worker(),
@@ -56,8 +56,8 @@ class MyPage extends StatelessWidget {
   }
 }
 
-class MyPageMyInfo extends StatelessWidget {
-  const MyPageMyInfo({Key? key}) : super(key: key);
+class MyPageMyInfo_worker extends StatelessWidget {
+  const MyPageMyInfo_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
 
@@ -109,8 +109,8 @@ class MyPageMyInfo extends StatelessWidget {
 }
 
 // 알바생 마이페이지 근무기록
-class MyPageGoToWork extends StatelessWidget {
-  const MyPageGoToWork({Key? key}) : super(key: key);
+class MyPageGoToWork_worker extends StatelessWidget {
+  const MyPageGoToWork_worker({Key? key}) : super(key: key);
 
   final int SUBPINKCOLOR = 0xffFDF6F8;
 
@@ -130,7 +130,7 @@ class MyPageGoToWork extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const MyPageWork()),
+                builder: (context) => const MyPageWork_worker()),
           );
         },
         child: Row(
@@ -150,8 +150,8 @@ class MyPageGoToWork extends StatelessWidget {
   }
 }
 
-class MyPageGoToResign extends StatelessWidget {
-  const MyPageGoToResign({Key? key}) : super(key: key);
+class MyPageGoToResign_worker extends StatelessWidget {
+  const MyPageGoToResign_worker({Key? key}) : super(key: key);
 
   final int SUBPINKCOLOR = 0xffFDF6F8;
 
@@ -171,7 +171,7 @@ class MyPageGoToResign extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const MyPageResign()),
+                builder: (context) => const MyPageResign_worker()),
           );
         }, // 버튼이 눌리면 StaffMyPageResign
         child: Row(

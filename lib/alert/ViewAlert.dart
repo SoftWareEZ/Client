@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:software_engineering/manager/AddAlert.dart';
-import '/Bottombar.dart';
+import '../bar/Bottombar.dart';
 
-class ViewAlert_1 extends StatelessWidget {
-  const ViewAlert_1({Key? key}) : super(key: key);
+class ViewAlert1 extends StatelessWidget {
+  const ViewAlert1({Key? key}) : super(key: key);
   final int MAINCOLOR = 0xffeeeded;
   final int SUBCOLOR = 0xffE94869;
 
@@ -92,8 +91,8 @@ class ViewAlert_1 extends StatelessWidget {
   }
 }
 
-class ViewAlert_2 extends StatelessWidget {
-  const ViewAlert_2({Key? key}) : super(key: key);
+class ViewAlert2 extends StatelessWidget {
+  const ViewAlert2({Key? key}) : super(key: key);
   final int MAINCOLOR = 0xffeeeded;
   final int SUBCOLOR = 0xffE94869;
 
@@ -187,8 +186,8 @@ class ViewAlert_2 extends StatelessWidget {
   }
 }
 
-class ViewAlert_3 extends StatelessWidget {
-  const ViewAlert_3({Key? key}) : super(key: key);
+class ViewAlert3 extends StatelessWidget {
+  const ViewAlert3({Key? key}) : super(key: key);
   final int MAINCOLOR = 0xffeeeded;
   final int SUBCOLOR = 0xffE94869;
 

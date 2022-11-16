@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '/Menubar.dart';
-import '/AlertPage.dart';
-import '/Bottombar.dart';
+import '/bar/Menubar.dart';
+import '../alert/AlertPage.dart';
+import '/bar/Bottombar.dart';
 
 // 사장용 알바생 관리 - 알바 정보 수정
-class ManagerUpdatePage extends StatelessWidget {
-  const ManagerUpdatePage({Key? key}) : super(key: key);
+class ManagementUpdatePage_manager extends StatelessWidget {
+  const ManagementUpdatePage_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -16,7 +16,7 @@ class ManagerUpdatePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar(),
+        drawer: MenuBar_manager(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알바생 정보 수정',
@@ -43,7 +43,7 @@ class ManagerUpdatePage extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            ManagerUpdate(
+            ManagerUpdate_manager(
               name: '김민지',
             )
           ],
@@ -72,8 +72,8 @@ class WorkSchedule {
   }
 }
 
-class ManagerUpdate extends StatelessWidget {
-  ManagerUpdate({Key? key, required this.name}) : super(key: key);
+class ManagerUpdate_manager extends StatelessWidget {
+  ManagerUpdate_manager({Key? key, required this.name}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;

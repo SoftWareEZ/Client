@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:software_engineering/manager/personnelmanagement.dart';
+import '/manager/PersonnelManagement_manager.dart';
 
-import 'worker/CalendarPage_worker.dart';
-import 'manager/ManagerinsteadPage.dart';
-import 'worker/CommutePage_worker.dart';
-import 'worker/MyPage.dart';
+import '/worker/CalendarPage_worker.dart';
+import '/manager/InsteadPage_manager.dart';
+import '/worker/CommutePage_worker.dart';
+import '/worker/MyPage_worker.dart';
 
-import 'manager/CalendarPage_manager.dart';
-import 'manager/ManagerPage.dart';
+import '/manager/CalendarPage_manager.dart';
+import '/manager/ManagementPage_manager.dart';
 
 class BottomBar_worker extends StatelessWidget {
   const BottomBar_worker({Key? key}) : super(key: key);
@@ -51,7 +51,7 @@ class BottomBar_worker extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const CommutePage()),
+                      builder: (context) => const CommutePage_worker()),
                 );
               },
               icon: Image.asset('assets/work.png'),
@@ -63,7 +63,7 @@ class BottomBar_worker extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const MyPage()),
+                      builder: (context) => const MyPage_worker()),
                 );
               },
               icon: Image.asset('assets/mypage.png'),
@@ -105,7 +105,7 @@ class BottomBar_manager extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ManagerinsteadPage()),
+                      builder: (context) => const InsteadPage_manager()),
                 );
               },
               icon: Image.asset('assets/change.png'),
@@ -117,7 +117,7 @@ class BottomBar_manager extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const personnelmanagement()),
+                      builder: (context) => const PersonnelManagement_manager()),
                 );
               },
               icon: Image.asset('assets/personnel.png'),
@@ -129,7 +129,7 @@ class BottomBar_manager extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const ManagerPage()),
+                      builder: (context) => const ManagementPage_manager()),
                 );
               },
               icon: Image.asset('assets/manage.png'),

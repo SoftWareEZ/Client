@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '/Menubar.dart';
-import '/AlertPage.dart';
-import '/Bottombar.dart';
+import '/bar/Menubar.dart';
+import 'AlertPage.dart';
+import '/bar/Bottombar.dart';
 
 class AddAlert extends StatelessWidget{
   const AddAlert({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class AddAlert extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar(),
+        drawer: MenuBar_manager(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알림 등록',
@@ -41,10 +41,10 @@ class AddAlert extends StatelessWidget{
         ),
         body: ListView(
           children: const [
-            AlertName(),
-            AlertContent(),
+            AlertName_manager(),
+            AlertContent_manager(),
             SizedBox(height: 60,),
-            Check(),
+            Check_manager(),
           ],
         ),
         bottomNavigationBar: BottomBar_manager(),
@@ -52,8 +52,9 @@ class AddAlert extends StatelessWidget{
     );
   }
 }
-class AlertName extends StatelessWidget {
-  const AlertName({Key? key}) : super(key: key);
+
+class AlertName_manager extends StatelessWidget {
+  const AlertName_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -87,8 +88,8 @@ class AlertName extends StatelessWidget {
     );
   }
 }
-class AlertContent extends StatelessWidget {
-  const AlertContent({Key? key}) : super(key: key);
+class AlertContent_manager extends StatelessWidget {
+  const AlertContent_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -123,8 +124,8 @@ class AlertContent extends StatelessWidget {
     );
   }
 }
-class Check extends StatelessWidget {
-  const Check({Key? key}) : super(key: key);
+class Check_manager extends StatelessWidget {
+  const Check_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
 

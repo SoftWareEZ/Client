@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:software_engineering/AlertPage.dart';
-import 'package:software_engineering/manager/ManagerUpdatePage.dart';
+import 'package:software_engineering/alert/AlertPage.dart';
+import 'package:software_engineering/manager/ManagementUpdatePage_manager.dart';
 
-import '/Menubar.dart';
-import '/Bottombar.dart';
+import '/bar/Menubar.dart';
+import '/bar/Bottombar.dart';
 
 // 사장용 알바생 관리
-class ManagerPage extends StatelessWidget {
-  const ManagerPage({Key? key}) : super(key: key);
+class ManagementPage_manager extends StatelessWidget {
+  const ManagementPage_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -16,7 +16,7 @@ class ManagerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar(),
+        drawer: MenuBar_manager(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알바생 관리',
@@ -42,7 +42,7 @@ class ManagerPage extends StatelessWidget {
           ],
         ),
         body: ListView(
-          children: [Manager()],
+          children: [Management_manager()],
         ),
         bottomNavigationBar: BottomBar_manager(),
       ),
@@ -50,14 +50,14 @@ class ManagerPage extends StatelessWidget {
   }
 }
 
-class Manager extends StatefulWidget {
-  const Manager({Key? key}) : super(key: key);
+class Management_manager extends StatefulWidget {
+  const Management_manager({Key? key}) : super(key: key);
 
   @override
-  State<Manager> createState() => _ManagerState();
+  State<Management_manager> createState() => _ManagementState();
 }
 
-class _ManagerState extends State<Manager> {
+class _ManagementState extends State<Management_manager> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
@@ -159,7 +159,7 @@ class OwnerManagerStaffInfo extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const ManagerUpdatePage()),
+                    builder: (context) => const ManagementUpdatePage_manager()),
               );
             },
             child: Container(

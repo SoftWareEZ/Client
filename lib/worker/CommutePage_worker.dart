@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '/AlbaMenubar.dart';
-import '/AlbaAlertPage.dart';
-import '/Bottombar.dart';
+import '/bar/Menubar.dart';
+import '/alert/AlertPage.dart';
+import '/bar/Bottombar.dart';
 
 // 알바용 - 출퇴근
-class CommutePage extends StatelessWidget {
-  const CommutePage({Key? key}) : super(key: key);
+class CommutePage_worker extends StatelessWidget {
+  const CommutePage_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -15,7 +15,7 @@ class CommutePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: AlbaMenuBar(),
+        drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알빠',
@@ -34,14 +34,14 @@ class CommutePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AlbaAlertPage()),
+                      builder: (context) => const AlertPage_worker()),
                 );
               },
             )
           ],
         ),
         body: ListView(
-          children: const [Commutebody()],
+          children: const [Commutebody_worker()],
         ),
         bottomNavigationBar: BottomBar_worker(),
       ),
@@ -49,8 +49,8 @@ class CommutePage extends StatelessWidget {
   }
 }
 
-class Commutebody extends StatelessWidget {
-  const Commutebody({Key? key}) : super(key: key);
+class Commutebody_worker extends StatelessWidget {
+  const Commutebody_worker({Key? key}) : super(key: key);
 
   final int SUBCOLOR = 0xffF4F4F4;
   final int MAINCOLOR = 0xffE94869;

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 
-import '/AlbaMenubar.dart';
-import '/AlbaAlertPage.dart';
-import '/Bottombar.dart';
+import '../alert/AlertPage.dart';
+import '../bar/Bottombar.dart';
+import '../bar/Menubar.dart';
 
 // 알바용 마이페이지 - 근무기록
-class MyPageWork extends StatelessWidget {
-  const MyPageWork({Key? key}) : super(key: key);
+class MyPageWork_worker extends StatelessWidget {
+  const MyPageWork_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -16,7 +15,7 @@ class MyPageWork extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
      home: Scaffold(
-        drawer: AlbaMenuBar(),
+        drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('근무기록',
@@ -35,14 +34,14 @@ class MyPageWork extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AlbaAlertPage()),
+                      builder: (context) => const AlertPage_worker()),
                 );
               },
             )
           ],
         ),
         body: ListView(
-          children: [MyPageWorkLog()
+          children: [MyPageWorkLog_worker()
           ],
         ),
         bottomNavigationBar: BottomBar_worker(),
@@ -52,8 +51,8 @@ class MyPageWork extends StatelessWidget {
 }
 
 // 알바용 마이페이지 - 근무기록 캘린더
-class MyPageWorkLog extends StatelessWidget {
-  const MyPageWorkLog({Key? key}) : super(key: key);
+class MyPageWorkLog_worker extends StatelessWidget {
+  const MyPageWorkLog_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;

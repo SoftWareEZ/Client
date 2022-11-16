@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '/AlbaMenubar.dart';
-import '/AlbaAlertPage.dart';
-import '/Bottombar.dart';
+import '/bar/Menubar.dart';
+import '/alert/AlertPage.dart';
+import '/bar/Bottombar.dart';
 
 // 알바용 - 한달근무표
 class CalendarPage_worker extends StatelessWidget {
@@ -16,7 +16,7 @@ class CalendarPage_worker extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: AlbaMenuBar(),
+        drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알빠',
@@ -35,7 +35,7 @@ class CalendarPage_worker extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AlbaAlertPage()),
+                      builder: (context) => const AlertPage_worker()),
                 );
               },
             )
@@ -44,9 +44,9 @@ class CalendarPage_worker extends StatelessWidget {
         body: ListView(
           children: const [
             //여기서 if로 변수해서 클릭시 변수 바뀌면 그거만 로딩하는건 안되는강
-            Calendar(),
-            CalendarSalary(),
-            CalendarInfo(),
+            Calendar_worker(),
+            CalendarSalary_worker(),
+            CalendarInfo_worker(),
           ],
         ),
         bottomNavigationBar: BottomBar_worker(),
@@ -56,14 +56,14 @@ class CalendarPage_worker extends StatelessWidget {
 }
 
 // 알바용 한달근무표 - 달력
-class Calendar extends StatefulWidget {
-  const Calendar({Key? key}) : super(key: key);
+class Calendar_worker extends StatefulWidget {
+  const Calendar_worker({Key? key}) : super(key: key);
 
   @override
-  State<Calendar> createState() => _CalendarState();
+  State<Calendar_worker> createState() => _CalendarState();
 }
 
-class _CalendarState extends State<Calendar> {
+class _CalendarState extends State<Calendar_worker> {
   CalendarFormat format = CalendarFormat.month;
 
   DateTime selectedDay = DateTime.now();
@@ -123,8 +123,8 @@ class _CalendarState extends State<Calendar> {
 }
 
 // 알바용 한달근무표 - 월급
-class CalendarSalary extends StatelessWidget {
-  const CalendarSalary({Key? key}) : super(key: key);
+class CalendarSalary_worker extends StatelessWidget {
+  const CalendarSalary_worker({Key? key}) : super(key: key);
 
   final int SUBCOLOR = 0xffF4F4F4;
 
@@ -152,8 +152,8 @@ class CalendarSalary extends StatelessWidget {
 }
 
 // 알바용 한달근무표 - 세부일정
-class CalendarInfo extends StatelessWidget {
-  const CalendarInfo({Key? key}) : super(key: key);
+class CalendarInfo_worker extends StatelessWidget {
+  const CalendarInfo_worker({Key? key}) : super(key: key);
 
   final int SUBCOLOR = 0xffF4F4F4;
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '/Menubar.dart';
-import '/AlertPage.dart';
-import '/Bottombar.dart';
+import '/bar/Menubar.dart';
+import '/alert/AlertPage.dart';
+import '/bar/Bottombar.dart';
 
 class AddWorkSpace extends StatelessWidget{
   const AddWorkSpace({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class AddWorkSpace extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-          drawer: MenuBar(),
+          drawer: MenuBar_manager(),
             appBar: AppBar(
               iconTheme: IconThemeData(color: Color(MAINCOLOR)),
               title: Text('사업장 추가',
@@ -41,12 +41,12 @@ class AddWorkSpace extends StatelessWidget{
             ),
             body: ListView(
               children: const [
-                SpaceName(),
-                SpaceAddress(),
+                SpaceName_manager(),
+                SpaceAddress_manager(),
                 SizedBox(
                   height: 140,
                 ),
-                Check(),
+                Check_manager(),
               ],
             ),
               bottomNavigationBar: BottomBar_manager(),
@@ -55,8 +55,8 @@ class AddWorkSpace extends StatelessWidget{
   }
 }
 
-class SpaceName extends StatelessWidget {
-  const SpaceName({Key? key}) : super(key: key);
+class SpaceName_manager extends StatelessWidget {
+  const SpaceName_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -93,8 +93,8 @@ class SpaceName extends StatelessWidget {
   }
 }
 
-class SpaceAddress extends StatelessWidget {
-  const SpaceAddress({Key? key}) : super(key: key);
+class SpaceAddress_manager extends StatelessWidget {
+  const SpaceAddress_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -132,8 +132,8 @@ class SpaceAddress extends StatelessWidget {
   }
 }
 
-class Check extends StatelessWidget {
-  const Check({Key? key}) : super(key: key);
+class Check_manager extends StatelessWidget {
+  const Check_manager({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
 

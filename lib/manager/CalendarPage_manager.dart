@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '/Menubar.dart';
-import '/AlertPage.dart';
-import '/Bottombar.dart';
+import '/bar/Menubar.dart';
+import '../alert/AlertPage.dart';
+import '/bar/Bottombar.dart';
 
 // 알바용 - 한달근무표
 class CalendarPage_manager extends StatelessWidget {
@@ -16,7 +16,7 @@ class CalendarPage_manager extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar(),
+        drawer: MenuBar_manager(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알빠',

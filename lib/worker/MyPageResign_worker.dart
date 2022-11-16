@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '/AlbaMenubar.dart';
-import '/AlbaAlertPage.dart';
-import '/Bottombar.dart';
+import '../bar/Menubar.dart';
+import '../alert/AlertPage.dart';
+import '../bar/Bottombar.dart';
 
 // 알바용 마이페이지 - 퇴사하기
-class MyPageResign extends StatelessWidget {
-  const MyPageResign({Key? key}) : super(key: key);
+class MyPageResign_worker extends StatelessWidget {
+  const MyPageResign_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -16,7 +16,7 @@ class MyPageResign extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: AlbaMenuBar(),
+        drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('퇴사하기',
@@ -35,14 +35,14 @@ class MyPageResign extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AlbaAlertPage()),
+                      builder: (context) => const AlertPage_worker()),
                 );
               },
             )
           ],
         ),
         body: ListView(
-          children: [MyPageResignWorkSpace()],
+          children: [MyPageResignWorkSpace_worker()],
         ),
         bottomNavigationBar: BottomBar_worker(),
       ),
@@ -51,8 +51,8 @@ class MyPageResign extends StatelessWidget {
 }
 
 // 알바용 마이페이지 - 퇴사하기 워크페이스 목록
-class MyPageResignWorkSpace extends StatelessWidget {
-  const MyPageResignWorkSpace({Key? key}) : super(key: key);
+class MyPageResignWorkSpace_worker extends StatelessWidget {
+  const MyPageResignWorkSpace_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -84,7 +84,7 @@ class MyPageResignWorkSpace extends StatelessWidget {
                       fontSize: 20,
                       fontWeight: FontWeight.w700),
                 ),
-                ResignButton()
+                ResignButton_worker()
               ],
             ),
           ),
@@ -105,7 +105,7 @@ class MyPageResignWorkSpace extends StatelessWidget {
                       fontSize: 20,
                       fontWeight: FontWeight.w700),
                 ),
-                ResignButton()
+                ResignButton_worker()
               ],
             ),
           ),
@@ -115,8 +115,8 @@ class MyPageResignWorkSpace extends StatelessWidget {
   }
 }
 
-class ResignButton extends StatelessWidget {
-  const ResignButton({Key? key}) : super(key: key);
+class ResignButton_worker extends StatelessWidget {
+  const ResignButton_worker({Key? key}) : super(key: key);
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
