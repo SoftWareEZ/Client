@@ -5,11 +5,17 @@ import '/alert/AlertPage.dart';
 import '/bar/Bottombar.dart';
 
 // 알바용 - 출퇴근
-class CommutePage_worker extends StatelessWidget {
-  const CommutePage_worker({Key? key}) : super(key: key);
+class CommuteState_worker extends StatefulWidget {
+  CommuteState_worker({Key? key}) : super(key: key);
 
-  final int MAINCOLOR = 0xffE94869;
+  @override
+  State<CommuteState_worker> createState() => CommutePage_worker();
+}
+
+class CommutePage_worker extends State<CommuteState_worker> {
   final int SUBCOLOR = 0xffF4F4F4;
+  final int MAINCOLOR = 0xffE94869;
+  String commute = '출근';
 
   @override
   Widget build(BuildContext context) {
@@ -41,61 +47,99 @@ class CommutePage_worker extends StatelessWidget {
           ],
         ),
         body: ListView(
-          children: const [Commutebody_worker()],
+          children: [
+            Container(
+                margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("근무지 근방 100m 내에서\n출근 버튼을 누르면\n정상적으로 출근처리를 합니다.",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 30,
+                      ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(MAINCOLOR),
+                          fixedSize: const Size(130, 130),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+
+                          // alignment: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                content: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin:
+                                            EdgeInsets.fromLTRB(20, 20, 20, 20),
+                                        child: Text(
+                                          commute + " 성공 !",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 35,
+                                        decoration: BoxDecoration(
+                                          color: Color(MAINCOLOR),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                if (commute == '출근') {
+                                                  commute = '퇴근';
+                                                } else {
+                                                  commute = '출근';
+                                                }
+                                              });
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                              "닫기",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.check, size: 40),
+                            Text(
+                              commute,
+                              style: TextStyle(
+                                fontSize: 35,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+          ],
         ),
         bottomNavigationBar: BottomBar_worker(),
       ),
     );
-  }
-}
-
-class Commutebody_worker extends StatelessWidget {
-  const Commutebody_worker({Key? key}) : super(key: key);
-
-  final int SUBCOLOR = 0xffF4F4F4;
-  final int MAINCOLOR = 0xffE94869;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("근무지 근방 100m 내에서\n출근 버튼을 누르면\n정상적으로 출근처리를 합니다.",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center),
-            Container(
-              margin: EdgeInsets.only(
-                top: 30,
-              ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(MAINCOLOR),
-                  fixedSize: const Size(130, 130),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-
-                  // alignment: BorderRadius.all(Radius.circular(10)),
-                ),
-                onPressed: () {},
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.check, size: 40),
-                    Text(
-                      "출근",
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ));
   }
 }

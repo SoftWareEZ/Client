@@ -69,7 +69,7 @@ class choose extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignUp()),
+                    MaterialPageRoute(builder: (context) => SignUpPage(person)),
                   );
                 },
                 child: Text("회원가입"),
