@@ -22,9 +22,12 @@ class MenuBar_manager extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(
-                      Icons.arrow_back_ios_new,
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios_new),
                       color: Colors.white,
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ],
                 ),
@@ -42,7 +45,7 @@ class MenuBar_manager extends StatelessWidget {
               ],
             ),
             decoration: BoxDecoration(
-              color: Color(0xffE94869),
+              color: Color(MAINCOLOR),
             ),
           ),
           Container(
@@ -242,9 +245,12 @@ class MenuBar_worker extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(
-                      Icons.arrow_back_ios_new,
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios_new),
                       color: Colors.white,
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ],
                 ),

@@ -49,11 +49,7 @@ class AddWorkSpace extends StatelessWidget{
               bottomNavigationBar: BottomBar_manager(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const MenuBar_manager()),);
-            },
+              Navigator.of(context).pop();},
             child: Icon(Icons.check),
             backgroundColor: Color(MAINCOLOR),
           ),
