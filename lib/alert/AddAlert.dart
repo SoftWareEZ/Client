@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/bar/Menubar.dart';
-import 'AlertPage.dart';
+import 'AlertPage_manager.dart';
 import '/bar/Bottombar.dart';
 
 class AddAlert extends StatelessWidget{
@@ -44,10 +44,19 @@ class AddAlert extends StatelessWidget{
             AlertName_manager(),
             AlertContent_manager(),
             SizedBox(height: 60,),
-            Check_manager(),
           ],
         ),
         bottomNavigationBar: BottomBar_manager(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AlertPage_manager()),);
+          },
+          child: Icon(Icons.check),
+          backgroundColor: Color(MAINCOLOR),
+        ),
       ),
     );
   }
@@ -121,33 +130,6 @@ class AlertContent_manager extends StatelessWidget {
               )
             ]
         )
-    );
-  }
-}
-class Check_manager extends StatelessWidget {
-  const Check_manager({Key? key}) : super(key: key);
-
-  final int MAINCOLOR = 0xffE94869;
-
-  @override
-  Widget build(BuildContext context){
-    return Container(
-      margin: const EdgeInsets.only(top: 5.0,bottom: 5.0),
-      alignment: Alignment.centerRight,
-      child: (
-          RawMaterialButton(
-            onPressed: () {},
-            elevation: 2.0,
-            fillColor: Color(MAINCOLOR),
-            child: Icon(
-              Icons.check,
-              color: Colors.white,
-              size: 25.0,
-            ),
-            padding: EdgeInsets.all(15.0),
-            shape: CircleBorder(),
-          )
-      ),
     );
   }
 }

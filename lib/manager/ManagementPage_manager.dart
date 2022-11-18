@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '/alert/AlertPage.dart';
+import '/alert/AlertPage_manager.dart';
 import '/manager/ManagementUpdatePage_manager.dart';
 import '/bar/Menubar.dart';
 import '/bar/Bottombar.dart';

@@ -4,7 +4,7 @@ import 'package:software_engineering/worker/AddInsteadPage_worker.dart';
 
 import '/bar/Menubar.dart';
 import '/bar/Bottombar.dart';
-import '/alert/AlertPage.dart';
+import '/alert/AlertPage_worker.dart';
 
 // 알바용 대타페이지
 class InsteadPage_worker extends StatelessWidget {

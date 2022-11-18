@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/bar/Menubar.dart';
-import '../alert/AlertPage.dart';
+import '../alert/AlertPage_manager.dart';
 import '/bar/Bottombar.dart';
 
 // 알바용  - 대타

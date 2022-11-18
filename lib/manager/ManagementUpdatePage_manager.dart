@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/bar/Menubar.dart';
-import '../alert/AlertPage.dart';
+import '../alert/AlertPage_manager.dart';
 import '/bar/Bottombar.dart';
 
 // 사장용 알바생 관리 - 알바 정보 수정
