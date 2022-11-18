@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '/bar/Bottombar.dart';
 import '/alert/AddAlert.dart';
@@ -53,138 +54,134 @@ class AlertPage_manager extends StatelessWidget {
               ),)
           ],
         ),
-        body: Container(
-          color: Color(MAINCOLOR),
-          child: Column(
-            children: [
-              Container(
-                height: 110,
-                width: 500,
-                margin: EdgeInsets.fromLTRB(30, 10, 30, 5),
-                padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Text('추석(9/9-11) 근무자 시급 15,000원으로 계산하겠습니다!! ^^',
-                        style: TextStyle(
-                            fontSize: 17.0,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('2022월 08월 06일',
-                            style: TextStyle(
-                                color: Color(SUBGREYCOLOR),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w500),),
-                          Text('삭제',
-                            style: TextStyle(
-                                color: Color(SUBCOLOR), fontSize: 14.0, fontWeight: FontWeight.w500),),
-                        ],
-                      ),
-                    ]
-                ),
-              ),
-              Container(
-                height: 110,
-                width: 500,
-                margin: EdgeInsets.fromLTRB(30, 5, 30, 5),
-                padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("교대할 때 시재 안 맞으면 채우고 퇴근하세요.",
-                          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("2022월 08월 01일",
-                          style: TextStyle(color: Color(SUBGREYCOLOR),fontSize: 14, fontWeight: FontWeight.w500),),
-                        Text('삭제',
-                          style: TextStyle(
-                              color: Color(SUBCOLOR), fontSize: 14.0, fontWeight: FontWeight.w500),),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: 110,
-                width: 500,
-                margin: EdgeInsets.fromLTRB(30, 5, 30, 5),
-                padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("매달 말일, 행사표 교체 잊지 말아주세요.",
-                          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("2022월 07월 31일",
-                          style: TextStyle(color: Color(SUBGREYCOLOR),fontSize: 14, fontWeight: FontWeight.w500),),
-                        Text('삭제',
-                          style: TextStyle(
-                              color: Color(SUBCOLOR), fontSize: 14.0, fontWeight: FontWeight.w500),),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 100,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  RawMaterialButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const AddAlert()
-                        ),
-                      );
-                    },
-                    elevation: 2.0,
-                    fillColor: Color(SUBCOLOR),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
-                    padding: EdgeInsets.all(15.0),
-                    shape: CircleBorder(),
-                  ),
-                ],
-              )
-            ],
-          ),
+        body: ListView(
+          children: [AlertList_manager()],
         ),
         bottomNavigationBar: BottomBar_manager(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AddAlert()),
+            );
+          },
+          child: Icon(Icons.add),
+          backgroundColor: Color(MAINCOLOR),
+        ),
       ),
+    );
+  }
+}
+
+class AlertList_manager extends StatefulWidget {
+  const AlertList_manager({Key? key}) : super(key: key);
+
+  @override
+  State<AlertList_manager> createState() => _AlertList_managerState();
+}
+
+class _AlertList_managerState extends State<AlertList_manager> {
+  final List<AlertInfo> _alertList = [
+    new AlertInfo("추석(9/9-11) 근무자 시급 15,000원으로 계산하겠습니다!! ^^","20220806","삭제"),
+    new AlertInfo("교대할 때 시재 안 맞으면 채우고 퇴근하세요.","20220801","삭제"),
+    new AlertInfo("매달 말일, 행사표 교체 잊지 말아주세요.","20220731","삭제"),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              for (int i = 0; i < _alertList.length; i++)
+                AlertBox_manager(
+                  contents: _alertList[i].contents,
+                  date: _alertList[i].date,
+                  delete: _alertList[i].delete,)
+            ],
+          )
+        ],
+      ));
+  }
+}
+
+class AlertInfo {
+  String contents = "";
+  String date = "";
+  String delete = "";
+
+  AlertInfo(String contents, String date, String delete){
+    this.contents = contents;
+    this.date = date;
+    this.delete = delete;
+  }
+}
+
+class AlertBox_manager extends StatelessWidget {
+  AlertBox_manager(
+      {Key? key,
+        required this.contents,
+        required this.date,
+        required this.delete})
+      : super(key: key);
+
+  final contents, date, delete;
+
+  final int MAINCOLOR = 0xffE94869;
+  final int SUBCOLOR = 0xff828282;
+  var f = NumberFormat('00');
+
+  @override
+  Widget build(BuildContext context){
+    return Container(
+      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                elevation: 0.0),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ViewAlert1()),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    '$contents',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                    ),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(DateFormat('yyyy년 MM월 dd일').format(DateTime.parse(date)),
+                      style: TextStyle(color: Color(SUBCOLOR),fontSize: 14),),
+                      Text(
+                        '$delete',
+                        style: TextStyle(
+                          color: Color(MAINCOLOR),
+                          fontSize: 14,
+                        ),),
+                    ],
+                  )
+                ],
+            ),
+          ),
+        )
     );
   }
 }
