@@ -1,109 +1,119 @@
 import 'package:flutter/material.dart';
-import 'package:software_engineering/worker/CalendarPage_worker.dart';
-import '/manager/CalendarPage_manager.dart';
-import 'SignUp.dart';
+import 'package:flutter/services.dart';
+import '/worker/CalendarPage_worker.dart';
 
+FocusNode myFocusNode = new FocusNode();
 
 //로그인
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class Loginpage extends StatefulWidget {
+  final String person;
+  Loginpage(this.person, {Key? key}) : super(key: key);
+  @override
+  State<Loginpage> createState() => Login(person);
+}
 
+class Login extends State<Loginpage>{
+  final String person;
+  Login(this.person);
+  // TextEditingController inputController = TextEditingController();
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
+  String id = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Grade(),
-    );
-  }
-}
-
-class Grade extends Login {
-  const Grade({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('알빠',
-            style: TextStyle(
-                color: Color(MAINCOLOR),
-                fontWeight: FontWeight.w700,
-                letterSpacing: 1.5)),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ),
-      body: Center(
-          child:Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset('assets/Loginlogo.png', height: 200,),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(	//모서리를 둥글게
-                        borderRadius: BorderRadius.circular(10)),
-                    primary: Color(MAINCOLOR),
-                    minimumSize: Size(200, 65),	//width, height
-                    //child 정렬 - 아래의 Text('$test')
-                    alignment: Alignment.center,
-                    textStyle: const TextStyle(fontSize: 25)
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CalendarPage_worker()
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('알빠',
+              style: TextStyle(
+                  color: Color(MAINCOLOR),
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.5)),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+        ),
+        body: Container(
+          padding: const EdgeInsets.all(40.0),
+          child: Form(
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  onChanged: (text) {
+                    setState(() {
+                      id= text;
+                    });
+                  },
+                  // controller: inputController,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.email,
+                      color: Color(MAINCOLOR),
                     ),
-                  );
-                },
-                child: Text("로그인"),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(	//모서리를 둥글게
-                        borderRadius: BorderRadius.circular(10)),
-                    primary: Color(MAINCOLOR),
-                    minimumSize: Size(200, 65),	//width, height
-                    //child 정렬 - 아래의 Text('$test')
-                    alignment: Alignment.center,
-                    textStyle: const TextStyle(fontSize: 25)
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SignUp()
+                    labelText: "이메일아이디를 입력해주세요",
+                    labelStyle: TextStyle(color: Colors.black54),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),
                     ),
-                  );
-                },
-                child: Text("회원가입"),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(	//모서리를 둥글게
-                        borderRadius: BorderRadius.circular(10)),
-                    primary: Colors.amberAccent,
-                    minimumSize: Size(200, 65),	//width, height
-                    //child 정렬 - 아래의 Text('$test')
-                    alignment: Alignment.center,
-                    textStyle: const TextStyle(fontSize: 25)
+                    hintText: 'EX) abcd@naver.com',
+                  ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const CalendarPage_manager()
-                    ),
-                  );
-                },
-                child: Text("카카오로그인"),
-              ),
-            ],
+                SizedBox(
+                  height: 13,
+                ),
+                TextFormField(
+                  obscureText: true, // 비밀번호를 적을때 안보이도록
+                  onChanged: (text) {
+                    setState(() {
+                      password= text;
+                    });
+                  },
+                  decoration: InputDecoration(
+                      icon: Icon(
+                        Icons.vpn_key,
+                        color: Color(MAINCOLOR),
+                      ),
+                      labelText: "비밀번호를 입력해주세요",
+                      labelStyle: TextStyle(color: Colors.black54),
+                      border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 2, color: Color(MAINCOLOR)),
+                      ),
+                      hintText: 'password'),
+                ),
+                SizedBox(
+                  height: 13,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                  alignment: Alignment.centerRight,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            //모서리를 둥글게
+                            borderRadius: BorderRadius.circular(5)),
+                        primary: Color(MAINCOLOR),
+                        minimumSize: Size(70, 50),
+                        //width, height
+                        alignment: Alignment.center,
+                        textStyle: const TextStyle(fontSize: 15)),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CalendarPage_worker()));
+                    },
+                    child: Text('로그인'),
+                  ),
+                ),
+                Text(person+id+password),
+              ],
+            ),
+          ),
         ),
       ),
     );

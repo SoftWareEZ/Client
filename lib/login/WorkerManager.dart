@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Login.dart';
+import 'Choose.dart';
 
 
 //알바 사장 선택
@@ -37,10 +37,11 @@ class Grade extends WorkerManager {
         child: Column(
           children: [
             InkWell(
-              onTap: () {
-                Navigator.push(
+              onTap: () async {
+                final String person = 'worker';
+                final result = await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Login()
+                  MaterialPageRoute(builder: (context) => choose(person)
                   ),
                 );
               },
@@ -60,10 +61,11 @@ class Grade extends WorkerManager {
               ),
             ),
           InkWell(
-            onTap: () {
-              Navigator.push(
+            onTap: () async {
+              final String person = 'manager';
+              final result = await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const Login()
+                MaterialPageRoute(builder: (context) => choose(person)
                 ),
               );
             },
