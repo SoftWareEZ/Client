@@ -26,8 +26,7 @@ class MenuBar_manager extends StatelessWidget {
                       icon: Icon(Icons.arrow_back_ios_new),
                       color: Colors.white,
                       onPressed: (){
-                        Navigator.of(context).pop();
-                      },
+                        Navigator.of(context).pop();},
                     ),
                   ],
                 ),
@@ -77,11 +76,7 @@ class MenuBar_manager extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  height: 2.0,
-                  width: 500.0,
-                  color: Color(0xffdcdbdb),
-                ),
+                Container(height: 2.0, width: 500.0, color: Color(0xffdcdbdb),),
                 Container(
                   margin: EdgeInsets.fromLTRB(10, 8, 10, 3),
                   child: Row(
@@ -121,23 +116,21 @@ class MenuBar_manager extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                            margin: EdgeInsets.fromLTRB(30, 6, 30, 6),
+                            padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
                             child: Text(
-                              "초대코드 입력하기",
+                              "초대코드 보내기",
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelStyle: TextStyle(
-                                color: Color(MAINCOLOR),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(70, 5, 70, 5),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Color(MAINCOLOR), width: 5),
                             ),
+                            child: Text("LeftBank",style: TextStyle(fontWeight: FontWeight.w500),),
                           ),
                           SizedBox(height: 20),
                           Row(
@@ -157,21 +150,6 @@ class MenuBar_manager extends StatelessWidget {
                           */
                                     },
                                     child: Text(
-                                      "입사요청",
-                                      style: TextStyle(color: Colors.white),
-                                    )),
-                              ),
-                              Container(
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  color: Color(MAINCOLOR),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text(
                                       "닫기",
                                       style: TextStyle(color: Colors.white),
                                     )),
@@ -184,7 +162,6 @@ class MenuBar_manager extends StatelessWidget {
                   });
             },
             child: Container(
-              height: 50,
               margin: EdgeInsets.fromLTRB(30, 6, 30, 6),
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
@@ -207,9 +184,8 @@ class MenuBar_manager extends StatelessWidget {
               );
             },
             child: Container(
-              height: 50,
               margin: EdgeInsets.fromLTRB(30, 6, 30, 6),
-              padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+              padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
               decoration: BoxDecoration(
                 color: Color(0xffF4F4F4),
                 borderRadius: BorderRadius.circular(10),
@@ -230,6 +206,8 @@ class MenuBar_manager extends StatelessWidget {
 
 class MenuBar_worker extends StatelessWidget {
   const MenuBar_worker({Key? key}) : super(key: key);
+
+  final int MAINCOLOR = 0xffE94869;
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +250,6 @@ class MenuBar_worker extends StatelessWidget {
             ),
           ),
           Container(
-            height: 110,
             margin: EdgeInsets.fromLTRB(30, 20, 30, 6),
             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
             decoration: BoxDecoration(
@@ -286,18 +263,86 @@ class MenuBar_worker extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text('  워크 플레이스'),
-                      Icon(
-                        Icons.arrow_drop_down,
+                      IconButton(
+                        icon: Icon(Icons.add),
                         color: Color(0xffE94869),
+                          onPressed:(){
+                            showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                                              child: Text(
+                                                "초대코드 입력하기",
+                                                style: TextStyle(fontSize: 20),
+                                              ),
+                                            ),
+                                            TextFormField(
+                                              decoration: InputDecoration(
+                                                labelStyle: TextStyle(
+                                                  color: Color(MAINCOLOR),
+                                                ),
+                                                border: OutlineInputBorder(
+                                                    borderRadius: BorderRadius.circular(10)
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),),
+                                              ),
+                                            ),
+                                            SizedBox(height: 20),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Container(
+                                                  height: 35,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(MAINCOLOR),
+                                                    borderRadius: BorderRadius.circular(10),
+                                                  ),
+                                                  child: TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context).pop();
+                                                        /*
+                          이 시점에 사장한테 입사요청
+                          */
+                                                      },
+                                                      child: Text(
+                                                        "입사요청",
+                                                        style: TextStyle(color: Colors.white),
+                                                      )),
+                                                ),
+                                                Container(
+                                                  height: 35,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(MAINCOLOR),
+                                                    borderRadius: BorderRadius.circular(10),
+                                                  ),
+                                                  child: TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context).pop();
+                                                      },
+                                                      child: Text(
+                                                        "닫기",
+                                                        style: TextStyle(color: Colors.white),
+                                                      )),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ));
+                                });
+                          },
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  height: 2.0,
-                  width: 500.0,
-                  color: Color(0xffdcdbdb),
-                ),
+                Container(height: 2.0, width: 500.0, color: Color(0xffdcdbdb),),
                 Container(
                   margin: EdgeInsets.fromLTRB(10, 8, 10, 3),
                   child: Row(
@@ -334,9 +379,8 @@ class MenuBar_worker extends StatelessWidget {
               );
             },
             child: Container(
-              height: 50,
               margin: EdgeInsets.fromLTRB(30, 6, 30, 6),
-              padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+              padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
               decoration: BoxDecoration(
                 color: Color(0xffF4F4F4),
                 borderRadius: BorderRadius.circular(10),
