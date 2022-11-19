@@ -136,7 +136,6 @@ class AlertBox_worker extends StatelessWidget {
             );
           },
           child: Container(
-            height: 110,
             padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

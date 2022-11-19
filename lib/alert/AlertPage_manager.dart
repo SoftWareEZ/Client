@@ -60,7 +60,7 @@ class AlertPage_manager extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const AddAlert()),
+                  builder: (context) => const AddAlertpage()),
             );
           },
           child: Icon(Icons.add),
@@ -139,7 +139,6 @@ class AlertBox_manager extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
           child: Container(
-            height: 110,
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
