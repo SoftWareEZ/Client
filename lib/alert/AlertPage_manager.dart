@@ -29,9 +29,7 @@ class AlertPage_manager extends StatelessWidget {
               onPressed: () {}),
           actions: [
             Container(
-              height: 5,
-              width: 60,
-              margin: EdgeInsets.fromLTRB(10, 12, 10, 12),
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                 color: Color(MAINCOLOR),
                 borderRadius: BorderRadius.circular(10),
@@ -41,11 +39,13 @@ class AlertPage_manager extends StatelessWidget {
                 children: [
                   Container(
                     margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    child: Text("닫기",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600)),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();},
+                      child: Text("닫기",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600)),
+                    ),
                   ),
                 ],
               ),)

@@ -29,9 +29,7 @@ class AlertPage_worker extends StatelessWidget {
               onPressed: () {}),
           actions: [
             Container(
-              height: 5,
-              width: 60,
-              margin: EdgeInsets.fromLTRB(10, 12, 10, 12),
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                 color: Color(MAINCOLOR),
                 borderRadius: BorderRadius.circular(10),
@@ -41,11 +39,13 @@ class AlertPage_worker extends StatelessWidget {
                 children: [
                   Container(
                     margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    child: Text("닫기",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600)),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();},
+                      child: Text("닫기",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600)),
+                    ),
                   ),
                 ],
               ),)
@@ -69,9 +69,9 @@ class AlertList_worker extends StatefulWidget {
 
 class _AlertList_workerState extends State<AlertList_worker> {
   final List<AlertInfo> _alertList = [
-    new AlertInfo("추석(9/9-11) 근무자 시급 15,000원으로 계산하겠습니다!! ^^","20220806"),
-    new AlertInfo("교대할 때 시재 안 맞으면 채우고 퇴근하세요.","20220801"),
-    new AlertInfo("매달 말일, 행사표 교체 잊지 말아주세요.","20220731"),
+    new AlertInfo("추석(9/9-11) 근무자 시급 15,000원으로 계산하겠습니다!! ^^","20220806","수고하세요~~~~~~~"),
+    new AlertInfo("교대할 때 시재 안 맞으면 채우고 퇴근하세요.","20220801",""),
+    new AlertInfo("매달 말일, 행사표 교체 잊지 말아주세요.","20220731",""),
   ];
 
   @override
@@ -83,8 +83,9 @@ class _AlertList_workerState extends State<AlertList_worker> {
               children: [
                 for (int i = 0; i < _alertList.length; i++)
                   AlertBox_worker(
-                    contents: _alertList[i].contents,
-                    date: _alertList[i].date,)
+                    title : _alertList[i].title,
+                    date: _alertList[i].date,
+                    contents: _alertList[i].contents,)
               ],
             )
           ],
@@ -93,23 +94,27 @@ class _AlertList_workerState extends State<AlertList_worker> {
 }
 
 class AlertInfo {
-  String contents = "";
+  String title ="";
   String date = "";
+  String contents = "";
 
-  AlertInfo(String contents, String date){
-    this.contents = contents;
+  AlertInfo(String title, String date, String contents){
+    this.title = title;
     this.date = date;
+    this.contents = contents;
   }
 }
 
 class AlertBox_worker extends StatelessWidget {
   AlertBox_worker(
       {Key? key,
+        required this.title,
+        required this.date,
         required this.contents,
-        required this.date})
+      })
       : super(key: key);
 
-  final contents, date;
+  final title, date, contents;
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xff828282;
@@ -132,7 +137,7 @@ class AlertBox_worker extends StatelessWidget {
           onPressed: (){
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ViewAlert1()),
+              MaterialPageRoute(builder: (context) => ViewAlert(title: title,date: date,contents: contents)),
             );
           },
           child: Container(
@@ -142,7 +147,7 @@ class AlertBox_worker extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '$contents',
+                  '$title',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,
@@ -155,7 +160,7 @@ class AlertBox_worker extends StatelessWidget {
                     Text(DateFormat('yyyy년 MM월 dd일').format(DateTime.parse(date)),
                       style: TextStyle(color: Color(SUBCOLOR),fontSize: 14),),
                   ],
-                )
+                ),
               ],
             ),
           ),
