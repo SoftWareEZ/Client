@@ -69,7 +69,7 @@ class MenuBar_manager extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const AddWorkSpace()),
+                                builder: (context) => const AddWorkSpacePage()),
                           );
                         },
                       ),
@@ -128,7 +128,7 @@ class MenuBar_manager extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Color(MAINCOLOR), width: 5),
+                                border: Border.all(color: Color(MAINCOLOR), width: 3),
                             ),
                             child: Text("LeftBank",style: TextStyle(fontWeight: FontWeight.w500),),
                           ),
