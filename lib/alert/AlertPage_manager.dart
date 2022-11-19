@@ -37,16 +37,11 @@ class AlertPage_manager extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();},
-                      child: Text("닫기",
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600)),
-                    ),
-                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();},
+                    child: Text("닫기",
+                        style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600)),),
                 ],
               ),)
           ],
