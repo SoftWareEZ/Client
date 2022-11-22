@@ -191,12 +191,14 @@ class SignUp extends State<SignUpPage> {
                         Fluttertoast.showToast(
                             msg: "비밀번호가 일치합니다",
                             backgroundColor: Colors.white,
+                            textColor: Colors.black,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM);
                       } else {
                         Fluttertoast.showToast(
                             msg: "비밀번호가 일치하지 않습니다",
                             backgroundColor: Colors.white,
+                            textColor: Colors.black,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM);
                       }
@@ -260,6 +262,7 @@ class SignUp extends State<SignUpPage> {
                           Fluttertoast.showToast(
                               msg: "비밀번호 확인버튼을 누르세요",
                               backgroundColor: Colors.white,
+                              textColor: Colors.black,
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM);
                         }
