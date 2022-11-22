@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '/worker/CalendarPage_worker.dart';
 
 FocusNode myFocusNode = new FocusNode();
@@ -187,83 +188,17 @@ class SignUp extends State<SignUpPage> {
                     onPressed: () {
                       if (password1 == password2) {
                         check = 1;
-                        showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: SingleChildScrollView(
-                                  child: Column(children: [
-                                    Container(
-                                      margin:
-                                      EdgeInsets.fromLTRB(20, 20, 20, 20),
-                                      child: Text(
-                                        "비밀번호가 일치합니다",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      decoration: BoxDecoration(
-                                        color: Color(MAINCOLOR),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            /*
-                          이 시점에 사장한테 대타요청
-                          */
-                                          },
-                                          child: Text(
-                                            "닫기",
-                                            style:
-                                            TextStyle(color: Colors.white),
-                                          )),
-                                    ),
-                                  ]),
-                                ),
-                              );
-                            });
+                        Fluttertoast.showToast(
+                            msg: "비밀번호가 일치합니다",
+                            backgroundColor: Colors.white,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM);
                       } else {
-                        showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: SingleChildScrollView(
-                                  child: Column(children: [
-                                    Container(
-                                      margin:
-                                          EdgeInsets.fromLTRB(20, 20, 20, 20),
-                                      child: Text(
-                                        "비밀번호가 일치하지 않습니다",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      decoration: BoxDecoration(
-                                        color: Color(MAINCOLOR),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            /*
-                          이 시점에 사장한테 대타요청
-                          */
-                                          },
-                                          child: Text(
-                                            "닫기",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          )),
-                                    ),
-                                  ]),
-                                ),
-                              );
-                            });
+                        Fluttertoast.showToast(
+                            msg: "비밀번호가 일치하지 않습니다",
+                            backgroundColor: Colors.white,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM);
                       }
                     },
                     child: Text('확인'),
@@ -322,44 +257,11 @@ class SignUp extends State<SignUpPage> {
                             MaterialPageRoute(
                                 builder: (context) => CalendarPage_worker()));
                       }else{
-                          showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  content: SingleChildScrollView(
-                                    child: Column(children: [
-                                      Container(
-                                        margin:
-                                        EdgeInsets.fromLTRB(20, 20, 20, 20),
-                                        child: Text(
-                                          "비밀번호 확인버튼을 누르세요",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 35,
-                                        decoration: BoxDecoration(
-                                          color: Color(MAINCOLOR),
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        child: TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                              /*
-                          이 시점에 사장한테 대타요청
-                          */
-                                            },
-                                            child: Text(
-                                              "닫기",
-                                              style:
-                                              TextStyle(color: Colors.white),
-                                            )),
-                                      ),
-                                    ]),
-                                  ),
-                                );
-                              });
+                          Fluttertoast.showToast(
+                              msg: "비밀번호 확인버튼을 누르세요",
+                              backgroundColor: Colors.white,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM);
                         }
                       }
                     },
