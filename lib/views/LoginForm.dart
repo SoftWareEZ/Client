@@ -15,12 +15,12 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
-  String token = "";
+  String token = "", urlsrc = "165.229.229.104:8080";
   String id = "", password = "";
 
   _getUserInfo() async {
     // 입력된 로그인 정보로 token 요청
-    String url = "http://165.229.229.104:8080/albba/userinfo";
+    String url = "http://${urlsrc}/albba/userinfo";
     Map<String, String> headers = {"authorization": "Bearer ${token}"};
     var response = await http.get(Uri.parse(url), headers: headers);
     var responseBody = utf8.decode(response.bodyBytes);
@@ -43,7 +43,7 @@ class _LoginFormState extends State<LoginForm> {
 
   _getToken() async {
     // 입력된 로그인 정보로 token 요청
-    String url = "http://165.229.229.104:8080/albba/login";
+    String url = "http://${urlsrc}/albba/login";
     Map<String, String> headers = {"Content-Type": "application/json"};
     var body = jsonEncode({"username": id, "password": password});
     var response =
@@ -61,6 +61,7 @@ class _LoginFormState extends State<LoginForm> {
       // 받은 token 저장
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("token", token);
+      prefs.setString("urlsrc", urlsrc);
 
       // userinfo 저장
       _getUserInfo();

@@ -82,19 +82,21 @@ class AlertList_manager extends StatefulWidget {
 
 class _AlertList_managerState extends State<AlertList_manager> {
   var _alertList = [];
-  String token = "", storeId = "1";
+  String token = "", urlsrc = "", storeId = "1";
   String title = "", date = "", id = "";
 
   _fetchBoardList() async {
     // 저장해둔 token 가져오기
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
     //storeId = (prefs.getString('storeId') ?? "null");
     print("token: " + token);
+    print("urlsrc: " + token);
     //print("storeId: " + storeId);
 
     // storeId를 바탕으로 글목록 get 요청
-    String url = "http://165.229.229.104:8080/albba/board/List/${storeId}";
+    String url = "http://${urlsrc}/albba/board/List/${storeId}";
     Map<String, String> headers = {"authorization": "Bearer ${token}"};
     var response = await http.get(Uri.parse(url), headers: headers);
     var responseBody = utf8.decode(response.bodyBytes);
@@ -174,16 +176,18 @@ class _AlertBox_managerState extends State<AlertBox_manager> {
   final int SUBCOLOR = 0xff828282;
   var f = NumberFormat('00');
 
-  String token = "";
+  String token = "", urlsrc = "";
 
   delete() async {
     // 저장해둔 token 가져오기
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
     print("token: "+ token);
+    print("urlsrc: "+ urlsrc);
 
     // 글id를 바탕으로 글내용 get 요청
-    String url = "http://165.229.229.104:8080/albba/board/delete/${widget.id}";
+    String url = "h/ttp:/${urlsrc}/albba/board/delete/${widget.id}";
     Map<String, String> headers = {"authorization": "Bearer ${token}"};
     var response = await http.delete(Uri.parse(url), headers: headers);
     var responseBody = utf8.decode(response.bodyBytes);

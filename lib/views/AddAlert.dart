@@ -17,19 +17,21 @@ class Alert extends State<AddAlertpage> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
-  String token = "", storeId = "1";
+  String token = "", urlsrc = "", storeId = "1";
   String title = "", contents = "";
 
   _fetchBoardPost() async {
     // 저장해둔 token 가져오기
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
     //storeId = (prefs.getString('storeId') ?? "null");
     print("token: " + token);
+    print("urlsrc: " + urlsrc);
     //print("storeId: "+ storeId);
 
     // 글쓰기 요청
-    String url = "http://165.229.229.104:8080/albba/board/Post";
+    String url = "http://${urlsrc}/albba/board/Post";
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "authorization": "Bearer ${token}"
