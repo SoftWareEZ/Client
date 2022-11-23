@@ -118,13 +118,13 @@ class Login extends State<Loginpage>{
                       Icons.email,
                       color: Color(MAINCOLOR),
                     ),
-                    labelText: "이메일아이디를 입력해주세요",
+                    labelText: "아이디를 입력해주세요",
                     labelStyle: TextStyle(color: Colors.black54),
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 2, color: Color(MAINCOLOR)),
                     ),
-                    hintText: 'EX) abcd@naver.com',
+                    hintText: 'id',
                   ),
                 ),
                 SizedBox(
