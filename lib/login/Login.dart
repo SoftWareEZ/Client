@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '/worker/CalendarPage_worker.dart';
 
 FocusNode myFocusNode = new FocusNode();
@@ -18,8 +23,69 @@ class Login extends State<Loginpage>{
   // TextEditingController inputController = TextEditingController();
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
-  String id = '';
-  String password = '';
+
+  String token = "", urlsrc = "192.168.0.27:8080";
+  String id = "", password = "";
+
+  _getToken() async {
+    // 입력된 로그인 정보로 token 요청
+    String url = "http://${urlsrc}/albba/login";
+    Map<String, String> headers = {"Content-Type": "application/json"};
+    var body = jsonEncode({"username": id, "password": password});
+    var response =
+    await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print(responseBody);
+
+    if (response.statusCode == 200) {
+      // 로그인 성공
+      Map<String, dynamic> json = jsonDecode(responseBody);
+      token = json["token"];
+      print("token: ${token}");
+      Fluttertoast.showToast(msg: "로그인 성공");
+
+      // 받은 token 저장
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("token", token);
+      prefs.setString("urlsrc", urlsrc); // 이때, urlsrc도 저장해두었다.
+
+      // userinfo 저장
+      _getUserInfo();
+
+      // 화면전환
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CalendarPage_worker()));
+    } else {
+      // 로그인 실패
+      Fluttertoast.showToast(msg: "로그인 실패");
+    }
+  }
+
+  _getUserInfo() async {
+    // 생성된 token 정보로 userinfo 요청
+    // 전달된 내용 중 username, storeId만 디바이스 디스크에 저장한다.
+    String url = "http://${urlsrc}/albba/userinfo";
+    Map<String, String> headers = {"authorization": "Bearer ${token}"};
+    var response = await http.get(Uri.parse(url), headers: headers);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print(responseBody);
+
+    if(response.statusCode == 200) {
+      // userinfo 가져오기 성공
+      Map<String, dynamic> json = jsonDecode(responseBody);
+      String username = json["username"];
+      int storeId = json["storeId"];
+
+      // 받은 token 저장
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString("username", username);
+      prefs.setInt("storeId", storeId);
+    } else {
+      // userinfo 가져오기 실패
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,12 +167,7 @@ class Login extends State<Loginpage>{
                         //width, height
                         alignment: Alignment.center,
                         textStyle: const TextStyle(fontSize: 15)),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CalendarPage_worker()));
-                    },
+                    onPressed: _getToken,
                     child: Text('로그인'),
                   ),
                 ),
