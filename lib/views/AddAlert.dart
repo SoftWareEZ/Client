@@ -81,6 +81,7 @@ class Alert extends State<AddAlertpage> {
           padding: const EdgeInsets.all(40.0),
           child: Form(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   '제목',
