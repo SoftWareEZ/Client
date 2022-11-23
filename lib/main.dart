@@ -1,5 +1,6 @@
 import 'package:connect/views/AddAlert.dart';
 import 'package:connect/views/AlertPage_manager.dart';
+import 'package:connect/views/CommutePage_worker.dart';
 import 'package:connect/views/LoginForm.dart';
 import 'package:intl/intl.dart';
 import 'views/ViewAlert.dart';
@@ -132,7 +133,7 @@ void main() async {
   // print("responseBody: ${responseBody}");
 
 
-  runApp(AlertPage_manager());
+  runApp(CommuteState_worker());
 }
 
 
