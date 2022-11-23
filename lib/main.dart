@@ -133,7 +133,7 @@ void main() async {
   // print("responseBody: ${responseBody}");
 
 
-  runApp(AlertPage_manager());
+  runApp(ViewAlert(id: 1));
 }
 
 

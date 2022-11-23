@@ -75,8 +75,8 @@ class _AlertState extends State<Alert> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
-    print("token: "+ token);
-    print("urlsrc: "+ urlsrc);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
 
     // 글id를 바탕으로 글내용 get 요청
     String url = "http://${urlsrc}/albba/board/View/${widget.id}";
@@ -110,19 +110,17 @@ class _AlertState extends State<Alert> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 110,
-            width: 500,
-            margin: EdgeInsets.fromLTRB(20, 10, 20, 5),
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     title,
@@ -132,27 +130,16 @@ class _AlertState extends State<Alert> {
                   SizedBox(
                     height: 7,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        date,
-                        style: TextStyle(color: Colors.black, fontSize: 14),
-                      ),
-                    ],
+                  Text(
+                    date,
+                    style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
                 ]),
           ),
           Divider(thickness: 1, color: Colors.grey),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                contents,
-                style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.w500),
-              ),
-            ],
+          Text(
+            contents,
+            style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.w500),
           ),
         ],
       ),
