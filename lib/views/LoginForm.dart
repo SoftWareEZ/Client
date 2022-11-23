@@ -15,7 +15,7 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
-  String token = "", urlsrc = "165.229.229.104:8080";
+  String token = "", urlsrc = "192.168.0.27:8080";
   String id = "", password = "";
 
   _getUserInfo() async {
@@ -30,12 +30,12 @@ class _LoginFormState extends State<LoginForm> {
       // userinfo 가져오기 성공
       Map<String, dynamic> json = jsonDecode(responseBody);
       String username = json["username"];
-      String storeId = json["storeId"];
+      int storeId = json["storeId"];
 
       // 받은 token 저장
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("username", username);
-      prefs.setString("storeId", storeId);
+      prefs.setInt("storeId", storeId);
     } else {
       // userinfo 가져오기 실패
     }

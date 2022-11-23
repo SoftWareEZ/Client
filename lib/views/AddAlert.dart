@@ -17,7 +17,7 @@ class Alert extends State<AddAlertpage> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
-  String token = "", urlsrc = "", storeId = "1";
+  String token = "", urlsrc = "", storeId = "";
   String title = "", contents = "";
 
   _fetchBoardPost() async {
@@ -25,10 +25,10 @@ class Alert extends State<AddAlertpage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
-    //storeId = (prefs.getString('storeId') ?? "null");
+    storeId = (prefs.getInt('storeId').toString() ?? "null");
     print("token: " + token);
     print("urlsrc: " + urlsrc);
-    //print("storeId: "+ storeId);
+    print("storeId: "+ storeId);
 
     // 글쓰기 요청
     String url = "http://${urlsrc}/albba/board/Post";

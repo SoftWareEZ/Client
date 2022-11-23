@@ -82,7 +82,7 @@ class AlertList_manager extends StatefulWidget {
 
 class _AlertList_managerState extends State<AlertList_manager> {
   var _alertList = [];
-  String token = "", urlsrc = "", storeId = "1";
+  String token = "", urlsrc = "", storeId = "";
   String title = "", date = "", id = "";
 
   _fetchBoardList() async {
@@ -90,10 +90,10 @@ class _AlertList_managerState extends State<AlertList_manager> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
-    //storeId = (prefs.getString('storeId') ?? "null");
+    storeId = (prefs.getInt('storeId').toString() ?? "null");
     print("token: " + token);
     print("urlsrc: " + token);
-    //print("storeId: " + storeId);
+    print("storeId: " + storeId);
 
     // storeId를 바탕으로 글목록 get 요청
     String url = "http://${urlsrc}/albba/board/List/${storeId}";
