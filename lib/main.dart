@@ -9,7 +9,7 @@ import 'dart:convert';
 
 void main() async {
 
-  String urlsrc = "165.229.229.104";
+  String urlsrc = "192.168.0.27:8080";
   String url;
   Map<String, String> headers;
   var body;
@@ -17,7 +17,7 @@ void main() async {
   var response, statusCode, responseHeaders, responseBody;
 
   // Server와 연결 - token 가져오기
-  // url = "http://${urlsrc}:8080/albba/login";
+  // url = "http://${urlsrc}/albba/login";
   // headers = {"Content-Type": "application/json"};
   // body = jsonEncode({"username": "admin", "password": "admin"});
   // response = await http.post(Uri.parse(url), headers: headers, body: body);
@@ -31,7 +31,7 @@ void main() async {
   // print("token: ${token}");
 
   // token으로 게시판 정보 post 요청
-  // url = "http://${urlsrc}:8080/albba/board/Post";
+  // url = "http://${urlsrc}/albba/board/Post";
   // headers =
   // {"Content-Type": "application/json", "authorization": "Bearer ${token}"};
   // body = jsonEncode({"title": "제목", "contents": "내용"});
@@ -45,7 +45,7 @@ void main() async {
   // print("responseBody: ${responseBody}");
 
   // token으로 게시판 리스트 get 요청
-  // url = "http://${urlsrc}:8080/albba/board/List";
+  // url = "http://${urlsrc}/albba/board/List";
   // headers = {"authorization": "Bearer ${token}"};
   // response = await http.get(Uri.parse(url), headers: headers);
   // statusCode = response.statusCode;
@@ -57,7 +57,7 @@ void main() async {
   // print("responseBody: ${responseBody}");
 
   // token으로 signup post 요청
-  // url = "http://${urlsrc}:8080/albba/signup";
+  // url = "http://${urlsrc}/albba/signup";
   // headers =
   // {"Content-Type": "application/json"};
   // body = jsonEncode({"username": "newid", "password": "0000", "email": "newEmail@gmail.com", "realname":"유정이"});
@@ -70,7 +70,7 @@ void main() async {
   // print("responseHeaders: ${responseHeaders}");
   // print("responseBody: ${responseBody}");
   //
-  // url = "http://${urlsrc}:8080/albba/login";
+  // url = "http://${urlsrc}/albba/login";
   // headers = {"Content-Type": "application/json"};
   // body = jsonEncode({"username": "newid", "password": "0000"});
   // response = await http.post(Uri.parse(url), headers: headers, body: body);
@@ -103,7 +103,7 @@ void main() async {
   //
   // // 출퇴근 - 퇴근하기
   // String endDate = new DateTime.now().toString();
-  // url = "http://${urlsrc}:8080/albba/commute/end";
+  // url = "http://${urlsrc}/albba/commute/end";
   // headers =
   // {"Content-Type": "application/json", "authorization": "Bearer ${token}"};
   // body = jsonEncode({"userId": "1", "storeId": "1", "date": "${DateFormat('yyyy-MM-dd').format(DateTime.parse(startDate))}", "end": "14:00"});
@@ -115,7 +115,7 @@ void main() async {
   // print("responseBody: ${responseBody}");
   //
   // // 근무기록
-  // url = "http://${urlsrc}:8080/albba/commute/list";
+  // url = "http://${urlsrc}/albba/commute/list";
   // headers =
   // {"Content-Type": "application/json", "authorization": "Bearer ${token}"};
   // body = jsonEncode({"userId": "1"});
