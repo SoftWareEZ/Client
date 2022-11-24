@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/alert/AlertPage_manager.dart';
-import '/bar/Menubar.dart';
 import '/bar/Bottombar.dart';
+import '/navigator/Navigator.dart';
 
 class AddAlertpage extends StatefulWidget {
   const AddAlertpage({Key? key}) : super(key: key);
@@ -149,14 +149,11 @@ class Alert extends State<AddAlertpage> {
             ),
           ),
         ),
+        bottomNavigationBar: BottomBar_manager(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             _fetchBoardPost();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const AlertPage_manager()),
-            );
+            Navigator.pop(context, Arguments(returnValue: ReturnValue(result: 'pop')));
           },
           child: Icon(Icons.check),
           backgroundColor: Color(MAINCOLOR),
