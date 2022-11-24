@@ -233,14 +233,14 @@ class _AlertPage_managerState extends State<AlertPage_manager> {
   }
 }
 
-class AlertList extends StatefulWidget {
-  const AlertList({Key? key}) : super(key: key);
+class AlertList_manager extends StatefulWidget {
+  const AlertList_manager({Key? key}) : super(key: key);
 
   @override
-  State<AlertList> createState() => _AlertListState();
+  State<AlertList_manager> createState() => _AlertList_managerState();
 }
 
-class _AlertListState extends State<AlertList> {
+class _AlertList_managerState extends State<AlertList_manager> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xff828282;
 
