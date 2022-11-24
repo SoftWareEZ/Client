@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/bar/Menubar.dart';
 import '/alert/AlertPage_worker.dart';
@@ -15,7 +19,139 @@ class CommuteState_worker extends StatefulWidget {
 class CommutePage_worker extends State<CommuteState_worker> {
   final int SUBCOLOR = 0xffF4F4F4;
   final int MAINCOLOR = 0xffE94869;
+  String token = "", urlsrc = "", userId = "";
+  int storeId = 0;
   String commute = '출근';
+
+  _fetchCommuteStart() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getString('userId') ?? "null");
+    storeId = (prefs.getInt('storeId') ?? 0);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: " + userId);
+    print("storeId: " + storeId.toString());
+
+    // 출근하기
+    DateTime startDate = new DateTime.now();
+    String url = "http://${urlsrc}/albba/commute/start";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}"
+    };
+
+    print("year: " + DateFormat('yyyy').format(startDate));
+    print("month: " + DateFormat('MM').format(startDate));
+    print("day: " + DateFormat('dd').format(startDate));
+    print("start: " + DateFormat.Hm().format(startDate));
+
+    var body = jsonEncode({
+      "userId": userId,
+      "storeId": storeId,
+      "year": DateFormat('yyyy').format(startDate),
+      "month": DateFormat('MM').format(startDate),
+      "day": DateFormat('dd').format(startDate),
+      "start": DateFormat.Hm().format(startDate)
+    });
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print("responseBody: ${responseBody}");
+
+    if (response.statusCode == 200) {
+      // 출근 성공
+      showCommuteResult();
+    } else {
+      // 출근 실패
+    }
+  }
+
+  _fetchCommuteEnd() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getString('userId') ?? "null");
+    storeId = (prefs.getInt('storeId') ?? 0);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: " + userId);
+    print("storeId: " + storeId.toString());
+
+    // 출근하기
+    DateTime endDate = new DateTime.now();
+    String url = "http://${urlsrc}/albba/commute/end";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}"
+    };
+    var body = jsonEncode({
+      "userId": userId,
+      "storeId": storeId,
+      "date": DateFormat('yyyy-MM-dd').format(endDate),
+      "end": DateFormat.Hm().format(endDate)
+    });
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print("responseBody: ${responseBody}");
+
+    if (response.statusCode == 200) {
+      // 퇴근 성공
+      showCommuteResult();
+    } else {
+      // 퇴근 실패
+    }
+  }
+
+  showCommuteResult() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  child: Text(
+                    commute + " 성공 !",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Container(
+                  height: 35,
+                  decoration: BoxDecoration(
+                    color: Color(MAINCOLOR),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          if (commute == '출근') {
+                            commute = '퇴근';
+                          } else {
+                            commute = '출근';
+                          }
+                        });
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "닫기",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,61 +199,23 @@ class CommutePage_worker extends State<CommuteState_worker> {
                       ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          //backgroundColor: Color(MAINCOLOR),
+                          backgroundColor: Color(MAINCOLOR),
                           fixedSize: const Size(130, 130),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
-
-                          // alignment: BorderRadius.all(Radius.circular(10)),
                         ),
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.fromLTRB(20, 20, 20, 20),
-                                        child: Text(
-                                          commute + " 성공 !",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 35,
-                                        decoration: BoxDecoration(
-                                          color: Color(MAINCOLOR),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: TextButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                if (commute == '출근') {
-                                                  commute = '퇴근';
-                                                } else {
-                                                  commute = '출근';
-                                                }
-                                              });
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text(
-                                              "닫기",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
+                          setState(() {
+                            print(commute);
+                            if (commute == '출근') {
+                              print("start commute");
+                              _fetchCommuteStart();
+                            } else if (commute == '퇴근') {
+                              print("end commute");
+                              _fetchCommuteEnd();
+                            }
+                          });
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
