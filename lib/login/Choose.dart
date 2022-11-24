@@ -25,6 +25,28 @@ class choose extends StatelessWidget {
                   letterSpacing: 1.5)),
           centerTitle: true,
           backgroundColor: Colors.white,
+          actions: [
+            Container(
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              decoration: BoxDecoration(
+                color: Color(MAINCOLOR),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child:
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("닫기",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600)),
+                ),
+              ]),
+            ),
+          ],
         ),
         body: Center(
           child: Column(
