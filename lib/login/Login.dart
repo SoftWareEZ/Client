@@ -24,10 +24,15 @@ class Login extends State<Loginpage>{
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
-  String token = "", urlsrc = "192.168.0.70:8080";
+  String token = "", urlsrc = "";
   String id = "", password = "";
 
   _getToken() async {
+    // 저장해둔 urlsrc 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    print("urlsrc: " + urlsrc);
+
     // 입력된 로그인 정보로 token 요청
     String url = "http://${urlsrc}/albba/login";
     Map<String, String> headers = {"Content-Type": "application/json"};
@@ -45,9 +50,8 @@ class Login extends State<Loginpage>{
       Fluttertoast.showToast(msg: "로그인 성공");
 
       // 받은 token 저장
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs = await SharedPreferences.getInstance();
       prefs.setString("token", token);
-      prefs.setString("urlsrc", urlsrc); // 이때, urlsrc도 저장해두었다.
 
       // userinfo 저장
       _getUserInfo();

@@ -30,20 +30,15 @@ class SignUp extends State<SignUpPage> {
   int check = 0;
 
   _fetchSignUp() async {
-    // 저장해둔 token 가져오기
+    // 저장해둔 urlsrc 가져오기
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
-    storeId = (prefs.getInt('storeId').toString() ?? "null");
-    print("token: " + token);
     print("urlsrc: " + urlsrc);
-    print("storeId: " + storeId);
 
     // 회원가입 요청
     String url = "http://${urlsrc}/albba/signup";
     Map<String, String> headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer ${token}"
+      "Content-Type": "application/json"
     };
     var body =
     jsonEncode({"username": id, "password": password1, "email": email, "realname": name});
@@ -54,10 +49,12 @@ class SignUp extends State<SignUpPage> {
 
     if (response.statusCode == 200) {
       // 회원가입 성공
-      Fluttertoast.showToast(msg: "회원가입 성공");
       Navigator.of(context).pop();
+    } else if(response.statusCode == 500){
+      // 회원가입 실패 - 아이디 중복
+      Fluttertoast.showToast(msg: "중복되는 아이디입니다.");
     } else {
-      // 회원가입 실패
+      // 회원가입 실패 - 다른 이유
       Fluttertoast.showToast(msg: "회원가입 실패");
     }
   }

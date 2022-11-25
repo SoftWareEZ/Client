@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Choose.dart';
-
 
 //알바 사장 선택
 class WorkerManager extends StatelessWidget {
@@ -8,6 +8,7 @@ class WorkerManager extends StatelessWidget {
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
+  final String urlsrc = "192.168.0.70:8080";
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,11 @@ class WorkerManager extends StatelessWidget {
 
 class Grade extends WorkerManager {
   const Grade({Key? key}) : super(key: key);
+
+  setUrlSrc() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("urlsrc", urlsrc);
+  }
 
   @override
   Widget build(BuildContext context) {
