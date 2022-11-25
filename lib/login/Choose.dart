@@ -111,11 +111,18 @@ class choose extends StatelessWidget {
                     alignment: Alignment.center,
                     textStyle: const TextStyle(fontSize: 25)),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CalendarPage_manager()),
-                  );
+                  // 화면전환
+                  if(person=="worker") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CalendarPage_worker()));
+                  } else if(person=="manager") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CalendarPage_manager()));
+                  }
                 },
                 child: Text("카카오로그인"),
               ),

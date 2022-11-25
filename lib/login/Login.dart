@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:software_engineering/manager/CalendarPage_manager.dart';
 
 import '/worker/CalendarPage_worker.dart';
 
@@ -57,10 +58,17 @@ class Login extends State<Loginpage>{
       _getUserInfo();
 
       // 화면전환
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CalendarPage_worker()));
+      if(person=="worker") {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CalendarPage_worker()));
+      } else if(person=="manager") {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CalendarPage_manager()));
+      }
     } else {
       // 로그인 실패
       Fluttertoast.showToast(
