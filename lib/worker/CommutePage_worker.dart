@@ -43,7 +43,7 @@ class CommutePage_worker extends State<CommuteState_worker> {
       "authorization": "Bearer ${token}"
     };
 
-    print("year: " + DateFormat('yyyy').format(startDate));
+    print("year: " + DateFormat('YYYY').format(startDate));
     print("month: " + DateFormat('MM').format(startDate));
     print("day: " + DateFormat('dd').format(startDate));
     print("start: " + DateFormat.Hm().format(startDate));
@@ -51,7 +51,7 @@ class CommutePage_worker extends State<CommuteState_worker> {
     var body = jsonEncode({
       "userId": userId,
       "storeId": storeId,
-      "year": DateFormat('yyyy').format(startDate),
+      "year": DateFormat('YYYY').format(startDate),
       "month": DateFormat('MM').format(startDate),
       "day": DateFormat('dd').format(startDate),
       "start": DateFormat.Hm().format(startDate)

@@ -24,7 +24,7 @@ class Login extends State<Loginpage>{
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
-  String token = "", urlsrc = "165.229.125.111:8080";
+  String token = "", urlsrc = "192.168.0.70:8080";
   String id = "", password = "";
 
   _getToken() async {
