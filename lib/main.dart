@@ -1,5 +1,6 @@
 import 'package:connect/views/AddAlert.dart';
 import 'package:connect/views/AlertPage_manager.dart';
+import 'package:connect/views/CalendarPage_worker.dart';
 import 'package:connect/views/CommutePage_worker.dart';
 import 'package:connect/views/LoginForm.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +11,7 @@ import 'dart:convert';
 
 void main() async {
 
-  String urlsrc = "192.168.0.27:8080";
+  String urlsrc = "39.121.253.211:8082";
   String url;
   Map<String, String> headers;
   var body;
@@ -133,7 +134,7 @@ void main() async {
   // print("responseBody: ${responseBody}");
 
 
-  runApp(AddAlertpage());
+  runApp(CalendarPage_worker());
 }
 
 
