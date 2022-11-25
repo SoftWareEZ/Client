@@ -44,6 +44,7 @@ class Grade extends WorkerManager {
           children: [
             InkWell(
               onTap: () async {
+                setUrlSrc();
                 final String person = 'worker';
                 final result = await Navigator.push(
                   context,
@@ -68,6 +69,7 @@ class Grade extends WorkerManager {
             ),
           InkWell(
             onTap: () async {
+              setUrlSrc();
               final String person = 'manager';
               final result = await Navigator.push(
                 context,
