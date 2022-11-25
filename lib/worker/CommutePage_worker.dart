@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -43,7 +44,7 @@ class CommutePage_worker extends State<CommuteState_worker> {
       "authorization": "Bearer ${token}"
     };
 
-    print("year: " + DateFormat('YYYY').format(startDate));
+    print("year: " + DateFormat('yyyy').format(startDate));
     print("month: " + DateFormat('MM').format(startDate));
     print("day: " + DateFormat('dd').format(startDate));
     print("start: " + DateFormat.Hm().format(startDate));
@@ -51,7 +52,7 @@ class CommutePage_worker extends State<CommuteState_worker> {
     var body = jsonEncode({
       "userId": userId,
       "storeId": storeId,
-      "year": DateFormat('YYYY').format(startDate),
+      "year": DateFormat('yyyy').format(startDate),
       "month": DateFormat('MM').format(startDate),
       "day": DateFormat('dd').format(startDate),
       "start": DateFormat.Hm().format(startDate)
@@ -66,6 +67,12 @@ class CommutePage_worker extends State<CommuteState_worker> {
       showCommuteResult();
     } else {
       // 출근 실패
+      Fluttertoast.showToast(
+          msg: "출근 실패",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
     }
   }
 
@@ -91,7 +98,9 @@ class CommutePage_worker extends State<CommuteState_worker> {
     var body = jsonEncode({
       "userId": userId,
       "storeId": storeId,
-      "date": DateFormat('yyyy-MM-dd').format(endDate),
+      "year": DateFormat('yyyy').format(endDate),
+      "month": DateFormat('MM').format(endDate),
+      "day": DateFormat('dd').format(endDate),
       "end": DateFormat.Hm().format(endDate)
     });
     var response =
@@ -104,6 +113,12 @@ class CommutePage_worker extends State<CommuteState_worker> {
       showCommuteResult();
     } else {
       // 퇴근 실패
+      Fluttertoast.showToast(
+          msg: "퇴근 실패",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
     }
   }
 

@@ -49,13 +49,30 @@ class SignUp extends State<SignUpPage> {
 
     if (response.statusCode == 200) {
       // 회원가입 성공
+      Fluttertoast.showToast(
+          msg: "회원가입 실패",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
+      // 화면 전환
       Navigator.of(context).pop();
     } else if(response.statusCode == 500){
       // 회원가입 실패 - 아이디 중복
-      Fluttertoast.showToast(msg: "중복되는 아이디입니다.");
+      Fluttertoast.showToast(
+          msg: "중복되는 아이디입니다.",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
     } else {
       // 회원가입 실패 - 다른 이유
-      Fluttertoast.showToast(msg: "회원가입 실패");
+      Fluttertoast.showToast(
+          msg: "회원가입 실패",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
     }
   }
 

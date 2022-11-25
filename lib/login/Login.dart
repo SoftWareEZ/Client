@@ -63,7 +63,12 @@ class Login extends State<Loginpage>{
               builder: (context) => CalendarPage_worker()));
     } else {
       // 로그인 실패
-      Fluttertoast.showToast(msg: "로그인 실패");
+      Fluttertoast.showToast(
+          msg: "로그인 실패",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,8 +47,19 @@ class Alert extends State<AddAlertpage> {
 
     if (response.statusCode == 200) {
       // 글쓰기 성공
+      Fluttertoast.showToast(
+          msg: "글쓰기 성공",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
     } else {
-      // 글쓰기 실패
+      Fluttertoast.showToast(
+          msg: "글쓰기 실패",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
     }
   }
 
