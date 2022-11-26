@@ -99,6 +99,7 @@ class Login extends State<Loginpage>{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("userId", userId);
       prefs.setInt("storeId", storeId);
+
     } else {
       // userinfo 가져오기 실패
     }

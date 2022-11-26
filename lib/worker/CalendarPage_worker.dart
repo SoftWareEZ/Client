@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/bar/Menubar.dart';
 import '/alert/AlertPage_worker.dart';
@@ -41,14 +45,7 @@ class CalendarPage_worker extends StatelessWidget {
             )
           ],
         ),
-        body: ListView(
-          children: const [
-            //여기서 if로 변수해서 클릭시 변수 바뀌면 그거만 로딩하는건 안되는강
-            Calendar_worker(),
-            CalendarSalary_worker(),
-            CalendarInfo_worker(),
-          ],
-        ),
+        body: Calendar_worker(),
         bottomNavigationBar: BottomBar_worker(),
       ),
     );
@@ -64,15 +61,67 @@ class Calendar_worker extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar_worker> {
-  CalendarFormat format = CalendarFormat.month;
+  final int MAINCOLOR = 0xffE94869;
+  final int SUBCOLOR = 0xffF4F4F4;
 
+  CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
+  String day = DateFormat('EEE').format(DateTime.now()).toString().toLowerCase();
 
-  final int MAINCOLOR = 0xffE94869;
+  var _calendarList = [];
+  String token = "", urlsrc = "", storeId = "";
+  String title = "", date = "", id = "";
+
+  _fetchCalendarList() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    storeId = (prefs.getInt('storeId').toString() ?? "null");
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("storeId: " + storeId);
+
+    // storeId를 바탕으로 글목록 get 요청
+    String url = "http://${urlsrc}/albba/${storeId}/${day}";
+    Map<String, String> headers = {"authorization": "Bearer ${token}"};
+    var response = await http.get(Uri.parse(url), headers: headers);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print(responseBody);
+
+    if (response.statusCode == 200) {
+      // 요청 성공
+      // 전달받은 값 저장
+      setState(() {
+        List<dynamic> body = json.decode(responseBody);
+        _calendarList =
+            body.map((dynamic item) => CalendarInfo.fromJson(item)).toList();
+      });
+    } else {
+      // 요청 실패
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _fetchCalendarList();
+  }
 
   @override
   Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        calendar(),
+        calendarSalary(),
+        calendarInfoBox(),
+      ],
+    );
+  }
+
+  Widget calendar() {
     return Container(
         margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
         child: TableCalendar(
@@ -92,9 +141,11 @@ class _CalendarState extends State<Calendar_worker> {
           // 날짜 선택하는 포멧 설정
           onDaySelected: (selectDay, focusDay) => {
             setState(() => {
-                  selectedDay = selectDay,
-                  focusedDay = focusDay,
-                }),
+              selectedDay = selectDay,
+              focusedDay = focusDay,
+              day = DateFormat('EEE').format(focusedDay).toString().toLowerCase(),
+              _fetchCalendarList()
+            }),
             print(focusedDay),
           },
 
@@ -120,16 +171,8 @@ class _CalendarState extends State<Calendar_worker> {
               )),
         ));
   }
-}
 
-// 알바용 한달근무표 - 월급
-class CalendarSalary_worker extends StatelessWidget {
-  const CalendarSalary_worker({Key? key}) : super(key: key);
-
-  final int SUBCOLOR = 0xffF4F4F4;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget calendarSalary() {
     return Container(
         margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -149,16 +192,8 @@ class CalendarSalary_worker extends StatelessWidget {
           ],
         ));
   }
-}
 
-// 알바용 한달근무표 - 세부일정
-class CalendarInfo_worker extends StatelessWidget {
-  const CalendarInfo_worker({Key? key}) : super(key: key);
-
-  final int SUBCOLOR = 0xffF4F4F4;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget calendarInfoBox() {
     return Container(
       margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -173,36 +208,61 @@ class CalendarInfo_worker extends StatelessWidget {
           Container(
             margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
             child: Text(
-              "8월 6일",
+              DateFormat('MM월 dd일').format(focusedDay),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
           ),
-          Container(
-            margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
-            child: Row(
-              children: [
-                Text(
-                  "08:00 - 12:00  ",
-                  style: TextStyle(color: Colors.black38, fontSize: 20),
-                ),
-                Text("조유정", style: TextStyle(fontSize: 20))
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
-            child: Row(
-              children: [
-                Text(
-                  "12:00 - 16:00  ",
-                  style: TextStyle(color: Colors.black38, fontSize: 20),
-                ),
-                Text("김민지", style: TextStyle(fontSize: 20))
-              ],
-            ),
-          ),
+          Stack(
+            children: [
+              Column(
+                children: [
+                  for (int i = 0; i < _calendarList.length; i++)
+                    calendarInfo((_calendarList[i].name ?? "null"),
+                        (_calendarList[i].start ?? "null"), (_calendarList[i].end ?? "null"))
+                ],
+              )
+            ],
+          )
         ],
       ),
     );
+  }
+
+  Widget calendarInfo(String name, String start, String end) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
+      child: Row(
+        children: [
+          Text(
+            start + " - " + end+" ",
+            style: TextStyle(color: Colors.black38, fontSize: 20),
+          ),
+          Text(name, style: TextStyle(fontSize: 20))
+        ],
+      ),
+    );
+  }
+
+}
+
+class CalendarInfo {
+  String name = "";
+  String start = "";
+  String end = "";
+
+  AlertInfo(String name, String start, String end) {
+    this.name = name;
+    this.start = start;
+    this.end = end;
+  }
+
+  CalendarInfo.fromJson(Map<String, dynamic> json) {
+    name = json["name"];
+    start = json["start"];
+    end = json["end"];
+
+    Map toJson() {
+      return {'name': name, 'start': start, 'end': end};
+    }
   }
 }
