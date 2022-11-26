@@ -20,8 +20,8 @@ class CommuteState_worker extends StatefulWidget {
 class CommutePage_worker extends State<CommuteState_worker> {
   final int SUBCOLOR = 0xffF4F4F4;
   final int MAINCOLOR = 0xffE94869;
-  String token = "", urlsrc = "", userId = "";
-  int storeId = 0;
+  String token = "", urlsrc = "";
+  int userId = 0, storeId = 0;
   String commute = '출근';
 
   _fetchCommuteStart() async {
@@ -29,11 +29,11 @@ class CommutePage_worker extends State<CommuteState_worker> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
-    userId = (prefs.getString('userId') ?? "null");
+    userId = (prefs.getInt('userId') ?? 0);
     storeId = (prefs.getInt('storeId') ?? 0);
     print("token: " + token);
     print("urlsrc: " + urlsrc);
-    print("userId: " + userId);
+    print("userId: " + userId.toString());
     print("storeId: " + storeId.toString());
 
     // 출근하기
@@ -81,11 +81,11 @@ class CommutePage_worker extends State<CommuteState_worker> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
-    userId = (prefs.getString('userId') ?? "null");
+    userId = (prefs.getInt('userId') ?? 0);
     storeId = (prefs.getInt('storeId') ?? 0);
     print("token: " + token);
     print("urlsrc: " + urlsrc);
-    print("userId: " + userId);
+    print("userId: " + userId.toString());
     print("storeId: " + storeId.toString());
 
     // 출근하기
