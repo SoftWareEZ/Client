@@ -64,24 +64,68 @@ class _CalendarState extends State<Calendar_worker> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
+  var f = NumberFormat('###,###,###,###');
+
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
-  String day = DateFormat('EEE').format(DateTime.now()).toString().toLowerCase();
+  String day =
+      DateFormat('EEE').format(DateTime.now()).toString().toLowerCase();
 
+  
   var _calendarList = [];
-  String token = "", urlsrc = "", storeId = "";
-  String title = "", date = "", id = "";
+  String token = "", urlsrc = "";
+  int userId = 0, storeId = 0;
+  String salary = "";
+
+  _fetchSalary() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getInt('userId') ?? 0);
+    storeId = (prefs.getInt('storeId') ?? 0);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: " + userId.toString());
+    print("storeId: " + storeId.toString());
+
+    // userId를 바탕으로 월별 월급 요청
+    String url = "http://${urlsrc}/albba/commute/cost/${userId}";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}"
+    };
+    var body = jsonEncode({
+      "storeId": storeId,
+      "year": DateFormat("yyyy").format(focusedDay),
+      "month": DateFormat("MM").format(focusedDay)
+    });
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print(responseBody);
+
+    if (response.statusCode == 200) {
+      // 요청 성공
+      // 전달받은 값 저장
+      setState(() {
+        salary = responseBody;
+      });
+    } else {
+      // 요청 실패
+    }
+  }
 
   _fetchCalendarList() async {
     // 저장해둔 token 가져오기
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
-    storeId = (prefs.getInt('storeId').toString() ?? "null");
+    storeId = (prefs.getInt('storeId') ?? 0);
     print("token: " + token);
     print("urlsrc: " + urlsrc);
-    print("storeId: " + storeId);
+    print("storeId: " + storeId.toString());
 
     // storeId를 바탕으로 글목록 get 요청
     String url = "http://${urlsrc}/albba/${storeId}/${day}";
@@ -107,6 +151,7 @@ class _CalendarState extends State<Calendar_worker> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _fetchSalary();
     _fetchCalendarList();
   }
 
@@ -141,11 +186,15 @@ class _CalendarState extends State<Calendar_worker> {
           // 날짜 선택하는 포멧 설정
           onDaySelected: (selectDay, focusDay) => {
             setState(() => {
-              selectedDay = selectDay,
-              focusedDay = focusDay,
-              day = DateFormat('EEE').format(focusedDay).toString().toLowerCase(),
-              _fetchCalendarList()
-            }),
+                  selectedDay = selectDay,
+                  focusedDay = focusDay,
+                  day = DateFormat('EEE')
+                      .format(focusedDay)
+                      .toString()
+                      .toLowerCase(),
+                  _fetchCalendarList(),
+                  _fetchSalary()
+                }),
             print(focusedDay),
           },
 
@@ -186,7 +235,7 @@ class _CalendarState extends State<Calendar_worker> {
             Text("월급",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
             Text(
-              "1,000,000 원",
+              f.format(int.parse(salary)) + " 원",
               style: TextStyle(color: Colors.black38, fontSize: 20),
             ),
           ],
@@ -217,8 +266,10 @@ class _CalendarState extends State<Calendar_worker> {
               Column(
                 children: [
                   for (int i = 0; i < _calendarList.length; i++)
-                    calendarInfo((_calendarList[i].name ?? "null"),
-                        (_calendarList[i].start ?? "null"), (_calendarList[i].end ?? "null"))
+                    calendarInfo(
+                        (_calendarList[i].name ?? "null"),
+                        (_calendarList[i].start ?? "null"),
+                        (_calendarList[i].end ?? "null"))
                 ],
               )
             ],
@@ -234,7 +285,7 @@ class _CalendarState extends State<Calendar_worker> {
       child: Row(
         children: [
           Text(
-            start + " - " + end+" ",
+            start + " - " + end + " ",
             style: TextStyle(color: Colors.black38, fontSize: 20),
           ),
           Text(name, style: TextStyle(fontSize: 20))
@@ -242,7 +293,6 @@ class _CalendarState extends State<Calendar_worker> {
       ),
     );
   }
-
 }
 
 class CalendarInfo {
