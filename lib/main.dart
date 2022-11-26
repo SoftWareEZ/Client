@@ -8,6 +8,7 @@ import 'views/ViewAlert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:connect/views/ManagementUpdatePage_manager.dart';
 
 void main() async {
 
@@ -133,8 +134,8 @@ void main() async {
   // responseBody = utf8.decode(response.bodyBytes);
   // print("responseBody: ${responseBody}");
 
-
-  runApp(CalendarPage_worker());
+    // runApp(CalendarPage_worker());
+  runApp(ManagementUpdatePage_manager());
 }
 
 
