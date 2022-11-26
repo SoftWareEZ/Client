@@ -92,14 +92,16 @@ class Login extends State<Loginpage>{
     if(response.statusCode == 200) {
       // userinfo 가져오기 성공
       Map<String, dynamic> json = jsonDecode(responseBody);
-      String username = json["username"];
       int userId = json["userId"];
+      String username = json["username"];
+      String realname = json["realname"];
       int storeId = json["storeId"];
 
       // 받은 token 저장
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("username", username);
       prefs.setInt("userId", userId);
+      prefs.setString("username", username);
+      prefs.setString("realname", realname);
       prefs.setInt("storeId", storeId);
 
     } else {
