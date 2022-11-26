@@ -45,22 +45,22 @@ class CalendarPage_worker extends StatelessWidget {
             )
           ],
         ),
-        body: Calendar_worker(),
+        body: Calendar(),
         bottomNavigationBar: BottomBar_worker(),
       ),
     );
   }
 }
 
-// 알바용 한달근무표 - 달력
-class Calendar_worker extends StatefulWidget {
-  const Calendar_worker({Key? key}) : super(key: key);
+// 한달근무표
+class Calendar extends StatefulWidget {
+  const Calendar({Key? key}) : super(key: key);
 
   @override
-  State<Calendar_worker> createState() => _CalendarState();
+  State<Calendar> createState() => _CalendarState();
 }
 
-class _CalendarState extends State<Calendar_worker> {
+class _CalendarState extends State<Calendar> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
