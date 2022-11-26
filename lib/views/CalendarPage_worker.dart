@@ -18,7 +18,7 @@ class CalendarPage_worker extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: MenuBar_worker(),
+        drawer: MenuBar_manager(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('알빠',
