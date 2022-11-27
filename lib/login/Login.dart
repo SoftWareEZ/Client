@@ -21,7 +21,6 @@ class Loginpage extends StatefulWidget {
 class Login extends State<Loginpage>{
   final String person;
   Login(this.person);
-  // TextEditingController inputController = TextEditingController();
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
@@ -29,6 +28,7 @@ class Login extends State<Loginpage>{
   String id = "", password = "";
 
   _getToken() async {
+    print("token");
     // 저장해둔 urlsrc 가져오기
     SharedPreferences prefs = await SharedPreferences.getInstance();
     urlsrc = (prefs.getString('urlsrc') ?? "null");
@@ -81,6 +81,7 @@ class Login extends State<Loginpage>{
   }
 
   _getUserInfo() async {
+    print("userinfo");
     // 생성된 token 정보로 userinfo 요청
     // 전달된 내용 중 username, storeId만 디바이스 디스크에 저장한다.
     String url = "http://${urlsrc}/albba/userinfo";
