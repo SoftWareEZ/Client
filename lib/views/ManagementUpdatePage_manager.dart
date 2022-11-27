@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import '/bar/Menubar.dart';
 // import '../alert/AlertPage_manager.dart';
@@ -8,7 +13,6 @@ import 'Menubar.dart';
 // 사장용 알바생 관리 - 알바 정보 수정
 class ManagementUpdatePage_manager extends StatefulWidget {
   const ManagementUpdatePage_manager({Key? key}) : super(key: key);
-
 
   @override
   State<ManagementUpdatePage_manager> createState() => ManagementUpdatePage();
@@ -73,11 +77,16 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
 
 class WorkSchedule {
   // 근무일정 클래스
+
+  // var f = NumberFormat('##:##');
   String day = ""; // 요일
+  // int n = NumberFormat('00') as int;
   int startHour = 0; // 시작 시
   int startMinute = 0; // 시작 분
   int endHour = 0; // 종료 시
   int endMinute = 0; // 종료 분
+  // var start=f.format(startHour);
+  String end="";
 
   WorkSchedule(
       String day, int startHour, int startMinute, int endHour, int endMinute) {
@@ -101,16 +110,176 @@ class Managerupdate_manager extends State<ManagerUpdate_manager> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
   final int SUBPINKCOLOR = 0xffFDF6F8;
-
-  // 입사날짜, 근무일정(요일, 시작시간, 끝나는시간)도 데이터 받아서 출력해야한다.
-  String money = "9160";
-  String AccountNumber ="1111-1111";
-
-  // 근무일정 데이터
-  final List<WorkSchedule> _workschedule = [
-    new WorkSchedule("화", 9, 0, 10, 0),
-    new WorkSchedule("목", 9, 0, 10, 0)
+  final List<String> _dayList = ['월', '화', '수', '목', '금', '토', '일'];
+  final List<String> _EdayList = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+  final List<int> _hourList = List.generate(24, (index) => index + 1);
+  final List<int> _minuteList = List.generate(60, (index) => index);
+  List<WorkSchedule> _workschedule = [
+    // new WorkSchedule("화", 9, 0, 10, 0),
+    // new WorkSchedule("목", 9, 0, 10, 0),
   ];
+String day="",start="",end="";
+  String token = "", urlsrc = "172.20.10.6:8080", userId = "", storeId = "";
+  String id = "", password = "";
+  String wage = "9160",
+      account = "1111-1111",
+  mon_start= "null",
+  mon_end= "null",
+  tue_start= "null",
+  tue_end= "null",
+  wed_start= "null",
+  wed_end= "null",
+  thu_start= "null",
+  thu_end= "null",
+  fri_start= "null",
+  fri_end= "null",
+  sat_start= "null",
+  sat_end= "null",
+  sun_start= "null",
+  sun_end= "null";
+
+  var f = NumberFormat('00');
+  // 근무일정 데이터
+  _transWorkSchedule() async {
+    for(int i=0;i<_workschedule.length;i++){
+      start=f.format(_workschedule[i].startHour)+":"+f.format(_workschedule[i].startMinute);
+      end=f.format(_workschedule[i].endHour)+":"+f.format(_workschedule[i].endMinute);
+      if (_workschedule[i].day == "월") {
+          mon_start=start;
+          mon_end=end;
+      }
+      else if (_workschedule[i].day == "화") {
+        tue_start=start;
+        tue_end=end;
+      }
+      else if (_workschedule[i].day == "수") {
+        wed_start=start;
+        wed_end=end;
+      }
+      else if (_workschedule[i].day == "목") {
+        thu_start=start;
+        thu_end=end;
+      }
+      else if (_workschedule[i].day == "금") {
+        fri_start=start;
+        fri_end=end;
+      }
+      else if (_workschedule[i].day == "토") {
+        sat_start=start;
+        sat_end=end;
+      }
+      else if (_workschedule[i].day == "일") {
+        sun_start=start;
+        sun_end=end;
+      }
+    }
+  }
+  _getWorkSchedule() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getString('userId') ?? "null");
+
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: " + userId);
+
+    String url = "http://172.20.10.6:8080/albba/store/${storeId}/worker/setting/${userId}";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}",
+    };
+    _transWorkSchedule();
+
+    var body = jsonEncode({
+      "wage": wage,
+      "account": account,
+      "mon_start": mon_start,
+      "mon_end": mon_end,
+      "tue_start": tue_start,
+      "tue_end": tue_end,
+      "wed_start": wed_start,
+      "wed_end": wed_end,
+      "thu_start": thu_start,
+      "thu_end": thu_end,
+      "fri_start": fri_start,
+      "fri_end": fri_end,
+      "sat_start": sat_start,
+      "sat_end": sat_end,
+      "sun_start": sun_start,
+      "sun_end" : sun_end
+    });
+
+    var response =
+    await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print(responseBody);
+
+    if (response.statusCode == 200) {
+      Fluttertoast.showToast(msg: "성공");
+      Map<String, dynamic> json = jsonDecode(responseBody);
+      setState(() {
+        wage = json["wage"];
+        account = json["account"];
+        mon_start = json["mon_start"];
+        mon_end = json["mon_end"];
+        tue_start = json["tue_start"];
+        tue_end = json["tue_end"];
+        wed_start = json["wed_start"];
+        wed_end = json["wed_end"];
+        thu_start = json["thu_start"];
+        thu_end = json["thu_end"];
+        fri_start = json["fri_start"];
+        fri_end = json["fri_end"];
+        sat_start = json["sat_start"];
+        sat_end = json["sat_end"];
+        sun_start = json["sun_start"];
+        sun_end = json["sun_end"];
+      });
+      if(mon_start!="null"){
+        List<int> starttime=(mon_start.split(":")) as List<int>;
+        List<int> endtime=(mon_end.split(":")) as List<int>;
+        new WorkSchedule("월", starttime[0], starttime[1], endtime[0], endtime[1]);
+      }
+      else if(tue_start !="null"){
+        List<int> starttime=(tue_start.split(":")) as List<int>;
+        List<int> endtime=(tue_end.split(":")) as List<int>;
+        new WorkSchedule("월", starttime[0], starttime[1], endtime[0], endtime[1]);
+      }
+      else if(wed_start !="null"){
+        List<int> starttime=(wed_start.split(":")) as List<int>;
+        List<int> endtime=(wed_end.split(":")) as List<int>;
+        new WorkSchedule("월", starttime[0], starttime[1], endtime[0], endtime[1]);
+      }
+      else if(thu_start !="null"){
+        List<int> starttime=(thu_start.split(":")) as List<int>;
+        List<int> endtime=(thu_end.split(":")) as List<int>;
+        new WorkSchedule("월", starttime[0], starttime[1], endtime[0], endtime[1]);
+      }
+      else if(fri_start !="null"){
+        List<int> starttime=(fri_start.split(":")) as List<int>;
+        List<int> endtime=(fri_end.split(":")) as List<int>;
+        new WorkSchedule("월", starttime[0], starttime[1], endtime[0], endtime[1]);
+      }
+      else if(sat_start !="null"){
+        List<int> starttime=(sat_start.split(":")) as List<int>;
+        List<int> endtime=(sat_end.split(":")) as List<int>;
+        new WorkSchedule("월", starttime[0], starttime[1], endtime[0], endtime[1]);
+      }else if(sun_start !="null"){
+        List<int> starttime=(sun_start.split(":")) as List<int>;
+        List<int> endtime=(sun_end.split(":")) as List<int>;
+        new WorkSchedule("월", starttime[0], starttime[1], endtime[0], endtime[1]);
+      }
+
+    } else {
+      Fluttertoast.showToast(msg: "실패");
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    _getWorkSchedule();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +354,7 @@ class Managerupdate_manager extends State<ManagerUpdate_manager> {
                       child: TextFormField(
                         onChanged: (text) {
                           setState(() {
-                            money = text;
+                            wage = text;
                           });
                         },
                         decoration: InputDecoration(
@@ -193,7 +362,7 @@ class Managerupdate_manager extends State<ManagerUpdate_manager> {
                             borderSide:
                                 BorderSide(width: 2, color: Color(MAINCOLOR)),
                           ),
-                          hintText: money,
+                          hintText: wage,
                           hintStyle: TextStyle(fontSize: 15),
                         ),
                       ),
@@ -211,25 +380,34 @@ class Managerupdate_manager extends State<ManagerUpdate_manager> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
+                child: Column(
                   children: [
-                    Text("근무 일정 :  "),
-                    Container(
-                      child: Stack(
-                        children: [
-                          Column(
+                    Row(
+                      children: [
+                        Text("근무 일정 :  "),
+                        Container(
+                          child: Stack(
                             children: [
-                              for (int i = 0; i < _workschedule.length; i++)
-                                WorkScheduleContainer(
-                                    day: _workschedule[i].day,
-                                    startHour: _workschedule[i].startHour,
-                                    startMinute: _workschedule[i].startMinute,
-                                    endHour: _workschedule[i].endHour,
-                                    endMinute: _workschedule[i].endMinute)
+                              Column(
+                                children: [
+                                  for (int i = 0; i < _workschedule.length; i++)
+                                    WorkScheduleContainer(i,_workschedule[i].day,_workschedule[i].startHour,_workschedule[i].startMinute,
+                                       _workschedule[i].endHour,
+                                        _workschedule[i].endMinute)
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextButton(
+                      onPressed: (){
+                        _workschedule.add(new WorkSchedule("월", 0, 0, 0, 0));
+                        _getWorkSchedule();
+                        print(_workschedule.length); //새로 정보 받아와야함
+                      },
+                      child: Icon(Icons.add,color: Color(MAINCOLOR)),
                     ),
                   ],
                 ),
@@ -251,15 +429,15 @@ class Managerupdate_manager extends State<ManagerUpdate_manager> {
                       child: TextFormField(
                         onChanged: (text) {
                           setState(() {
-                            AccountNumber = text;
+                            account = text;
                           });
                         },
                         decoration: InputDecoration(
                           focusedBorder: UnderlineInputBorder(
                             borderSide:
-                            BorderSide(width: 2, color: Color(MAINCOLOR)),
+                                BorderSide(width: 2, color: Color(MAINCOLOR)),
                           ),
-                          hintText: AccountNumber,
+                          hintText: account,
                           hintStyle: TextStyle(fontSize: 15),
                         ),
                       ),
@@ -273,115 +451,91 @@ class Managerupdate_manager extends State<ManagerUpdate_manager> {
       ],
     );
   }
-}
-
-
-class WorkScheduleContainer extends StatefulWidget {
-  WorkScheduleContainer(
-      {Key? key,
-        required this.day,
-        required this.startHour,
-        required this.startMinute,
-        required this.endHour,
-        required this.endMinute})
-      : super(key: key);
-
-  String day; // 요일
-  int startHour; // 시작 시
-  int startMinute; // 시작 분
-  int endHour; // 종료 시
-  int endMinute; // 종료 분
-
-
-  @override
-  State<WorkScheduleContainer> createState() => ContainerState();
-}
-
-class ContainerState extends State<WorkScheduleContainer> {
-  final List<String> _dayList = ['월', '화', '수', '목', '금', '토', '일'];
-  final List<int> _hourList = List.generate(24, (index) => index+1);
-  final List<int> _minuteList = List.generate(60, (index) => index);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget WorkScheduleContainer(int i,String day,int startHour,int startMinute,int endHour,int endMinute){
     return Container(
       child: Row(
-      children: [
-        DropdownButton( //요일
-          value: widget.day,
-          items: _dayList.map((value) {
-            return DropdownMenuItem(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          onChanged: (value) {
-            setState(() {
-              widget.day = value!;
-            });
-          },
-        ),
-        Text("  "),
-        DropdownButton( //시작 시
-          value: widget.startHour,
-          items: _hourList.map((value) {
-            return DropdownMenuItem(
-              value: value,
-              child: Text('$value'),
-            );
-          }).toList(),
-          onChanged: (value) {
-            setState(() {
-              widget.startHour = value!;
-            });
-          },
-        ),
-        Text(" : "),
-        DropdownButton( //시작 분
-          value: widget.startMinute,
-          items: _minuteList.map((value) {
-            return DropdownMenuItem(
-              value: value,
-              child: Text('$value'),
-            );
-          }).toList(),
-          onChanged: (value) {
-            setState(() {
-              widget.startMinute = value!;
-            });
-          },
-        ),
-        Text("  ~  "),
-        DropdownButton( //종료 시
-          value: widget.endHour,
-          items: _hourList.map((value) {
-            return DropdownMenuItem(
-              value: value,
-              child: Text('$value'),
-            );
-          }).toList(),
-          onChanged: (value) {
-            setState(() {
-              widget.endHour = value!;
-            });
-          },
-        ),
-        Text(" : "),
-        DropdownButton( //종료 분
-          value: widget.endMinute,
-          items: _minuteList.map((value) {
-            return DropdownMenuItem(
-              value: value,
-              child: Text('$value'),
-            );
-          }).toList(),
-          onChanged: (value) {
-            setState(() {
-              widget.endMinute = value!;
-            });
-          },
-        ),
-      ],
+        children: [
+          DropdownButton(
+            //요일
+            value: day,
+            items: _dayList.map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _workschedule[i].day = value!;
+                print(_workschedule[i].day);
+              });
+            },
+          ),
+          Text("  "),
+          DropdownButton(
+            //시작 시
+            value: startHour,
+            items: _hourList.map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text('$value'),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _workschedule[i].startHour = value!;
+              });
+            },
+          ),
+          Text(" : "),
+          DropdownButton(
+            //시작 분
+            value: startMinute,
+            items: _minuteList.map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text('$value'),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _workschedule[i].startMinute = value!;
+              });
+            },
+          ),
+          Text("  ~  "),
+          DropdownButton(
+            //종료 시
+            value: endHour,
+            items: _hourList.map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text('$value'),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _workschedule[i].endHour = value!;
+              });
+            },
+          ),
+          Text(" : "),
+          DropdownButton(
+            //종료 분
+            value: endMinute,
+            items: _minuteList.map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text('$value'),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _workschedule[i].endMinute = value!;
+              });
+            },
+          ),
+        ],
       ),
     );
   }
