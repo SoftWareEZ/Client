@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '/bar/Menubar.dart';
 import '../alert/AlertPage_manager.dart';
 import '/bar/Bottombar.dart';
-// import 'Menubar.dart';
 
 // 사장용 알바생 관리 - 알바 정보 수정
 class ManagementUpdatePage_manager extends StatefulWidget {
@@ -184,47 +183,6 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
           sun_start = json["sun_start"];
           sun_end = json["sun_end"];
         });
-        if (mon_start != "null") {
-          List<String> starttime = mon_start.split(":");
-          List<String> endtime = mon_end.split(":");
-          new WorkSchedule(
-              "월", starttime[0], starttime[1], endtime[0], endtime[1]);
-        }
-        else if (tue_start != "null") {
-          List<String> starttime = (tue_start.split(":"));
-          List<String> endtime = (tue_end.split(":"));
-          new WorkSchedule(
-              "화", starttime[0], starttime[1], endtime[0], endtime[1]);
-        }
-        else if (wed_start != "null") {
-          List<String> starttime = wed_start.split(":");
-          List<String> endtime = wed_end.split(":");
-          new WorkSchedule(
-              "수", starttime[0], starttime[1], endtime[0], endtime[1]);
-        }
-        else if (thu_start != "null") {
-          List<String> starttime = thu_start.split(":");
-          List<String> endtime = thu_end.split(":");
-          new WorkSchedule(
-              "목", starttime[0], starttime[1], endtime[0], endtime[1]);
-        }
-        else if (fri_start != "null") {
-          List<String> starttime = fri_start.split(":");
-          List<String> endtime = fri_end.split(":");
-          new WorkSchedule(
-              "금", starttime[0], starttime[1], endtime[0], endtime[1]);
-        }
-        else if (sat_start != "null") {
-          List<String> starttime = sat_start.split(":");
-          List<String> endtime = sat_end.split(":");
-          new WorkSchedule(
-              "토", starttime[0], starttime[1], endtime[0], endtime[1]);
-        } else if (sun_start != "null") {
-          List<String> starttime = sun_start.split(":");
-          List<String> endtime = sun_end.split(":");
-          new WorkSchedule(
-              "일", starttime[0], starttime[1], endtime[0], endtime[1]);
-        }
       }
     } else {
       Fluttertoast.showToast(msg: "실패");
@@ -236,8 +194,50 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
     super.initState();
     _getWorkSchedule();
   }
+
   @override
   Widget build(BuildContext context) {
+    if (mon_start != "null") {
+      List<String> starttime = mon_start.split(":");
+      List<String> endtime = mon_end.split(":");
+      new WorkSchedule(
+          "월", starttime[0], starttime[1], endtime[0], endtime[1]);
+    }
+    else if (tue_start != "null") {
+      List<String> starttime = (tue_start.split(":"));
+      List<String> endtime = (tue_end.split(":"));
+      new WorkSchedule(
+          "화", starttime[0], starttime[1], endtime[0], endtime[1]);
+    }
+    else if (wed_start != "null") {
+      List<String> starttime = wed_start.split(":");
+      List<String> endtime = wed_end.split(":");
+      new WorkSchedule(
+          "수", starttime[0], starttime[1], endtime[0], endtime[1]);
+    }
+    else if (thu_start != "null") {
+      List<String> starttime = thu_start.split(":");
+      List<String> endtime = thu_end.split(":");
+      new WorkSchedule(
+          "목", starttime[0], starttime[1], endtime[0], endtime[1]);
+    }
+    else if (fri_start != "null") {
+      List<String> starttime = fri_start.split(":");
+      List<String> endtime = fri_end.split(":");
+      new WorkSchedule(
+          "금", starttime[0], starttime[1], endtime[0], endtime[1]);
+    }
+    else if (sat_start != "null") {
+      List<String> starttime = sat_start.split(":");
+      List<String> endtime = sat_end.split(":");
+      new WorkSchedule(
+          "토", starttime[0], starttime[1], endtime[0], endtime[1]);
+    } else if (sun_start != "null") {
+      List<String> starttime = sun_start.split(":");
+      List<String> endtime = sun_end.split(":");
+      new WorkSchedule(
+          "일", starttime[0], starttime[1], endtime[0], endtime[1]);
+    }
     return MaterialApp(
       home: Scaffold(
         drawer: MenuBar_manager(),
@@ -256,11 +256,11 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
               color: Color(MAINCOLOR),
               iconSize: 30,
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => const AlertPage_manager()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AlertPage_manager()),
+                );
               },
             )
           ],
@@ -465,7 +465,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                _workschedule[i].day = value.toString();
+                // _workschedule[i].day = value.toString();
                 print(value);
               });
             },
@@ -482,7 +482,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                _workschedule[i].startHour = value.toString();
+                // _workschedule[i].startHour = value.toString();
                 print(value);
               });
             },
@@ -499,7 +499,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                _workschedule[i].startMinute = value.toString();
+                // _workschedule[i].startMinute = value.toString();
               });
             },
           ),
@@ -515,7 +515,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                _workschedule[i].endHour = value.toString();
+                // _workschedule[i].endHour = value.toString();
               });
             },
           ),
@@ -531,7 +531,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-                _workschedule[i].endMinute = value.toString();
+                // _workschedule[i].endMinute = value;
               });
             },
           ),
