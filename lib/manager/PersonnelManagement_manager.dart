@@ -59,7 +59,7 @@ class PersonnelManagement_manager extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: Text(
                       "입사",
-                      style: TextStyle(color: Color(MAINCOLOR), fontSize: 20),
+                      style: TextStyle(color: Color(MAINCOLOR), fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                   ),
                   Container(
@@ -81,7 +81,7 @@ class PersonnelManagement_manager extends StatelessWidget {
                         children: [
                           Container(
                             margin: EdgeInsets.only(right: 10.0),
-                            height: 30,
+                            height: 35,
                             decoration: BoxDecoration(
                               color: Color(MAINCOLOR),
                               borderRadius: BorderRadius.circular(13),
@@ -158,7 +158,7 @@ class PersonnelManagement_manager extends StatelessWidget {
                           ),
                           Container(
                             margin: EdgeInsets.only(right: 40.0),
-                            height: 30,
+                            height: 35,
                             decoration: BoxDecoration(
                               color: Color(MAINCOLOR),
                               borderRadius: BorderRadius.circular(13),
@@ -252,7 +252,7 @@ class PersonnelManagement_manager extends StatelessWidget {
                         children: [
                           Container(
                             margin: EdgeInsets.only(right: 10.0),
-                            height: 30,
+                            height: 35,
                             decoration: BoxDecoration(
                               color: Color(MAINCOLOR),
                               borderRadius: BorderRadius.circular(13),
@@ -329,7 +329,7 @@ class PersonnelManagement_manager extends StatelessWidget {
                           ),
                           Container(
                             margin: EdgeInsets.only(right: 40.0),
-                            height: 30,
+                            height: 35,
                             decoration: BoxDecoration(
                               color: Color(MAINCOLOR),
                               borderRadius: BorderRadius.circular(13),
@@ -426,7 +426,7 @@ class PersonnelManagement_manager extends StatelessWidget {
                     margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: Text(
                       "퇴사",
-                      style: TextStyle(color: Color(MAINCOLOR), fontSize: 20),
+                      style: TextStyle(color: Color(MAINCOLOR), fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                   ),
                   Container(
@@ -448,7 +448,7 @@ class PersonnelManagement_manager extends StatelessWidget {
                         children: [
                           Container(
                             margin: EdgeInsets.only(right: 10.0),
-                            height: 30,
+                            height: 35,
                             decoration: BoxDecoration(
                               color: Color(MAINCOLOR),
                               borderRadius: BorderRadius.circular(13),
@@ -519,13 +519,12 @@ class PersonnelManagement_manager extends StatelessWidget {
                                       });
                                 },
                                 child: Text(
-                                  "수락",
-                                  style: TextStyle(color: Colors.white),
+                                  "수락", style: TextStyle(color: Colors.white),
                                 )),
                           ),
                           Container(
                             margin: EdgeInsets.only(right: 40.0),
-                            height: 30,
+                            height: 35,
                             decoration: BoxDecoration(
                               color: Color(MAINCOLOR),
                               borderRadius: BorderRadius.circular(13),
