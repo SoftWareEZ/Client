@@ -63,7 +63,7 @@ class InsteadPage_manager extends StatelessWidget {
                         ),
                         Text("12:00 - 18:00",
                             style:
-                                TextStyle(color: Colors.black38, fontSize: 15))
+                            TextStyle(color: Colors.black38, fontSize: 15))
                       ],
                     ),
                   ),
@@ -106,7 +106,68 @@ class InsteadPage_manager extends StatelessWidget {
                         ),
                         child: TextButton(
                             onPressed: () {
-                              // Navigator.of(context).pop();
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        content: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.fromLTRB(
+                                                    20, 20, 20, 20),
+                                                child: Text(
+                                                  "수락하시겠습니까?",
+                                                  style: TextStyle(fontSize: 20),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Container(
+                                                    height: 35,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(MAINCOLOR),
+                                                      borderRadius:
+                                                      BorderRadius.circular(10),
+                                                    ),
+                                                    child: TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                          "예",
+                                                          style: TextStyle(
+                                                              color: Colors.white),
+                                                        )),
+                                                  ),
+                                                  Container(
+                                                    height: 35,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(MAINCOLOR),
+                                                      borderRadius:
+                                                      BorderRadius.circular(10),
+                                                    ),
+                                                    child: TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                          "아니오",
+                                                          style: TextStyle(
+                                                              color: Colors.white),
+                                                        )),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ));
+                                  });
                             },
                             child: Text(
                               "수락",
@@ -122,7 +183,71 @@ class InsteadPage_manager extends StatelessWidget {
                         ),
                         child: TextButton(
                             onPressed: () {
-                              // Navigator.of(context).pop();
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        content: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.fromLTRB(
+                                                    20, 20, 20, 20),
+                                                child: Text(
+                                                  "거절하시겠습니까?",
+                                                  style: TextStyle(fontSize: 20),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Container(
+                                                    height: 35,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(MAINCOLOR),
+                                                      borderRadius:
+                                                      BorderRadius.circular(10),
+                                                    ),
+                                                    child: TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          /*
+                          이 시점에 사장한테 대타요청
+                          */
+                                                        },
+                                                        child: Text(
+                                                          "예",
+                                                          style: TextStyle(
+                                                              color: Colors.white),
+                                                        )),
+                                                  ),
+                                                  Container(
+                                                    height: 35,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(MAINCOLOR),
+                                                      borderRadius:
+                                                      BorderRadius.circular(10),
+                                                    ),
+                                                    child: TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                          "아니오",
+                                                          style: TextStyle(
+                                                              color: Colors.white),
+                                                        )),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ));
+                                  });
                             },
                             child: Text(
                               "거절",
