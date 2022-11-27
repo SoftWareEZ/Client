@@ -235,7 +235,7 @@ class _CalendarState extends State<Calendar> {
             Text("월급",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
             Text(
-              f.format(int.parse(salary)) + " 원",
+              salary + " 원",
               style: TextStyle(color: Colors.black38, fontSize: 20),
             ),
           ],
@@ -287,6 +287,9 @@ class _CalendarState extends State<Calendar> {
           Text(
             start + " - " + end + " ",
             style: TextStyle(color: Colors.black38, fontSize: 20),
+          ),
+          SizedBox(
+            width: 15,
           ),
           Text(name, style: TextStyle(fontSize: 20))
         ],
