@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:software_engineering/alert/AlertPage_manager.dart';
-import 'package:software_engineering/bar/Menubar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import '/alert/AlertPage_manager.dart';
+import '/bar/Menubar.dart';
 import '/bar/Bottombar.dart';
 
 class AddWorkSpacePage extends StatefulWidget {
@@ -13,8 +18,50 @@ class AddWorkSpace extends State<AddWorkSpacePage>{
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
-  String S_name = "";
-  String address = "";
+  String token = "", urlsrc = "";
+  int userId = 0;
+  String storeName = "", storeAddr = "";
+
+  _fetchAddStore() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getInt('userId') ?? 0);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: "+ userId.toString());
+
+    // 사업장 추가 요청
+    String url = "http://${urlsrc}/albba/store/add";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}"
+    };
+    var body =
+    jsonEncode({"userId": userId, "storeName": storeName, "storeAddr": storeAddr});
+    var response =
+    await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print(responseBody);
+
+    if (response.statusCode == 200) {
+      // 글쓰기 성공
+      Fluttertoast.showToast(
+          msg: "글쓰기 성공",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
+    } else {
+      Fluttertoast.showToast(
+          msg: "글쓰기 실패",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +103,7 @@ class AddWorkSpace extends State<AddWorkSpacePage>{
                 TextFormField(
                   onChanged: (text) {
                     setState(() {
-                      S_name= text;
+                      storeName= text;
                     });
                   },
                   // controller: inputController,
@@ -75,7 +122,7 @@ class AddWorkSpace extends State<AddWorkSpacePage>{
                 TextFormField(
                   onChanged: (text) {
                     setState(() {
-                      address= text;
+                      storeAddr= text;
                     });
                   },
                   decoration: InputDecoration(
@@ -90,14 +137,16 @@ class AddWorkSpace extends State<AddWorkSpacePage>{
                 ),
 
                 SizedBox(height: 13,),
-                Text(S_name + address),
+                Text(storeName + storeAddr),
               ],
             ),
           ),
         ),
         bottomNavigationBar: BottomBar_manager(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {Navigator.of(context).pop();},
+          onPressed: () {
+            _fetchAddStore();
+            Navigator.of(context).pop();},
           child: Icon(Icons.check),
           backgroundColor: Color(MAINCOLOR),
         ),
