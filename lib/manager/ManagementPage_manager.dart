@@ -76,7 +76,7 @@ class _ManagementState extends State<Management_manager> {
   int userId = 0, storeId = 0;
   String salary = "";
 
-  _fetchCalendarList() async {
+  _fetchStaffList() async {
     // 저장해둔 token 가져오기
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = (prefs.getString('token') ?? "null");
@@ -88,13 +88,14 @@ class _ManagementState extends State<Management_manager> {
     print("storeId: " + storeId.toString());
 
     // 월별 근무시간 post 요청
-    String url = "http://${urlsrc}/albba/commute/${storeId}";
+    String url = "http://${urlsrc}/albba/commute/month/${storeId}";
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "authorization": "Bearer ${token}"
     };
     var body = jsonEncode({"year": year, "month": month});
-    var response = await http.post(Uri.parse(url), headers: headers, body: body);
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
     var responseBody = utf8.decode(response.bodyBytes);
     print(responseBody);
 
@@ -103,7 +104,7 @@ class _ManagementState extends State<Management_manager> {
       // 전달받은 값 저장
       setState(() {
         List<dynamic> body = json.decode(responseBody);
-        var _staffList =
+        _staffList =
             body.map((dynamic item) => StaffInfo.fromJson(item)).toList();
       });
     } else {
@@ -168,6 +169,13 @@ class _ManagementState extends State<Management_manager> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _fetchStaffList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20.0),
@@ -179,7 +187,12 @@ class _ManagementState extends State<Management_manager> {
                 Expanded(
                   child: TextFormField(
                     controller: TextEditingController(text: year),
-                    onChanged: (text) {
+                    onTap: (){
+                      setState(() {
+                        year = "";
+                      });
+                    },
+                    onFieldSubmitted: (text) {
                       setState(() {
                         year = text;
                       });
@@ -204,7 +217,12 @@ class _ManagementState extends State<Management_manager> {
                 Expanded(
                   child: TextFormField(
                     controller: TextEditingController(text: month),
-                    onChanged: (text) {
+                    onTap: (){
+                      setState(() {
+                        month = "";
+                      });
+                    },
+                    onFieldSubmitted: (text) {
                       setState(() {
                         month = text;
                       });
@@ -233,7 +251,9 @@ class _ManagementState extends State<Management_manager> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      // 조회
+                      setState(() {
+                        _fetchStaffList();
+                      });
                     },
                     child: Text("조회",
                         style: TextStyle(
@@ -263,7 +283,7 @@ class _ManagementState extends State<Management_manager> {
     );
   }
 
-  Widget infoBox(int userId, String username, int time) {
+  Widget infoBox(int userId, String username, double time) {
     return Row(
       children: [
         Expanded(
@@ -311,7 +331,10 @@ class _ManagementState extends State<Management_manager> {
                           style: TextStyle(color: Colors.black),
                         ),
                         Text(
-                          f.format(time/60) + '시간 ' + f.format(time%60) + '분',
+                          f.format(time / 60) +
+                              '시간 ' +
+                              f.format(time % 60) +
+                              '분',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -335,9 +358,9 @@ class _ManagementState extends State<Management_manager> {
 class StaffInfo {
   int userId = 0;
   String username = "";
-  int time = 0;
+  double time = 0.0;
 
-  StaffInfo(int userId, String username, int time) {
+  StaffInfo(int userId, String username, double time) {
     this.userId = userId;
     this.username = username;
     this.time = time;
