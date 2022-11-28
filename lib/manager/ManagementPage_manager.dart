@@ -283,7 +283,7 @@ class _ManagementState extends State<Management_manager> {
     );
   }
 
-  Widget infoBox(int userId, String username, double time) {
+  Widget infoBox(int workerId, String workerName, double time) {
     return Row(
       children: [
         Expanded(
@@ -306,7 +306,7 @@ class _ManagementState extends State<Management_manager> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const ManagementUpdatePage_manager()),
+                              ManagementUpdatePage_manager(workerId: workerId, workerName: workerName,)),
                     );
                   },
                   child: Container(
@@ -320,7 +320,7 @@ class _ManagementState extends State<Management_manager> {
                           size: 30,
                         ),
                         Text(
-                          username,
+                          workerName,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
