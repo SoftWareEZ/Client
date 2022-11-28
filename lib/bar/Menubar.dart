@@ -243,8 +243,15 @@ class MenuBarstate_manager extends State<MenuBar_manager> {
                                   )
                                 else
                                   GestureDetector(
-                                    onTap: () {
-                                      // storeId 바뀌면서, 사업장 바껴야함
+                                    onTap: () async {
+                                      print(_storeList[i].storeId.toString() +
+                                          " - " +
+                                          _storeList[i].storeName);
+                                      // storeId 바뀌면서, 사업장이 바뀐다.
+                                      SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.setInt(
+                                          "storeId", _storeList[i].storeId);
                                     },
                                     child: Text(
                                       (_storeList[i].storeName ?? "null"),
@@ -364,15 +371,16 @@ class MenuBarstate_worker extends State<MenuBar_worker> {
       "authorization": "Bearer ${token}",
     };
     var body = jsonEncode({"code": code});
-    var response = await http.post(Uri.parse(url), headers: headers, body: body);
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
     var responseBody = utf8.decode(response.bodyBytes);
     print(responseBody);
 
     if (response.statusCode == 200) {
       String result = responseBody;
-      if(result == "success") {
+      if (result == "success") {
         Fluttertoast.showToast(msg: "입사요청 성공");
-      } else if(result == "fail"){
+      } else if (result == "fail") {
         Fluttertoast.showToast(msg: "존재하지 않는 코드입니다.");
       }
     } else {
@@ -539,8 +547,12 @@ class MenuBarstate_worker extends State<MenuBar_worker> {
                               for (int i = 0; i < _storeList.length; i++)
                                 if (_storeList[i].storeId == storeId)
                                   GestureDetector(
-                                    onTap: () {
-                                      // storeId 바뀌면서, 사업장 바껴야함
+                                    onTap: () async {
+                                      // storeId 바뀌면서, 사업장이 바뀐다.
+                                      SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.setInt(
+                                          "storeId", _storeList[i].storeId);
                                     },
                                     child: Text(
                                       (_storeList[i].storeName ?? "null"),
