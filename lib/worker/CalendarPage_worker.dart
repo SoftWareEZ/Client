@@ -299,23 +299,26 @@ class _CalendarState extends State<Calendar> {
 }
 
 class CalendarInfo {
+  int userId = 0;
   String name = "";
   String start = "";
   String end = "";
 
-  AlertInfo(String name, String start, String end) {
+  CalendarInfo(int userId, String name, String start, String end) {
+    this.userId = userId;
     this.name = name;
     this.start = start;
     this.end = end;
   }
 
   CalendarInfo.fromJson(Map<String, dynamic> json) {
+    userId = json["userId"];
     name = json["name"];
     start = json["start"];
     end = json["end"];
 
     Map toJson() {
-      return {'name': name, 'start': start, 'end': end};
+      return {'userId': userId, 'name': name, 'start': start, 'end': end};
     }
   }
 }
