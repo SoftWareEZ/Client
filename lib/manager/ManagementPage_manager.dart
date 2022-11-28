@@ -88,7 +88,7 @@ class _ManagementState extends State<Management_manager> {
     print("storeId: " + storeId.toString());
 
     // 월별 근무시간 post 요청
-    String url = "http://${urlsrc}/albba/commute/month/${storeId}";
+    String url = "http://${urlsrc}/albba/store/${storeId}/worker/list";
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "authorization": "Bearer ${token}"
