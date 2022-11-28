@@ -18,7 +18,7 @@ class MenuBar_manager extends StatefulWidget {
 class MenuBarstate_manager extends State<MenuBar_manager> {
   final int MAINCOLOR = 0xffE94869;
   String token = "", urlsrc = "", realname = "";
-  int storeId = 0;
+  int storeId = 0, userId = 0;
   List<StoreInfo> _storeList = [];
   String storeCode = "";
 
@@ -27,6 +27,7 @@ class MenuBarstate_manager extends State<MenuBar_manager> {
     token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
     storeId = (prefs.getInt('storeId') ?? 0);
+    userId = (prefs.getInt('userId') ?? 0);
     realname = (prefs.getString('realname') ?? "null");
 
     print("token: " + token);
@@ -35,7 +36,7 @@ class MenuBarstate_manager extends State<MenuBar_manager> {
     print("realname: " + realname);
 
     // 사업장 조회
-    String url = "http://${urlsrc}/albba/store/list";
+    String url = "http://${urlsrc}/albba/store/list/${userId}";
     Map<String, String> headers = {
       "authorization": "Bearer ${token}",
     };
