@@ -89,7 +89,6 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _fetchMonth();
   }
@@ -159,30 +158,14 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
                             Text(monthList[i].month.toString()),
                             IconButton(
                               icon: Icon(Icons.arrow_drop_down),
-                              onPressed: () {
-                                setState(() {
+                              onPressed: (){
+                                setState((){
                                   _fetchInfo(monthList[i].month);
-                                  Column(
-                                    children: [
-                                      for (int j = 0; j < infoList.length; j++)
-                                        Text(infoList[j].info),
-                                    ],
-                                  );
+                                  for (int j = 0; j < infoList.length; j++)
+                                    Text(infoList[j].info);
                                 });
                               },
                             ),
-                            /*Container(
-                              child: Column(
-                                children: [
-                                  for (int j = 0; j < infoList.length; j++)
-                                    Column(
-                                      children: [
-                                        Text(infoList[j].info),
-                                      ],
-                                    ),
-                                ],
-                              ),
-                            ),*/
                           ],
                         ),
                       ),
@@ -191,7 +174,8 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
               ],
             )
           ],
-        ), // bottomNavigationBar: BottomBar_worker(),
+        ),
+        // bottomNavigationBar: BottomBar_worker(),
       ),
     );
   }
