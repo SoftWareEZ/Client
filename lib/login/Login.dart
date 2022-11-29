@@ -32,7 +32,6 @@ class Login extends State<Loginpage> {
   String id = "", password = "";
 
   _getToken() async {
-    print("token");
     // 저장해둔 urlsrc 가져오기
     SharedPreferences prefs = await SharedPreferences.getInstance();
     urlsrc = (prefs.getString('urlsrc') ?? "null");
@@ -81,7 +80,6 @@ class Login extends State<Loginpage> {
   }
 
   _getUserInfo() async {
-    print("userinfo");
     int type = 0;
     if(person=="worker"){
       type = 0;

@@ -12,9 +12,10 @@ import '/Kakao/Kakao.dart';
 
 //로그인
 class choose extends StatelessWidget {
-  final String person;
   choose(this.person,{Key? key}): super(key:key);
-  final viewModel = ViewModel(KakaoInfo());
+  String person = "";
+
+  var viewModel = ViewModel(KakaoInfo());
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -118,6 +119,7 @@ class choose extends StatelessWidget {
                     alignment: Alignment.center,
                     textStyle: const TextStyle(fontSize: 25)),
                 onPressed: () async{
+                  viewModel.setPerson(person);
                   await viewModel.login();
                   // 화면전환
                   if(person=="worker") {
