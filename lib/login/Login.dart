@@ -13,14 +13,18 @@ FocusNode myFocusNode = new FocusNode();
 //로그인
 class Loginpage extends StatefulWidget {
   final String person;
+
   Loginpage(this.person, {Key? key}) : super(key: key);
+
   @override
   State<Loginpage> createState() => Login(person);
 }
 
-class Login extends State<Loginpage>{
+class Login extends State<Loginpage> {
   final String person;
+
   Login(this.person);
+
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
 
@@ -39,7 +43,7 @@ class Login extends State<Loginpage>{
     Map<String, String> headers = {"Content-Type": "application/json"};
     var body = jsonEncode({"username": id, "password": password});
     var response =
-    await http.post(Uri.parse(url), headers: headers, body: body);
+        await http.post(Uri.parse(url), headers: headers, body: body);
     var responseBody = utf8.decode(response.bodyBytes);
     print(responseBody);
 
@@ -58,16 +62,12 @@ class Login extends State<Loginpage>{
       _getUserInfo();
 
       // 화면전환
-      if(person=="worker") {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CalendarPage_worker()));
-      } else if(person=="manager") {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CalendarPage_manager()));
+      if (person == "worker") {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CalendarPage_worker()));
+      } else if (person == "manager") {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CalendarPage_manager()));
       }
     } else {
       // 로그인 실패
@@ -90,13 +90,16 @@ class Login extends State<Loginpage>{
     var responseBody = utf8.decode(response.bodyBytes);
     print(responseBody);
 
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       // userinfo 가져오기 성공
       Map<String, dynamic> json = jsonDecode(responseBody);
       int userId = json["userId"];
       String username = json["username"];
       String realname = json["realname"];
-      int storeId = json["storeId"];
+      int storeId = 0;
+      if (json["storeId"] != null) {
+        storeId = json["storeId"];
+      }
 
       // 받은 token 저장
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -104,7 +107,6 @@ class Login extends State<Loginpage>{
       prefs.setString("username", username);
       prefs.setString("realname", realname);
       prefs.setInt("storeId", storeId);
-
     } else {
       // userinfo 가져오기 실패
     }
@@ -131,7 +133,7 @@ class Login extends State<Loginpage>{
                 borderRadius: BorderRadius.circular(10),
               ),
               child:
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -154,7 +156,7 @@ class Login extends State<Loginpage>{
                 TextFormField(
                   onChanged: (text) {
                     setState(() {
-                      id= text;
+                      id = text;
                     });
                   },
                   // controller: inputController,
@@ -179,7 +181,7 @@ class Login extends State<Loginpage>{
                   obscureText: true, // 비밀번호를 적을때 안보이도록
                   onChanged: (text) {
                     setState(() {
-                      password= text;
+                      password = text;
                     });
                   },
                   decoration: InputDecoration(
@@ -216,7 +218,7 @@ class Login extends State<Loginpage>{
                     child: Text('로그인'),
                   ),
                 ),
-                Text(person+id+password),
+                Text(person + id + password),
               ],
             ),
           ),
