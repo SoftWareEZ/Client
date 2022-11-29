@@ -82,9 +82,16 @@ class Login extends State<Loginpage> {
 
   _getUserInfo() async {
     print("userinfo");
+    int type = 0;
+    if(person=="worker"){
+      type = 0;
+    } else if(person=="manager"){
+      type = 1;
+    }
+
     // 생성된 token 정보로 userinfo 요청
     // 전달된 내용 중 username, storeId만 디바이스 디스크에 저장한다.
-    String url = "http://${urlsrc}/albba/userinfo";
+    String url = "http://${urlsrc}/albba/userinfo/${type}";
     Map<String, String> headers = {"authorization": "Bearer ${token}"};
     var response = await http.get(Uri.parse(url), headers: headers);
     var responseBody = utf8.decode(response.bodyBytes);
