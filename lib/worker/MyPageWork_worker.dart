@@ -4,10 +4,13 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:software_engineering/alert/AlertPage_manager.dart';
+import 'package:software_engineering/alert/AlertPage_worker.dart';
+import 'package:software_engineering/bar/Bottombar.dart';
 
-//import '../alert/AlertPage_worker.dart';
-//import '../bar/Bottombar.dart';
-//import '../bar/Menubar.dart';
+import '../alert/AlertPage_worker.dart';
+import '../bar/Bottombar.dart';
+import '../bar/Menubar.dart';
 
 // 알바용 마이페이지 - 근무기록
 class MyPageWork_worker extends StatefulWidget {
@@ -20,6 +23,7 @@ class MyPageWork_worker extends StatefulWidget {
 class _MyPageWork_worker extends State<MyPageWork_worker> {
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
+  final int SUBPINKCOLOR = 0xffFDF6F8;
 
   List<WorkMonthInfo> monthList = [];
   List<WorkInfo> infoList = [];
@@ -90,14 +94,13 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
   @override
   void initState() {
     super.initState();
-    _fetchMonth();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        //drawer: MenuBar_manager(),
+        drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
           title: Text('근무 기록',
@@ -113,11 +116,11 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
               color: Color(MAINCOLOR),
               iconSize: 30,
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => const AlertPage_manager()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AlertPage_worker()),
+                );
               },
             )
           ],
@@ -125,14 +128,19 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
         body: ListView(
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              decoration: BoxDecoration(
+                color: Color(SUBCOLOR),
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Row(
                 children: [
                   Text(
                     "2022년",
                     style: TextStyle(
                       color: Color(MAINCOLOR),
-                      fontSize: 17,
+                      fontSize: 20,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -140,7 +148,6 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
                     icon: Icon(Icons.arrow_drop_down),
                     onPressed: () {
                       _fetchMonth();
-                      //_fetchInfo를 해줘야 할까..?
                     },
                   ),
                 ],
@@ -150,32 +157,71 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
               children: [
                 Column(
                   children: [
-                    for (int i = 0; i < monthList.length; i++)
+                    for (int i = 0; i < monthList.length; i++)...[
                       Container(
-                        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        decoration: BoxDecoration(
+                          color: Color(SUBCOLOR),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(monthList[i].month.toString()),
-                            IconButton(
-                              icon: Icon(Icons.arrow_drop_down),
-                              onPressed: (){
-                                setState((){
+                            Text(monthList[i].month.toString() + "월",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            TextButton(
+                              child: Text("조회",
+                                style: TextStyle(
+                                  color: Color(MAINCOLOR),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              onPressed: () {
+                                setState(() {
                                   _fetchInfo(monthList[i].month);
-                                  for (int j = 0; j < infoList.length; j++)
-                                    Text(infoList[j].info);
                                 });
                               },
                             ),
                           ],
                         ),
                       ),
+                    ],
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 50, 10, 5),
+                      padding: EdgeInsets.fromLTRB(40, 40, 40, 40),
+                      decoration: BoxDecoration(
+                        color: Color(SUBPINKCOLOR),
+                        borderRadius: BorderRadius.circular(10),
+                        //border: Border.all(color: Color(SUBCOLOR)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          for(int j = 0; j < infoList.length; j++)
+                            Text(infoList[j].info,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
                   ],
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
-        // bottomNavigationBar: BottomBar_worker(),
+        bottomNavigationBar: BottomBar_worker(),
       ),
     );
   }
