@@ -113,20 +113,20 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
     var body = jsonEncode({
       "wage": wage,
       "account": account,
-      "mon_start": mon_start,
-      "mon_end": mon_end,
-      "tue_start": tue_start,
-      "tue_end": tue_end,
-      "wed_start": wed_start,
-      "wed_end": wed_end,
-      "thu_start": thu_start,
-      "thu_end": thu_end,
-      "fri_start": fri_start,
-      "fri_end": fri_end,
-      "sat_start": sat_start,
-      "sat_end": sat_end,
-      "sun_start": sun_start,
-      "sun_end": sun_end
+      "monStart": mon_start,
+      "monEnd": mon_end,
+      "tueStart": tue_start,
+      "tueEnd": tue_end,
+      "wedStart": wed_start,
+      "wedEnd": wed_end,
+      "thuStart": thu_start,
+      "thuEnd": thu_end,
+      "friStart": fri_start,
+      "friEnd": fri_end,
+      "satStart": sat_start,
+      "satEnd": sat_end,
+      "sunStart": sun_start,
+      "sunEnd": sun_end
     });
 
     var response =
@@ -182,6 +182,90 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
           sun_start = json["sunStart"];
           sun_end = json["sunEnd"];
         });
+        if (mon_start != "null") {
+          var idx = mon_start.toString().indexOf(':');
+          String starthour = mon_start.toString().substring(0, idx);
+          String startminute =
+          mon_start.toString().substring(idx + 1, mon_start.length);
+          idx = mon_end.toString().indexOf(':');
+          String endhour = mon_end.toString().substring(0, idx);
+          String endminute =
+          mon_end.toString().substring(idx + 1, mon_end.length);
+          _workschedule.add(new WorkSchedule("월", starthour, startminute, endhour, endminute));
+          print("월");
+        }
+        if (tue_start != "null") {
+          var idx = tue_start.toString().indexOf(':');
+          String starthour = tue_start.toString().substring(0, idx);
+          String startminute =
+          tue_start.toString().substring(idx + 1, tue_start.length);
+          idx = tue_end.toString().indexOf(':');
+          String endhour = tue_end.toString().substring(0, idx);
+          String endminute =
+          tue_end.toString().substring(idx + 1, tue_end.length);
+          _workschedule.add(new WorkSchedule("화", starthour, startminute, endhour, endminute));
+          print("화");
+        }
+        if (wed_start != "null") {
+          var idx = wed_start.toString().indexOf(':');
+          String starthour = wed_start.toString().substring(0, idx);
+          String startminute =
+          wed_start.toString().substring(idx + 1, wed_start.length);
+          idx = wed_end.toString().indexOf(':');
+          String endhour = wed_end.toString().substring(0, idx);
+          String endminute =
+          wed_end.toString().substring(idx + 1, wed_end.length);
+          _workschedule.add(new WorkSchedule("수", starthour, startminute, endhour, endminute));
+          print("수");
+        }
+        if (thu_start != "null") {
+          var idx = thu_start.toString().indexOf(':');
+          String starthour = thu_start.toString().substring(0, idx);
+          String startminute =
+          thu_start.toString().substring(idx + 1, thu_start.length);
+          idx = thu_end.toString().indexOf(':');
+          String endhour = thu_end.toString().substring(0, idx);
+          String endminute =
+          thu_end.toString().substring(idx + 1, thu_end.length);
+          _workschedule.add(new WorkSchedule("목", starthour, startminute, endhour, endminute));
+          print("목");
+        }
+        if (fri_start != "null") {
+          var idx = fri_start.toString().indexOf(':');
+          String starthour = fri_start.toString().substring(0, idx);
+          String startminute =
+          fri_start.toString().substring(idx + 1, fri_start.length);
+          idx = fri_end.toString().indexOf(':');
+          String endhour = fri_end.toString().substring(0, idx);
+          String endminute =
+          fri_end.toString().substring(idx + 1, fri_end.length);
+          _workschedule.add(new WorkSchedule("금", starthour, startminute, endhour, endminute));
+          print("금");
+        }
+        if (sat_start != "null") {
+          var idx = sat_start.toString().indexOf(':');
+          String starthour = sat_start.toString().substring(0, idx);
+          String startminute =
+          sat_start.toString().substring(idx + 1, sat_start.length);
+          idx = sat_end.toString().indexOf(':');
+          String endhour = sat_end.toString().substring(0, idx);
+          String endminute =
+          sat_end.toString().substring(idx + 1, sat_end.length);
+          _workschedule.add(new WorkSchedule("토", starthour, startminute, endhour, endminute));
+          print("토");
+        }
+        if (sun_start != "null") {
+          var idx = sun_start.toString().indexOf(':');
+          String starthour = sun_start.toString().substring(0, idx);
+          String startminute =
+          sun_start.toString().substring(idx + 1, sun_start.length);
+          idx = sun_end.toString().indexOf(':');
+          String endhour = sun_end.toString().substring(0, idx);
+          String endminute =
+          sun_end.toString().substring(idx + 1, sun_end.length);
+          _workschedule.add(new WorkSchedule("일", starthour, startminute, endhour, endminute));
+          print("일");
+        }
       }
     } else {
       Fluttertoast.showToast(msg: "실패");
@@ -200,93 +284,11 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
     List<String> minuteList = intminuteList.map((e) => e.toString()).toList();
     var set = Set<String>();
     _dayList = dayList.where((value) => set.add(value)).toList();
+    set = Set<String>();
     _hourList = hourList.where((value) => set.add(value)).toList();
+    set = Set<String>();
     _minuteList = minuteList.where((value) => set.add(value)).toList();
 
-    if (mon_start != "null") {
-      var idx = mon_start.toString().indexOf(':');
-      String starthour = mon_start.toString().substring(0, idx);
-      String startminute =
-      mon_start.toString().substring(idx + 1, mon_start.length);
-      idx = mon_end.toString().indexOf(':');
-      String endhour = mon_end.toString().substring(0, idx);
-      String endminute =
-      mon_end.toString().substring(idx + 1, mon_end.length);
-      new WorkSchedule("월", starthour, startminute, endhour, endminute);
-      print("월");
-    }
-    if (tue_start != "null") {
-      var idx = tue_start.toString().indexOf(':');
-      String starthour = tue_start.toString().substring(0, idx);
-      String startminute =
-      tue_start.toString().substring(idx + 1, tue_start.length);
-      idx = tue_end.toString().indexOf(':');
-      String endhour = tue_end.toString().substring(0, idx);
-      String endminute =
-      tue_end.toString().substring(idx + 1, tue_end.length);
-      new WorkSchedule("화", starthour, startminute, endhour, endminute);
-      print("화");
-    }
-    if (wed_start != "null") {
-      var idx = wed_start.toString().indexOf(':');
-      String starthour = wed_start.toString().substring(0, idx);
-      String startminute =
-      wed_start.toString().substring(idx + 1, wed_start.length);
-      idx = wed_end.toString().indexOf(':');
-      String endhour = wed_end.toString().substring(0, idx);
-      String endminute =
-      wed_end.toString().substring(idx + 1, wed_end.length);
-      new WorkSchedule("수", starthour, startminute, endhour, endminute);
-      print("수");
-    }
-    if (thu_start != "null") {
-      var idx = thu_start.toString().indexOf(':');
-      String starthour = thu_start.toString().substring(0, idx);
-      String startminute =
-      thu_start.toString().substring(idx + 1, thu_start.length);
-      idx = thu_end.toString().indexOf(':');
-      String endhour = thu_end.toString().substring(0, idx);
-      String endminute =
-      thu_end.toString().substring(idx + 1, thu_end.length);
-      new WorkSchedule("목", starthour, startminute, endhour, endminute);
-      print("목");
-    }
-    if (fri_start != "null") {
-      var idx = fri_start.toString().indexOf(':');
-      String starthour = fri_start.toString().substring(0, idx);
-      String startminute =
-      fri_start.toString().substring(idx + 1, fri_start.length);
-      idx = fri_end.toString().indexOf(':');
-      String endhour = fri_end.toString().substring(0, idx);
-      String endminute =
-      fri_end.toString().substring(idx + 1, fri_end.length);
-      new WorkSchedule("금", starthour, startminute, endhour, endminute);
-      print("금");
-    }
-    if (sat_start != "null") {
-      var idx = sat_start.toString().indexOf(':');
-      String starthour = sat_start.toString().substring(0, idx);
-      String startminute =
-      sat_start.toString().substring(idx + 1, sat_start.length);
-      idx = sat_end.toString().indexOf(':');
-      String endhour = sat_end.toString().substring(0, idx);
-      String endminute =
-      sat_end.toString().substring(idx + 1, sat_end.length);
-      new WorkSchedule("토", starthour, startminute, endhour, endminute);
-      print("토");
-    }
-    if (sun_start != "null") {
-      var idx = sun_start.toString().indexOf(':');
-      String starthour = sun_start.toString().substring(0, idx);
-      String startminute =
-      sun_start.toString().substring(idx + 1, sun_start.length);
-      idx = sun_end.toString().indexOf(':');
-      String endhour = sun_end.toString().substring(0, idx);
-      String endminute =
-      sun_end.toString().substring(idx + 1, sun_end.length);
-      new WorkSchedule("일", starthour, startminute, endhour, endminute);
-      print("일");
-    }
     return MaterialApp(
       home: Scaffold(
         drawer: MenuBar_manager(),
@@ -316,177 +318,175 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
         ),
         body: ListView(
           children: [
-            Column(
-              children: [
-                Container(
-                  // 아이콘, 이름, 근무기간 컨테이너
-                  height: 90,
-                  margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  decoration: BoxDecoration(
-                    color: Color(SUBPINKCOLOR),
-                    borderRadius: BorderRadius.circular(10),
+            Container(
+              // 아이콘, 이름, 근무기간 컨테이너
+              height: 90,
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              decoration: BoxDecoration(
+                color: Color(SUBPINKCOLOR),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    // 아이콘 컨테이너
+                    margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Icon(
+                      Icons.person,
+                      color: Color(MAINCOLOR),
+                      size: 50,
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        // 아이콘 컨테이너
-                        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: Icon(
-                          Icons.person,
-                          color: Color(MAINCOLOR),
-                          size: 50,
+                  Container(
+                    // 이름, 근무기간 컨테이너
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          // 이름
+                          widget.workerName ?? "null",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                      Container(
-                        // 이름, 근무기간 컨테이너
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              // 이름
-                              widget.workerName ?? "null",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
+                        // Text('2022.06.24 - 계속') // 근무기간
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              // 시급, 근무일정 컨테이너
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              decoration: BoxDecoration(
+                color: Color(SUBCOLOR),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    // 시급 컨테이너
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        Text("시급 :  "),
+                        Container(
+                          width: 50,
+                          child: TextFormField(
+                            onChanged: (text) {
+                              setState(() {
+                                wage = text;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 2, color: Color(MAINCOLOR)),
                               ),
+                              hintText: wage,
+                              hintStyle: TextStyle(fontSize: 15),
                             ),
-                            // Text('2022.06.24 - 계속') // 근무기간
-                          ],
+                          ),
                         ),
-                      )
-                    ],
+                        Text(" 원"),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  // 시급, 근무일정 컨테이너
-                  margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  decoration: BoxDecoration(
-                    color: Color(SUBCOLOR),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        // 시급 컨테이너
-                        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
+                  Container(
+                    // 근무일정 컨테이너
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
                           children: [
-                            Text("시급 :  "),
+                            Text("근무 일정 :  "),
                             Container(
-                              width: 50,
-                              child: TextFormField(
-                                onChanged: (text) {
-                                  setState(() {
-                                    wage = text;
-                                  });
-                                },
-                                decoration: InputDecoration(
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2, color: Color(MAINCOLOR)),
-                                  ),
-                                  hintText: wage,
-                                  hintStyle: TextStyle(fontSize: 15),
-                                ),
-                              ),
-                            ),
-                            Text(" 원"),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        // 근무일정 컨테이너
-                        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text("근무 일정 :  "),
-                                Container(
-                                  child: Stack(
+                              child: Stack(
+                                children: [
+                                  Column(
                                     children: [
-                                      Column(
-                                        children: [
-                                          for (int i = 0;
-                                          i < _workschedule.length;
-                                          i++)
-                                            WorkScheduleContainer(
-                                                i,
-                                                _workschedule[i].day,
-                                                _workschedule[i].startHour,
-                                                _workschedule[i].startMinute,
-                                                _workschedule[i].endHour,
-                                                _workschedule[i].endMinute)
-                                        ],
-                                      )
+                                      for (int i = 0;
+                                      i < _workschedule.length;
+                                      i++)
+                                        WorkScheduleContainer(
+                                            i,
+                                            _workschedule[i].day,
+                                            _workschedule[i].startHour,
+                                            _workschedule[i].startMinute,
+                                            _workschedule[i].endHour,
+                                            _workschedule[i].endMinute)
                                     ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                _workschedule.add(new WorkSchedule.orgin());
-                                _getWorkSchedule();
-                              },
-                              child: Icon(Icons.add, color: Color(MAINCOLOR)),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        // 계좌 컨테이너
-                        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          children: [
-                            Text("입금 계좌 :  "),
-                            Container(
-                              width: 150,
-                              child: TextFormField(
-                                onChanged: (text) {
-                                  setState(() {
-                                    account = text;
-                                  });
-                                },
-                                decoration: InputDecoration(
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2, color: Color(MAINCOLOR)),
-                                  ),
-                                  hintText: account,
-                                  hintStyle: TextStyle(fontSize: 15),
-                                ),
+                                  )
+                                ],
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _workschedule.add(new WorkSchedule.orgin());
+                              _postWorkSchedule();
+                            });
+                          },
+                          child: Icon(Icons.add, color: Color(MAINCOLOR)),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                    // 계좌 컨테이너
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        Text("입금 계좌 :  "),
+                        Container(
+                          width: 150,
+                          child: TextFormField(
+                            onChanged: (text) {
+                              setState(() {
+                                account = text;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 2, color: Color(MAINCOLOR)),
+                              ),
+                              hintText: account,
+                              hintStyle: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -510,19 +510,6 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
     return Container(
       child: Row(
         children: [
-
-          // DropdownButton<String>(
-          //   value: int.parse(startHour).toString() ,
-          //   icon: Icon(Icons.keyboard_arrow_down),
-          //   items: _hourList.map((String items) {
-          //     return DropdownMenuItem(value: items, child: Text(items));
-          //   }).toList(),
-          //   onChanged: (String? newValue) {
-          //     setState(() {
-          //       _workschedule[i].startHour = newValue!;
-          //     });
-          //   },
-          // ),
           DropdownButton(
             //요일
             value: day,
@@ -603,6 +590,14 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
                 _workschedule[i].endMinute = value as String;
               });
             },
+          ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _workschedule.removeAt(i);
+              });
+            },
+            child: Icon(Icons.remove, color: Color(MAINCOLOR)),
           ),
         ],
       ),
