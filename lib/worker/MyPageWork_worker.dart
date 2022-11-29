@@ -62,11 +62,11 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
     token = (prefs.getString('token') ?? "null");
     urlsrc = (prefs.getString('urlsrc') ?? "null");
     userId = (prefs.getInt('userId') ?? 0);
-    month = (prefs.getInt('month') ?? 0);
     print("token: " + token);
     print("urlsrc: " + urlsrc);
     print("userId: " + userId.toString());
-    print("month: " + month.toString());
+
+    print("selectedMonth: " + selectedMonth.toString());
 
     // userId를 바탕으로 2022년 해당 달의 정보 요청
     String url = "http://${urlsrc}/albba/commute/list/${userId}/2022/${selectedMonth}";
