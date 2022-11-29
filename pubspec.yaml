@@ -39,6 +39,7 @@ dependencies:
   fluttertoast: ^8.0.8
   shared_preferences: ^2.0.15
   http: ^0.13.5
+  kakao_flutter_sdk_user: ^1.2.2
 
 dev_dependencies:
   flutter_test:

@@ -1,13 +1,20 @@
+/* choose */
+import 'dart:convert';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:software_engineering/worker/CalendarPage_worker.dart';
 import '/manager/CalendarPage_manager.dart';
 import 'Login.dart';
 import 'SignUp.dart';
+import '/Kakao/Kakao.dart';
 
 //로그인
 class choose extends StatelessWidget {
   final String person;
   choose(this.person,{Key? key}): super(key:key);
+  final viewModel = ViewModel(KakaoInfo());
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
@@ -59,7 +66,7 @@ class choose extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        //모서리를 둥글게
+                      //모서리를 둥글게
                         borderRadius: BorderRadius.circular(10)),
                     primary: Color(MAINCOLOR),
                     minimumSize: Size(200, 65),
@@ -82,7 +89,7 @@ class choose extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        //모서리를 둥글게
+                      //모서리를 둥글게
                         borderRadius: BorderRadius.circular(10)),
                     primary: Color(MAINCOLOR),
                     minimumSize: Size(200, 65),
@@ -102,7 +109,7 @@ class choose extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        //모서리를 둥글게
+                      //모서리를 둥글게
                         borderRadius: BorderRadius.circular(10)),
                     primary: Colors.amberAccent,
                     minimumSize: Size(200, 65),
@@ -110,7 +117,8 @@ class choose extends StatelessWidget {
                     //child 정렬 - 아래의 Text('$test')
                     alignment: Alignment.center,
                     textStyle: const TextStyle(fontSize: 25)),
-                onPressed: () {
+                onPressed: () async{
+                  await viewModel.login();
                   // 화면전환
                   if(person=="worker") {
                     Navigator.push(
