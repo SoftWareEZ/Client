@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/bar/Menubar.dart';
 import '/alert/AlertPage_worker.dart';
@@ -56,10 +57,32 @@ class MyPage_worker extends StatelessWidget {
   }
 }
 
-class MyPageMyInfo_worker extends StatelessWidget {
+class MyPageMyInfo_worker extends StatefulWidget {
   const MyPageMyInfo_worker({Key? key}) : super(key: key);
 
+  @override
+  State<MyPageMyInfo_worker> createState() => _MyPageMyInfo_workerState();
+}
+
+class _MyPageMyInfo_workerState extends State<MyPageMyInfo_worker> {
+
   final int MAINCOLOR = 0xffE94869;
+  String realname = "";
+
+  getRealName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      realname = (prefs.getString('realname') ?? "null");
+    });
+    print("realname: " + realname);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getRealName();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +119,7 @@ class MyPageMyInfo_worker extends StatelessWidget {
                               fontSize: 16,
                               fontWeight: FontWeight.w600)),
                     ),
-                    Text("프론트 님",
+                    Text("${realname} 님",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
