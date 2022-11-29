@@ -45,11 +45,13 @@ class _PersonnelManagement_managerState extends State<PersonnelManagement_manage
 
     if (response.statusCode == 200) {
       // 요청 성공
-      setState(() {
-        List<dynamic> body = json.decode(responseBody);
-        _requestList =
-            body.map((dynamic item) => RequestInfo.fromJson(item)).toList();
-      });
+      if(!responseBody.toString().isEmpty){
+        setState(() {
+          List<dynamic> body = json.decode(responseBody);
+          _requestList =
+              body.map((dynamic item) => RequestInfo.fromJson(item)).toList();
+        });
+      }
     } else {
       // 요청 실패
     }
