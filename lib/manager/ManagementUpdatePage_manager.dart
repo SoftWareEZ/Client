@@ -111,8 +111,9 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
     _transWorkSchedule();
 
     var body = jsonEncode({
-      "wage": wage,
+      "wage": int.parse(wage),
       "account": account,
+      "activated": 1,
       "monStart": mon_start,
       "monEnd": mon_end,
       "tueStart": tue_start,
@@ -128,6 +129,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
       "sunStart": sun_start,
       "sunEnd": sun_end
     });
+    print("body: "+body);
 
     var response =
     await http.post(Uri.parse(url), headers: headers, body: body);
