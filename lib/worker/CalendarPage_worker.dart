@@ -82,7 +82,7 @@ class _CalendarState extends State<Calendar> {
   // 대타요청 하지않은 상태 = 0
   // 대타요청 한 상태 = 1
   // 대타수락 된 상태 = 2
-  int daetaState = 0;
+  int daetaState_req = 0, daetaState_acp = 0;
 
   // 대타수락 된 상태면 acceptName에 값이 들어가 있다.
   String acceptName = "";
@@ -231,12 +231,14 @@ class _CalendarState extends State<Calendar> {
       setState(() {
         if (responseBody.toString().isEmpty) {
           // 대타요청 리스트에 없는 경우
-          daetaState = 0;
+          daetaState_req = 0;
         } else {
           // 대타요청 리스트에 있는 경우
-          daetaState = 1;
+          daetaState_req = 1;
         }
       });
+
+      _fetchDaetaList();
     } else {
       // 요청 실패
     }
@@ -280,7 +282,7 @@ class _CalendarState extends State<Calendar> {
 
         for (int i = 0; i < _daetaList.length; i++) {
           if (_daetaList[i].requestId == userId) {
-            daetaState = 2; // 현재 로그인 사용자가 대타를 구한 상태
+            daetaState_acp = 2; // 현재 로그인 사용자가 대타를 구한 상태
           }
         }
       }
@@ -352,7 +354,6 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _fetchDaetaList();
     _fetchDeataRequestList();
     _fetchSalary();
     _fetchCalendarList();
@@ -395,8 +396,8 @@ class _CalendarState extends State<Calendar> {
                       .format(focusedDay)
                       .toString()
                       .toLowerCase(),
-                  _fetchDaetaList(),
                   _fetchDeataRequestList(),
+                  _fetchDaetaList(),
                   _fetchSalary(),
                   _fetchCalendarList()
                 }),
@@ -503,13 +504,6 @@ class _CalendarState extends State<Calendar> {
     );
   }
 
-  void printCalendarInfo(List<CalendarInfo> clist, List<DaetaInfo> dList) {
-    for (int i = 0; i < clist.length; i++) {
-      calendarInfo(
-          clist[i].userId, clist[i].name, clist[i].start, clist[i].end);
-    }
-  }
-
   Widget calendarInfo(
       int currentUserId, String name, String start, String end) {
     return Container(
@@ -524,7 +518,7 @@ class _CalendarState extends State<Calendar> {
         ),
         Stack(
           children: [
-            if (daetaState == 2)
+            if (daetaState_acp == 2)
               Text(acceptName, style: TextStyle(fontSize: 20))
             else
               Text(name, style: TextStyle(fontSize: 20))
@@ -536,7 +530,31 @@ class _CalendarState extends State<Calendar> {
         Stack(
           children: [
             if (currentUserId == userId)
-              if (daetaState == 0)
+              if (daetaState_acp == 2)
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom:
+                              BorderSide(color: Color(MAINCOLOR), width: 2))),
+                  child: Text(
+                    "대타",
+                    style: TextStyle(
+                        color: Color(MAINCOLOR), fontWeight: FontWeight.w700),
+                  ),
+                )
+              else if (daetaState_req == 1)
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom:
+                              BorderSide(color: Color(MAINCOLOR), width: 2))),
+                  child: Text(
+                    "대타 구인중",
+                    style: TextStyle(
+                        color: Color(MAINCOLOR), fontWeight: FontWeight.w700),
+                  ),
+                )
+              else if (daetaState_req == 0)
                 GestureDetector(
                   onTap: () {
                     showMessage();
@@ -551,30 +569,6 @@ class _CalendarState extends State<Calendar> {
                       style: TextStyle(
                           color: Color(MAINCOLOR), fontWeight: FontWeight.w700),
                     ),
-                  ),
-                )
-              else if (daetaState == 1)
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom:
-                              BorderSide(color: Color(MAINCOLOR), width: 2))),
-                  child: Text(
-                    "대타 구인중",
-                    style: TextStyle(
-                        color: Color(MAINCOLOR), fontWeight: FontWeight.w700),
-                  ),
-                )
-              else if (daetaState == 2)
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom:
-                              BorderSide(color: Color(MAINCOLOR), width: 2))),
-                  child: Text(
-                    "대타",
-                    style: TextStyle(
-                        color: Color(MAINCOLOR), fontWeight: FontWeight.w700),
                   ),
                 )
           ],
@@ -611,16 +605,16 @@ class CalendarInfo {
 
 class DaetaInfo {
   int no = 0;
-  String date = "";
+  int date = 0;
   int storeId = 0;
-  int userId = 0;
+  int requestId = 0;
   String acceptName = "";
 
-  DaetaInfo(int no, String date, int storeId, int userId, String acceptName) {
+  DaetaInfo(int no, int date, int storeId, int requestId, String acceptName) {
     this.no = no;
     this.date = date;
     this.storeId = storeId;
-    this.userId = userId;
+    this.requestId = requestId;
     this.acceptName = acceptName;
   }
 
@@ -628,15 +622,15 @@ class DaetaInfo {
     no = json["no"];
     date = json["date"];
     storeId = json["storeId"];
-    userId = json["userId"];
+    requestId = json["requestId"];
     acceptName = json["acceptName"];
 
     Map toJson() {
       return {
-        'userId': userId,
+        'no': no,
         'date': date,
         'storeId': storeId,
-        'userId': userId,
+        'requestId': requestId,
         'acceptName': acceptName
       };
     }

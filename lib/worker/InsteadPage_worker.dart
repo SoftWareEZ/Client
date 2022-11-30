@@ -223,9 +223,7 @@ class _InsteadList_workerState extends State<InsteadList_worker> {
   Widget InsteadBox(int no, String name, int date) {
     return GestureDetector(
       onTap: () {
-        setState(() => {
-          showMessage(no)
-        });
+        setState(() => {showMessage(no)});
       },
       child: Container(
         height: 70,
@@ -238,18 +236,15 @@ class _InsteadList_workerState extends State<InsteadList_worker> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+
             Text(
-              name,
+              "${name}님",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
             Text("|"),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(DateFormat('yyyy년 MM월 dd일')
-                    .format(DateTime.parse(date.toString()))),
-              ],
-            )
+            Text(DateFormat('yyyy년 MM월 dd일')
+                .format(DateTime.parse(date.toString()))),
+
           ],
         ),
       ),
