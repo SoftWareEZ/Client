@@ -82,10 +82,113 @@ class _CalendarState extends State<Calendar> {
   // 대타요청 하지않은 상태 = 0
   // 대타요청 한 상태 = 1
   // 대타수락 된 상태 = 2
-  int daetaState_req = 0, daetaState_acp = 0;
+  int daetaState = 0;
 
   // 대타수락 된 상태면 acceptName에 값이 들어가 있다.
   String acceptName = "";
+
+  _fetchDaetaList() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getInt('userId') ?? 0);
+    storeId = (prefs.getInt('storeId') ?? 0);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: " + userId.toString());
+    print("storeId: " + storeId.toString());
+
+    // 대타수락 리스트 가져오기
+    String url = "http://${urlsrc}/albba/daeta/accept/view";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}"
+    };
+    var body = jsonEncode({
+      "date": DateFormat("yyyyMMdd").format(focusedDay),
+      "storeId": storeId
+    });
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print("responseBody: " + responseBody);
+
+    if (response.statusCode == 200) {
+      // 요청성공
+      setState(() {
+        if (responseBody.toString().isEmpty) {
+          _daetaList = [];
+        } else {
+          List<dynamic> body = json.decode(responseBody);
+          _daetaList =
+              body.map((dynamic item) => DaetaInfo.fromJson(item)).toList();
+
+          for (int i = 0; i < _daetaList.length; i++) {
+            if (_daetaList[i].requestId == userId) {
+              daetaState = 2; // 현재 로그인 사용자가 대타를 구한 상태
+            }
+          }
+
+          if(daetaState==2){
+            _fetchSalary();
+            _fetchCalendarList();
+          } else {
+            _fetchDeataRequestList();
+          }
+        }
+      });
+    } else {
+      // 요청실패
+    }
+  }
+
+  _fetchDeataRequestList() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getInt('userId') ?? 0);
+    storeId = (prefs.getInt('storeId') ?? 0);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: " + userId.toString());
+    print("storeId: " + storeId.toString());
+
+    // 대타 요청리스트 조회
+    String url = "http://${urlsrc}/albba/daeta/request/check";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}"
+    };
+    var body = jsonEncode({
+      "date": DateFormat("yyyyMMdd").format(focusedDay),
+      "storeId": storeId,
+      "userId": userId
+    });
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print("responseBody: " + responseBody);
+
+    if (response.statusCode == 200) {
+      // 요청 성공
+      setState(() {
+        if (responseBody.toString().isEmpty) {
+          // 대타요청 리스트에 없는 경우
+          daetaState = 0;
+        } else {
+          // 대타요청 리스트에 있는 경우
+          daetaState = 1;
+        }
+
+        _fetchSalary();
+        _fetchCalendarList();
+      });
+    } else {
+      // 요청 실패
+    }
+  }
 
   _fetchSalary() async {
     // 저장해둔 token 가져오기
@@ -149,7 +252,7 @@ class _CalendarState extends State<Calendar> {
       // 요청 성공
       // 전달받은 값 저장
       setState(() {
-        if (responseBody == null) {
+        if (responseBody.toString().isEmpty) {
           _calendarList = [];
         } else {
           List<dynamic> body = json.decode(responseBody);
@@ -195,99 +298,6 @@ class _CalendarState extends State<Calendar> {
           textColor: Colors.black,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM);
-    }
-  }
-
-  _fetchDeataRequestList() async {
-    // 저장해둔 token 가져오기
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = (prefs.getString('token') ?? "null");
-    urlsrc = (prefs.getString('urlsrc') ?? "null");
-    userId = (prefs.getInt('userId') ?? 0);
-    storeId = (prefs.getInt('storeId') ?? 0);
-    print("token: " + token);
-    print("urlsrc: " + urlsrc);
-    print("userId: " + userId.toString());
-    print("storeId: " + storeId.toString());
-
-    // 대타 요청리스트 조회
-    String url = "http://${urlsrc}/albba/daeta/request/check";
-    Map<String, String> headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer ${token}"
-    };
-    var body = jsonEncode({
-      "date": DateFormat("yyyyMMdd").format(focusedDay),
-      "storeId": storeId,
-      "userId": userId
-    });
-    var response =
-        await http.post(Uri.parse(url), headers: headers, body: body);
-    var responseBody = utf8.decode(response.bodyBytes);
-    print("responseBody: " + responseBody);
-
-    if (response.statusCode == 200) {
-      // 요청 성공
-      setState(() {
-        if (responseBody.toString().isEmpty) {
-          // 대타요청 리스트에 없는 경우
-          daetaState_req = 0;
-        } else {
-          // 대타요청 리스트에 있는 경우
-          daetaState_req = 1;
-        }
-      });
-
-      _fetchDaetaList();
-    } else {
-      // 요청 실패
-    }
-  }
-
-  _fetchDaetaList() async {
-    // 저장해둔 token 가져오기
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = (prefs.getString('token') ?? "null");
-    urlsrc = (prefs.getString('urlsrc') ?? "null");
-    userId = (prefs.getInt('userId') ?? 0);
-    storeId = (prefs.getInt('storeId') ?? 0);
-    print("token: " + token);
-    print("urlsrc: " + urlsrc);
-    print("userId: " + userId.toString());
-    print("storeId: " + storeId.toString());
-
-    // 대타수락 리스트 가져오기
-    String url = "http://${urlsrc}/albba/daeta/accept/view";
-    Map<String, String> headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer ${token}"
-    };
-    var body = jsonEncode({
-      "date": DateFormat("yyyyMMdd").format(focusedDay),
-      "storeId": storeId
-    });
-    var response =
-        await http.post(Uri.parse(url), headers: headers, body: body);
-    var responseBody = utf8.decode(response.bodyBytes);
-    print("responseBody: " + responseBody);
-
-    if (response.statusCode == 200) {
-      // 요청성공
-      if (responseBody.toString().isEmpty) {
-        _daetaList = [];
-      } else {
-        List<dynamic> body = json.decode(responseBody);
-        _daetaList =
-            body.map((dynamic item) => DaetaInfo.fromJson(item)).toList();
-
-        for (int i = 0; i < _daetaList.length; i++) {
-          if (_daetaList[i].requestId == userId) {
-            daetaState_acp = 2; // 현재 로그인 사용자가 대타를 구한 상태
-          }
-        }
-      }
-    } else {
-      // 요청실패
     }
   }
 
@@ -354,9 +364,7 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _fetchDeataRequestList();
-    _fetchSalary();
-    _fetchCalendarList();
+    _fetchDaetaList();
   }
 
   @override
@@ -518,9 +526,6 @@ class _CalendarState extends State<Calendar> {
         ),
         Stack(
           children: [
-            if (daetaState_acp == 2)
-              Text(acceptName, style: TextStyle(fontSize: 20))
-            else
               Text(name, style: TextStyle(fontSize: 20))
           ],
         ),
@@ -530,7 +535,7 @@ class _CalendarState extends State<Calendar> {
         Stack(
           children: [
             if (currentUserId == userId)
-              if (daetaState_acp == 2)
+              if (daetaState == 2)
                 Container(
                   decoration: BoxDecoration(
                       border: Border(
@@ -542,7 +547,7 @@ class _CalendarState extends State<Calendar> {
                         color: Color(MAINCOLOR), fontWeight: FontWeight.w700),
                   ),
                 )
-              else if (daetaState_req == 1)
+              else if (daetaState == 1)
                 Container(
                   decoration: BoxDecoration(
                       border: Border(
@@ -554,7 +559,7 @@ class _CalendarState extends State<Calendar> {
                         color: Color(MAINCOLOR), fontWeight: FontWeight.w700),
                   ),
                 )
-              else if (daetaState_req == 0)
+              else if (daetaState == 0)
                 GestureDetector(
                   onTap: () {
                     showMessage();
