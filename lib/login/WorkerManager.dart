@@ -8,7 +8,7 @@ class WorkerManager extends StatelessWidget {
 
   final int MAINCOLOR = 0xffE94869;
   final int SUBCOLOR = 0xffF4F4F4;
-  final String urlsrc = "192.168.0.14:8080";
+  final String urlsrc = "localhost:8080";
 
   @override
   Widget build(BuildContext context) {
