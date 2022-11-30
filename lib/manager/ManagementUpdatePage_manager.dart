@@ -60,6 +60,20 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
 
 //  근무일정 데이터
   _transWorkSchedule() async {
+    mon_start = "null";
+    mon_end = "null";
+    tue_start = "null";
+    tue_end = "null";
+    wed_start = "null";
+    wed_end = "null";
+    thu_start = "null";
+    thu_end = "null";
+    fri_start = "null";
+    fri_end = "null";
+    sat_start = "null";
+    sat_end = "null";
+    sun_start = "null";
+    sun_end = "null";
     for (int i = 0; i < _workschedule.length; i++) {
       start = f.format(int.parse(_workschedule[i].startHour)) +
           ":" +
