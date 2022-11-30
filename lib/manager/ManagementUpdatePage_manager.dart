@@ -605,6 +605,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
             onPressed: () {
               setState(() {
                 _workschedule.removeAt(i);
+                _postWorkSchedule();
               });
             },
             child: Icon(Icons.remove, color: Color(MAINCOLOR)),
