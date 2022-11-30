@@ -61,12 +61,13 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
 //  근무일정 데이터
   _transWorkSchedule() async {
     for (int i = 0; i < _workschedule.length; i++) {
-      start = f.format(_workschedule[i].startHour) +
+      start = f.format(int.parse(_workschedule[i].startHour)) +
           ":" +
-          f.format(_workschedule[i].startMinute);
-      end = f.format(_workschedule[i].endHour) +
+          f.format(int.parse(_workschedule[i].startMinute));
+      end = f.format(int.parse(_workschedule[i].endHour)) +
           ":" +
-          f.format(_workschedule[i].endMinute);
+          f.format(int.parse(_workschedule[i].endMinute));
+      print(start+end);
       if (_workschedule[i].day == "월") {
         mon_start = start;
         mon_end = end;
@@ -419,7 +420,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
                       children: [
                         Row(
                           children: [
-                            Text("근무 일정 :  "),
+                            Text("근무 일정 : ",),
                             Container(
                               child: Stack(
                                 children: [
@@ -496,6 +497,11 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             setState(() {
+              for(int i=0;i<_workschedule.length;i++){
+                print(_workschedule[i].day+_workschedule[i].startHour);
+              }
+              _transWorkSchedule();
+              print("mon: "+sun_start);
               _postWorkSchedule();
             });
             Navigator.of(context).pop();
