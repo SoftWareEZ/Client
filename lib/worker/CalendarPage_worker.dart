@@ -74,7 +74,7 @@ class _CalendarState extends State<Calendar> {
   String day =
       DateFormat('EEE').format(DateTime.now()).toString().toLowerCase();
 
-  var _calendarList = [];
+  var _calendarList = [], _daetaList = [];
   String token = "", urlsrc = "";
   int userId = 0, storeId = 0;
   String salary = "";
@@ -149,7 +149,7 @@ class _CalendarState extends State<Calendar> {
       // 요청 성공
       // 전달받은 값 저장
       setState(() {
-        if (responseBody.toString().isEmpty) {
+        if (responseBody == null) {
           _calendarList = [];
         } else {
           List<dynamic> body = json.decode(responseBody);
@@ -163,7 +163,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   _fetchDeataRequest() async {
-    // 대타 요청
+    // 대타요청
     String url = "http://${urlsrc}/albba/daeta/request";
     Map<String, String> headers = {
       "Content-Type": "application/json",
@@ -181,17 +181,112 @@ class _CalendarState extends State<Calendar> {
 
     if (response.statusCode == 200) {
       // 요청 성공
+      Fluttertoast.showToast(
+          msg: "대타요청 성공",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
+    } else {
+      // 요청 실패
+      Fluttertoast.showToast(
+          msg: "대타요청 실패",
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
+    }
+  }
+
+  _fetchDeataRequestList() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getInt('userId') ?? 0);
+    storeId = (prefs.getInt('storeId') ?? 0);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: " + userId.toString());
+    print("storeId: " + storeId.toString());
+
+    // 대타 요청리스트 조회
+    String url = "http://${urlsrc}/albba/daeta/request/check";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}"
+    };
+    var body = jsonEncode({
+      "date": DateFormat("yyyyMMdd").format(focusedDay),
+      "storeId": storeId,
+      "userId": userId
+    });
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print("responseBody: " + responseBody);
+
+    if (response.statusCode == 200) {
+      // 요청 성공
+      setState(() {
+        if (responseBody.toString().isEmpty) {
+          // 대타요청 리스트에 없는 경우
+          daetaState = 0;
+        } else {
+          // 대타요청 리스트에 있는 경우
+          daetaState = 1;
+        }
+      });
     } else {
       // 요청 실패
     }
   }
 
-  _fetchDeataRequestList() async {
-    // 대타 요청리스트 조회
-  }
+  _fetchDaetaList() async {
+    // 저장해둔 token 가져오기
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    token = (prefs.getString('token') ?? "null");
+    urlsrc = (prefs.getString('urlsrc') ?? "null");
+    userId = (prefs.getInt('userId') ?? 0);
+    storeId = (prefs.getInt('storeId') ?? 0);
+    print("token: " + token);
+    print("urlsrc: " + urlsrc);
+    print("userId: " + userId.toString());
+    print("storeId: " + storeId.toString());
 
-  _fetchDeataAccept() async {
-    // 대타 수락 리스트 조회
+    // 대타수락 리스트 가져오기
+    String url = "http://${urlsrc}/albba/daeta/accept/view";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "authorization": "Bearer ${token}"
+    };
+    var body = jsonEncode({
+      "date": DateFormat("yyyyMMdd").format(focusedDay),
+      "storeId": storeId
+    });
+    var response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+    var responseBody = utf8.decode(response.bodyBytes);
+    print("responseBody: " + responseBody);
+
+    if (response.statusCode == 200) {
+      // 요청성공
+      if (responseBody.toString().isEmpty) {
+        _daetaList = [];
+      } else {
+        List<dynamic> body = json.decode(responseBody);
+        _daetaList =
+            body.map((dynamic item) => DaetaInfo.fromJson(item)).toList();
+
+        for (int i = 0; i < _daetaList.length; i++) {
+          if (_daetaList[i].requestId == userId) {
+            daetaState = 2; // 현재 로그인 사용자가 대타를 구한 상태
+          }
+        }
+      }
+    } else {
+      // 요청실패
+    }
   }
 
   showMessage() {
@@ -257,6 +352,8 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    _fetchDaetaList();
+    _fetchDeataRequestList();
     _fetchSalary();
     _fetchCalendarList();
   }
@@ -298,8 +395,10 @@ class _CalendarState extends State<Calendar> {
                       .format(focusedDay)
                       .toString()
                       .toLowerCase(),
-                  _fetchCalendarList(),
-                  _fetchSalary()
+                  _fetchDaetaList(),
+                  _fetchDeataRequestList(),
+                  _fetchSalary(),
+                  _fetchCalendarList()
                 }),
             print(focusedDay),
           },
@@ -371,9 +470,30 @@ class _CalendarState extends State<Calendar> {
             children: [
               Column(
                 children: [
-                  for (int i = 0; i < _calendarList.length; i++)
-                    calendarInfo(_calendarList[i].userId, _calendarList[i].name,
-                        _calendarList[i].start, _calendarList[i].end)
+                  if (_daetaList.length == 0)
+                    for (int i = 0; i < _calendarList.length; i++)
+                      calendarInfo(
+                          _calendarList[i].userId,
+                          _calendarList[i].name,
+                          _calendarList[i].start,
+                          _calendarList[i].end)
+                  else
+                    for (int i = 0; i < _calendarList.length; i++)
+                      for (int j = 0; j < _daetaList.length; j++)
+                        if (_calendarList[i].userId == _daetaList[j].requestId)
+                          // 대타인 경우
+                          calendarInfo(
+                              _calendarList[i].userId,
+                              _daetaList[j].acceptName,
+                              _calendarList[i].start,
+                              _calendarList[i].end)
+                        else
+                          // 대타가 아닌 경우
+                          calendarInfo(
+                              _calendarList[i].userId,
+                              _calendarList[i].name,
+                              _calendarList[i].start,
+                              _calendarList[i].end)
                 ],
               )
             ],
@@ -381,6 +501,13 @@ class _CalendarState extends State<Calendar> {
         ],
       ),
     );
+  }
+
+  void printCalendarInfo(List<CalendarInfo> clist, List<DaetaInfo> dList) {
+    for (int i = 0; i < clist.length; i++) {
+      calendarInfo(
+          clist[i].userId, clist[i].name, clist[i].start, clist[i].end);
+    }
   }
 
   Widget calendarInfo(
@@ -433,7 +560,7 @@ class _CalendarState extends State<Calendar> {
                           bottom:
                               BorderSide(color: Color(MAINCOLOR), width: 2))),
                   child: Text(
-                    "대타요청 대기중",
+                    "대타 구인중",
                     style: TextStyle(
                         color: Color(MAINCOLOR), fontWeight: FontWeight.w700),
                   ),
@@ -478,6 +605,40 @@ class CalendarInfo {
 
     Map toJson() {
       return {'userId': userId, 'name': name, 'start': start, 'end': end};
+    }
+  }
+}
+
+class DaetaInfo {
+  int no = 0;
+  String date = "";
+  int storeId = 0;
+  int userId = 0;
+  String acceptName = "";
+
+  DaetaInfo(int no, String date, int storeId, int userId, String acceptName) {
+    this.no = no;
+    this.date = date;
+    this.storeId = storeId;
+    this.userId = userId;
+    this.acceptName = acceptName;
+  }
+
+  DaetaInfo.fromJson(Map<String, dynamic> json) {
+    no = json["no"];
+    date = json["date"];
+    storeId = json["storeId"];
+    userId = json["userId"];
+    acceptName = json["acceptName"];
+
+    Map toJson() {
+      return {
+        'userId': userId,
+        'date': date,
+        'storeId': storeId,
+        'userId': userId,
+        'acceptName': acceptName
+      };
     }
   }
 }

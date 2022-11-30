@@ -56,6 +56,11 @@ class MenuBarstate_manager extends State<MenuBar_manager> {
     }
   }
 
+  switchStoreId(int sid) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt("storeId", sid);
+  }
+
   _fetchCode() async {
     // 초대코드 조회
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -231,28 +236,19 @@ class MenuBarstate_manager extends State<MenuBar_manager> {
                             children: <Widget>[
                               for (int i = 0; i < _storeList.length; i++)
                                 if (_storeList[i].storeId == storeId)
-                                  GestureDetector(
-                                    onTap: () {
-                                      // storeId 바뀌면서, 사업장 바껴야함
-                                    },
-                                    child: Text(
-                                      (_storeList[i].storeName ?? "null"),
-                                      style: TextStyle(
-                                          color: Color(MAINCOLOR),
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  Text(
+                                    (_storeList[i].storeName ?? "null"),
+                                    style: TextStyle(
+                                        color: Color(MAINCOLOR),
+                                        fontWeight: FontWeight.w700),
                                   )
                                 else
                                   GestureDetector(
                                     onTap: () async {
-                                      print(_storeList[i].storeId.toString() +
-                                          " - " +
-                                          _storeList[i].storeName);
                                       // storeId 바뀌면서, 사업장이 바뀐다.
-                                      SharedPreferences prefs =
-                                          await SharedPreferences.getInstance();
-                                      prefs.setInt(
-                                          "storeId", _storeList[i].storeId);
+                                      setState(() {
+                                        switchStoreId(_storeList[i].storeId);
+                                      });
                                     },
                                     child: Text(
                                       (_storeList[i].storeName ?? "null"),
