@@ -103,7 +103,7 @@ class _MyPageWork_worker extends State<MyPageWork_worker> {
         drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
-          title: Text('근무 기록',
+          title: Text('알바에 빠지다',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,

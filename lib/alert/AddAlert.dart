@@ -70,7 +70,7 @@ class Alert extends State<AddAlertpage> {
       home: Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
-          title: Text('알림 등록',
+          title: Text('알바에 빠지다',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,

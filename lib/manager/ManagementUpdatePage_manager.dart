@@ -311,7 +311,7 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
         drawer: MenuBar_manager(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
-          title: Text('알바생 정보 수정',
+          title: Text('알바에 빠지다',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,

@@ -192,7 +192,7 @@ class _MyPageResign_workerState extends State<MyPageResign_worker> {
         drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
-          title: Text('퇴사하기',
+          title: Text('알바에 빠지다',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,

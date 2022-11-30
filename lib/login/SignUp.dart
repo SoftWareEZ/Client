@@ -82,7 +82,7 @@ class SignUp extends State<SignUpPage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('알빠',
+          title: Text('알바에 빠지다',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,

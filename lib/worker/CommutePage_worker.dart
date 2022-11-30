@@ -175,7 +175,7 @@ class CommutePage_worker extends State<CommuteState_worker> {
         drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
-          title: Text('알빠',
+          title: Text('알바에 빠지다',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,

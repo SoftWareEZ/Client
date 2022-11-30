@@ -18,7 +18,7 @@ class ViewAlert extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('알림',
+          title: Text('알바에 빠지다',
               style: TextStyle(
                   color: Color(SUBCOLOR),
                   fontWeight: FontWeight.w700,

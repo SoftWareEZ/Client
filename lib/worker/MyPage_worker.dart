@@ -22,7 +22,7 @@ class MyPage_worker extends StatelessWidget {
         drawer: MenuBar_worker(),
         appBar: AppBar(
           iconTheme: IconThemeData(color: Color(MAINCOLOR)),
-          title: Text('마이페이지',
+          title: Text('알바에 빠지다',
               style: TextStyle(
                   color: Color(MAINCOLOR),
                   fontWeight: FontWeight.w700,
