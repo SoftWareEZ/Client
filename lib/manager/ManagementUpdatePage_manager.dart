@@ -418,9 +418,11 @@ class ManagementUpdatePage extends State<ManagementUpdatePage_manager> {
                     ),
                     child: Column(
                       children: [
-                        Row(
+                        Column(
                           children: [
-                            Text("근무 일정 : ",),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              child: Text("근무 일정 :  " ),),
                             Container(
                               child: Stack(
                                 children: [
