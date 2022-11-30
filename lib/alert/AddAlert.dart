@@ -155,8 +155,7 @@ class Alert extends State<AddAlertpage> {
                 ),
                 SizedBox(
                   height: 13,
-                ),
-                Text(title + contents),
+                )
               ],
             ),
           ),

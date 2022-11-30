@@ -223,7 +223,6 @@ class Login extends State<Loginpage> {
                     child: Text('로그인'),
                   ),
                 ),
-                Text(person + id + password),
               ],
             ),
           ),

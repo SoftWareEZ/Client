@@ -136,8 +136,7 @@ class AddWorkSpace extends State<AddWorkSpacePage>{
                   ),
                 ),
 
-                SizedBox(height: 13,),
-                Text(storeName + storeAddr),
+                SizedBox(height: 13,)
               ],
             ),
           ),
